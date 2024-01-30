@@ -9,7 +9,11 @@ func SetupRoutes(r *gin.Engine) {
 	r.Use(gzip.Gzip(gzip.DefaultCompression))
 
 	// index
-	r.GET("/", nil)
+	r.GET("/", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "Hello world!",
+		})
+	})
 
 	// login and logout
 	r.GET("/signin", nil)

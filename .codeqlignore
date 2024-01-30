@@ -1,0 +1,13 @@
+# .codeqlignore
+
+# ignore prettier
+
+modules/node/src/lib/prettier/**
+modules/node/src/lib/prettier/\*
+modules/web/src/lib/core
+modules/web/src/lib/core/**
+modules/web/src/lib/core/_
+modules/web/src/lib/core/_.mjs
+modules/web/src/lib/core/**/_.mjs
+modules/web/src/lib/core/_.mjs
+modules/ele-web/**/\*
