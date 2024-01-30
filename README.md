@@ -1,10 +1,10 @@
 # 💡 Introduction
 
-This project, elb3, powers the online forum "English Learning Base III". It serves as a global gathering point for English language enthusiasts.
+This project, elb3, powers the online forum "English Learning Base III". It is a small forum for English language master and amateur to conveniently communicate with each other. 
 
-The author has opened its entire source code, welcome to contribute or have a code review.
+As its author, I have opened the entire source code for this forum, welcome to contribute or raise an issue.
 
-Home link: https://elb3.com
+Forum Link: https://elb3.com
 
 # 🪪 License
 
