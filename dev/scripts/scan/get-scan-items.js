@@ -31,7 +31,7 @@ if (baseDIR == "") {
   // exit(99)
 }
 
-let webDIR = path.join(baseDIR, ...`modules/web`.split("/"));
+let webDIR = path.join(baseDIR, ...`modules/elb-web`.split("/"));
 let nodeDIR = path.join(baseDIR, ...`modules/node`.split("/"));
 
 // personal project for RYAN LAI, just ignore it please
