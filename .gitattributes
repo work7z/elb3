@@ -9,5 +9,5 @@ resources/public/purejs linguist-detectable=false
 modules/web/src/lib/core/**/*  linguist-detectable=false
 modules/web/src/lib/core/**/*.mjs  linguist-detectable=false
 modules/web/src/lib/core/*.mjs  linguist-detectable=false
-modules/elb-web/*  linguist-detectable=false
-modules/elb-web/**/*  linguist-detectable=false
+modules/elb-web/*.js  linguist-detectable=false
+modules/elb-web/**/*.js  linguist-detectable=false

@@ -17,6 +17,14 @@
 }
 
 body {
+ min-width: 820px;
+ font-family: "Helvetica Neue",
+    "Luxi Sans",
+    "Segoe UI",
+    "Hiragino Sans GB",
+    "Microsoft Yahei",
+    sans-serif,
+    "Apple Logo";
 }
 
 @layer utilities {
