@@ -1,0 +1,13 @@
+{
+  "name": "elb3",
+  "version": "1.0.0",
+  "description": "This project, elb3, powers the online forum \"English Learning Base III\". It is a small forum for English language master and amateur to conveniently communicate with each other.",
+  "main": "index.js",
+  "scripts": {
+    "fe-scan": "(cd ./dev/scripts/scan/ && node ./scan-entry.js)",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -44,7 +44,7 @@ func main() {
 	if tools.IsDockerMode() {
 		actualServerPath = "127.0.0.1" // TODO: consider to use other domain
 	}
-	fullURL := "http://" + strings.ReplaceAll(host, "0.0.0.0", actualServerPath) + "" + "/entry?t=" + ""
+	fullURL := "http://" + strings.ReplaceAll(host, "0.0.0.0", actualServerPath) + ""
 
 	println("")
 	println("-----------------------------------------------")
@@ -54,10 +54,6 @@ func main() {
 	println("" + fullURL + "  ")
 	println("-----------------------------------------------")
 	println("")
-
-	if !tools.IsDevMode {
-		// global.OpenInBrowser(fullURL)
-	}
 
 	Srv := &http.Server{
 		Addr:    host,
@@ -69,5 +65,7 @@ func main() {
 			tools.ShouldNoErr(err, "Unable to launch the service")
 		}
 	}()
+
+	select {}
 
 }
