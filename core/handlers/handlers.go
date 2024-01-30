@@ -7,10 +7,7 @@ import (
 
 func SetupRoutes(r *gin.Engine) {
 	r.Use(gzip.Gzip(gzip.DefaultCompression))
-	// root
-	r.GET("/", func(c *gin.Context) {
-		c.Redirect(302, "/v2")
-	})
+
 	// index
 	r.GET("/", nil)
 
