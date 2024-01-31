@@ -3,6 +3,7 @@ import type { Metadata, ResolvingMetadata } from "next";
 import Head from 'next/head'
 import { Props } from "next/script";
 import { Dot } from "./utils/TranslationUtils";
+import { getWebsiteName } from "./common/config";
 
 
 export default function Home() {
@@ -21,6 +22,6 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   return {
-    title: Dot("iBavZKJeo", "English Learning Base III"),
+    title: getWebsiteName(),
   };
 }
