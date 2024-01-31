@@ -21,7 +21,6 @@ function convertUnixPathToWindowsPath(v) {
 function sub_exp(idx) {
   return "((?<![\\\\])['\"`])((?:.(?!(?<![\\\\])\\1))*.?)\\" + idx;
 }
-// get env LAFTOOLS_ROOT
 let baseDIR = path.join(__dirname, "..", "..", "..");
 if (baseDIR == "") {
   console.log("LAFTOOLS_ROOT could not be empty");
@@ -38,23 +37,23 @@ let nodeDIR = path.join(baseDIR, ...`modules/node`.split("/"));
 let privateProjects = [];
 
 let webItem = {
-  id: "bprl",
-  type: "ts",
+  id: "bpq3rl",
+  type: "tsx",
   prefix: "Dot(",
   pattern: commonText,
   target: `${webDIR}/public/static/lang`,
-  dir: `${webDIR}/src`,
+  dir: `${webDIR}`,
 };
 
 let searchItems = [
-  {
-    id: "brl",
-    type: "go",
-    prefix: ".Dot(",
-    target: `${baseDIR}/resources/lang`,
-    pattern: commonText,
-    dir: `${baseDIR}/core`,
-  },
+  // {
+  //   id: "brl",
+  //   type: "go",
+  //   prefix: ".Dot(",
+  //   target: `${baseDIR}/resources/lang`,
+  //   pattern: commonText,
+  //   dir: `${baseDIR}/core`,
+  // },
   webItem,
 ].map((x) => {
   x.dir = convertUnixPathToWindowsPath(x.dir);

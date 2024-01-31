@@ -114,7 +114,7 @@ let processWithArg = async ({
     let overwrittenFile = a1;
     let idOverwriteJSONFile = getFile(a1); // replace with appropriate function
     let overwriteJSONFile = getFile(
-      `${overwrittenDir}/${isChinese ? "zh_CN" : eachLang}-overwrite.json`,
+      `${overwrittenDir}/${isChinese ? "zh_CN" : eachLang}-overwrite.json`
     );
 
     if (!fs.existsSync(idOverwriteJSONFile.file)) {
@@ -139,27 +139,27 @@ let processWithArg = async ({
 
     fs.writeFileSync(
       path.join(tmpTranslateDir, `raw-${eachRunItem.id}-${eachLang}.json`),
-      waitTranslateObjStr,
+      waitTranslateObjStr
     );
     fs.writeFileSync(
       path.join(tmpTranslateDir, `config-${eachRunItem.id}-${eachLang}.json`),
       toJSON({
         id: eachRunItem.id,
-      }),
+      })
     );
 
     // execute a command
     let cmd = `go run "${path.join(
       __dirname,
       "translate-tools",
-      "bulktranslate.go",
+      "bulktranslate.go"
     )}" --id=${eachRunItem.id} --lg=${eachLang} --output="${outputLangFile}" `;
     console.log("cmd is ", cmd);
     sh.exec(cmd);
 
     let resultFile = path.join(
       __dirname,
-      `tmp-translate-result/result-${eachRunItem.id}-${eachLang}.json`,
+      `tmp-translate-result/result-${eachRunItem.id}-${eachLang}.json`
     );
     // TODO: if there's no dynamic file was mentioned in the code, then we should clean them
     if (fs.existsSync(resultFile)) {
@@ -288,6 +288,12 @@ for (let eachItem of searchItems) {
       // console.log('some file is changed', event, path);
       if (event == "add" || event == "change" || event == "unlink") {
         let eachFile = path;
+        if (
+          eachFile.indexOf("node_modules") != -1 ||
+          eachFile.indexOf(".next") != -1
+        ) {
+          return;
+        }
         if (
           (eachFile + "").endsWith("go") ||
           (eachFile + "").endsWith("ts") ||
