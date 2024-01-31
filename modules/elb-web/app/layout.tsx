@@ -38,7 +38,8 @@ export async function generateMetadata(
       // "icon-nav.png"
       // "icon3.png"
       // "icon4.png"
-      "icon5.png"
+      // "icon5.png"
+      "icon6.png"
     ]
   };
 }
