@@ -1,12 +1,12 @@
 package main
 
 import (
+	"elb3-go/core/handlers"
+	"elb3-go/core/log"
+	"elb3-go/core/tools"
 	"net/http"
 	"strconv"
 	"strings"
-	"work7z-go/core/handlers"
-	"work7z-go/core/log"
-	"work7z-go/core/tools"
 
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"

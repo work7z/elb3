@@ -1,4 +1,4 @@
-module work7z-go
+module elb3-go
 
 go 1.18
 

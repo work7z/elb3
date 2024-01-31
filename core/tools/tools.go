@@ -1,6 +1,6 @@
 package tools
 
-import "work7z-go/core/log"
+import "elb3-go/core/log"
 
 func IsDockerMode() bool {
 	return false

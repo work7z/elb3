@@ -2,11 +2,11 @@ package main
 
 import (
 	"crypto/md5"
+	"elb3-go/dev/scripts/scan/translate-tools/env"
+	"elb3-go/dev/scripts/scan/translate-tools/log"
+	nocycle "elb3-go/dev/scripts/scan/translate-tools/tools"
 	"encoding/json"
 	"fmt"
-	"laftools-go/core/log"
-	"laftools-go/core/project/base/env"
-	nocycle "laftools-go/core/tools"
 	"os"
 	"path"
 	"strings"
