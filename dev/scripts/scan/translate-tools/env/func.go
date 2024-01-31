@@ -1,8 +1,8 @@
 // LafTools - The Leading All-In-One ToolBox for Programmers.
-// 
+//
 // Date: Thu, 21 Dec 2023
 // Author: LafTools Team - FX <work7z@outlook.com>
-// Description: 
+// Description:
 // Copyright (C) 2023 - Present, https://laf-tools.com and https://codegen.cc
 //
 // This program is free software: you can redistribute it and/or modify
@@ -28,7 +28,7 @@ import (
 )
 
 func GetEnvValueForLafToolsRoot() string {
-	a := os.Getenv("LAFTOOLS_ROOT")
+	a := os.Getenv("ELB3_ROOT")
 	if a != "" {
 		return a
 	}

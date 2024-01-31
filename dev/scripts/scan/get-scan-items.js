@@ -46,14 +46,14 @@ let webItem = {
 };
 
 let searchItems = [
-  // {
-  //   id: "brl",
-  //   type: "go",
-  //   prefix: ".Dot(",
-  //   target: `${baseDIR}/resources/lang`,
-  //   pattern: commonText,
-  //   dir: `${baseDIR}/core`,
-  // },
+  {
+    id: "brl3",
+    type: "go",
+    prefix: ".Dot(",
+    target: `${baseDIR}/resources/lang`,
+    pattern: commonText,
+    dir: `${baseDIR}/core`,
+  },
   webItem,
 ].map((x) => {
   x.dir = convertUnixPathToWindowsPath(x.dir);
