@@ -1,7 +1,11 @@
 import { Dot } from "../utils/TranslationUtils"
 
+export const getPureWebsiteName = () => {
+    return Dot("UED59zbd-", "ELB3 Community", "elb3")
+}
+
 export const getWebsiteName = (subPage?: string) => {
-    let str = Dot("UED59zbd-", "ELB3 Community", "elb3")
+    let str = getPureWebsiteName()
     if (!subPage) {
         subPage = Dot("OBjaZqTvx", "Home")
     }
