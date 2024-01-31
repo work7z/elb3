@@ -4,7 +4,7 @@ import Image from "next/image";
 import type { Metadata, ResolvingMetadata } from "next";
 import Head from 'next/head'
 import { Props } from "next/script";
-import { Dot } from "./utils/TranslationUtils";
+import { Dot, getCurrentLang } from "./utils/TranslationUtils";
 import { getWebsiteName } from "./common/config";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang={getCurrentLang()} >
       <body className={inter.className}>
         {children}
       </body>

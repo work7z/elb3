@@ -1,5 +1,10 @@
 import { getPureWebsiteName } from "@/app/common/config"
 import { Dot } from "@/app/utils/TranslationUtils"
+// import { Tooltip as ReactTooltip } from "react-tooltip";
+// import 'react-tooltip/dist/react-tooltip.css'
+import NoSsr from "@/app/components/NoSsr";
+import dynamic from 'next/dynamic'
+
 
 export let TopNav = () => {
     // write a function that returns a component for top nav, written by tailwindcss, which should 
@@ -18,12 +23,12 @@ export let TopNav = () => {
         { name: Dot("xhxY6iLDH", "Logout"), href: "/contact" },
     ]
     return (
-        <div className="border-b-2" >
-            <div className="flex items-center justify-between flex-wrap p-4 border-b-slate-300 mx-auto app-minmax-size" style={{
+        <div className="border-b-2  " >
+            <div className="flex items-center justify-between flex-wrap p-4 border-b-slate-300 mx-auto app-minmax-size " style={{
             }}>
                 <div className="flex items-center flex-shrink-0 mr-6">
                     <img src="/icon6.png" alt="logo" className="fill-current h-8 w-22 mr-2" />
-                    <span className="font-semibold text-xl tracking-tight">{getPureWebsiteName()}</span>
+                    <span data-tooltip-id="my-tooltip-1" className="ml-1 font-semibold text-xl tracking-tight">{getPureWebsiteName()}</span>
                     <div className="text-sm ml-6">
                         <input
                             type="search"
@@ -33,15 +38,21 @@ export let TopNav = () => {
                     </div>
                 </div>
                 <div className="  flex-grow lg:flex lg:items-center lg:w-auto flex justify-end">
-
                     <div>
                         {links.map(x => {
                             return (
-                                <a href={x.href} target="_blank" className="inline-block text-lg px-4 py-2 leading-none ">{x.name}</a>
+                                <a href={x.href} target="_blank" className="inline-block hover:opacity-70 text-lg px-4 py-2 leading-none ">{x.name}</a>
                             )
                         })}
                     </div>
                 </div>
+
+                {/** nav tooltip */}
+                {/* <ReactTooltip
+                    id="my-tooltip-1"
+                    place="bottom"
+                    content="Hello world! I'm a Tooltip"
+                /> */}
             </div>
         </div>
     )

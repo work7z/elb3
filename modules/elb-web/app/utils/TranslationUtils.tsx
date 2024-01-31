@@ -74,6 +74,10 @@ function formatResultWithReplacer(val = "", ...args) {
   return val;
 }
 
+export let getCurrentLang = () => {
+  return 'zh_CN'
+}
+
 const TranslationUtils = {
   ForcbilyLanguage: "",
   CurrentLanguage: LANG_EN_US,
@@ -85,7 +89,11 @@ const TranslationUtils = {
   LangMap: crtNewLangMap,
   RealtimeObj: {},
   Dot(id: string, enText: string, ...args: any[]): string {
-    let language = TranslationUtils.CurrentLanguage;
+    let language = getCurrentLang();
+    if (language != 'en_US') {
+      let pmap = require("../../public/static/lang/" + language + ".json")
+      TranslationUtils.LangMap[language] = pmap
+    }
     if (language == LANG_EN_US) {
       // do nothing
     } else {
