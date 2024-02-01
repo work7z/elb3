@@ -7,6 +7,7 @@ import { getWebsiteName } from "./common/config";
 import { TopNav } from "./containers/TopNav";
 import CenterPart from "./containers/CenterPart";
 import CardPanel from './components/CardPanel'
+import NodeHorizontalBar from "./containers/NodeHorizontalBar";
 
 export default function Home() {
   return (
@@ -16,14 +17,21 @@ export default function Home() {
         <CardPanel className='p-2' style={{
           flex: '1'
         }}>
-          <div>left panel</div>
+            <NodeHorizontalBar></NodeHorizontalBar>
         </CardPanel>
-        <CardPanel
+        <div
           style={{
             width: '290px'
-          }}>
-          right content
-        </CardPanel>
+          }}
+          className="space-y-2"
+        >
+          <CardPanel>
+            user panel
+          </CardPanel>
+          <CardPanel>
+            settings
+          </CardPanel>
+        </div>
       </div>}></CenterPart>
     </main>
   );
