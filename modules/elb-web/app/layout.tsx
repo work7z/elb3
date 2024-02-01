@@ -31,7 +31,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   return {
     title: getWebsiteName(),
-    description: Dot("JWT3EJA1A", "{0} is an interactive online forum dedicated to facilitating communication and learning among English language learners.", 'elb3.com'),
+    description: Dot("lWqYc","ELB3 community is derived from the WeChat group {0}, in this community, we study knowledge and share our life stories, experiences, and thoughts.","English Learning Base III"),
     icons: [
       // "docusaurus.svg"
       // "icon2-nav2.png"

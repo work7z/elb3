@@ -6,22 +6,24 @@ import { Dot } from "./utils/TranslationUtils";
 import { getWebsiteName } from "./common/config";
 import { TopNav } from "./containers/TopNav";
 import CenterPart from "./containers/CenterPart";
-
+import CardPanel from './components/CardPanel'
 
 export default function Home() {
-  let cardClz = `h-16 rounded-sm shadow-sm  bg-white w-full `
   return (
     <main className="">
       <TopNav></TopNav>
       <CenterPart children={<div className=" flex flex-row space-x-4 ">
-        <div className={cardClz + ` p-2`} style={{ flex: '1' }}>
-          <div>left</div>
-        </div>
-        <div className={cardClz} style={{
-          width: '290px'
+        <CardPanel className='p-2' style={{
+          flex: '1'
         }}>
-          right
-        </div>
+          <div>left panel</div>
+        </CardPanel>
+        <CardPanel
+          style={{
+            width: '290px'
+          }}>
+          right content
+        </CardPanel>
       </div>}></CenterPart>
     </main>
   );
