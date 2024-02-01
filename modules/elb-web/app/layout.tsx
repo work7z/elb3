@@ -1,11 +1,17 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { getCurrentLang } from "./utils/TranslationUtils";
 import Image from "next/image";
 import type { Metadata, ResolvingMetadata } from "next";
 import Head from 'next/head'
 import { Props } from "next/script";
-import { Dot, getCurrentLang } from "./utils/TranslationUtils";
-import { getWebsiteName } from "./common/config";
+import { Dot } from "./utils/TranslationUtils";
+import { getWebDesc, getWebsiteName } from "./common/config";
+import { TopNav } from "./containers/TopNav";
+import CenterPart from "./containers/CenterPart";
+import CardPanel from './components/CardPanel'
+import NodeHorizontalBar from "./containers/TabGroupHorizontalBar";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +23,9 @@ export default function RootLayout({
   return (
     <html lang={getCurrentLang()} >
       <body className={inter.className}>
-        {children}
+        <TopNav></TopNav>
+        <CenterPart children={children as any}>
+        </CenterPart>
       </body>
     </html>
   );
@@ -31,14 +39,8 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   return {
     title: getWebsiteName(),
-    description: Dot("lWqYc","ELB3 community is derived from the WeChat group {0}, in this community, we study knowledge and share our life stories, experiences, and thoughts.","English Learning Base III"),
+    description: getWebDesc(),
     icons: [
-      // "docusaurus.svg"
-      // "icon2-nav2.png"
-      // "icon-nav.png"
-      // "icon3.png"
-      // "icon4.png"
-      // "icon5.png"
       "icon6.png"
     ]
   };
