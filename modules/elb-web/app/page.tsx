@@ -81,7 +81,7 @@ export default function Home() {
           className="space-y-2"
         >
           <CardPanel>
-            user panel
+            <div>this is user panel</div>
           </CardPanel>
           <CardPanel>
             settings
