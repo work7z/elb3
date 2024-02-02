@@ -16,6 +16,14 @@
   }
 }
 
+.nav-size-icon{
+  font-weight: bold;
+  height: 20px;
+  min-width: 32px;
+  font-size: 17px;
+  font-family: unset;
+}
+
 .app-minmax-size{
   min-width: 820px;
   max-width: 1200px;
