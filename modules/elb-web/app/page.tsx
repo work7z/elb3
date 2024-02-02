@@ -9,20 +9,25 @@ import CenterPart from "./containers/CenterPart";
 import CardPanel from './components/CardPanel'
 import NodeHorizontalBar from "./containers/TabGroupHorizontalBar";
 import _, { random } from "lodash";
+import UserPanel from "./containers/UserPanel";
+import { useParams, useSearchParams } from "next/navigation";
+import { usePathname } from 'next/navigation';
 
-export default function Home() {
+export default function Home({ searchParams }) {
   let testNodes = ['生活', '闲聊', '历程', 'PETS3', '纯英语', '语法交流', '单词PK']
   let randomGetOneFromArr = (arr: string[]) => {
     return arr[Math.floor(Math.random() * arr.length)]
   }
+  let activeTabs = searchParams.tabs
   return (
     <main className="">
       <div className=" flex flex-row space-x-4 ">
 
+
         <CardPanel className='' style={{
           flex: '1'
         }}>
-          <NodeHorizontalBar></NodeHorizontalBar>
+          <NodeHorizontalBar activeId={activeTabs}></NodeHorizontalBar>
 
           <div className="px-4 py-3 flex justify-between items-center bg-gray-100  min-h-8 border-slate-200  shadow-inner border-t border-b" >
             <div className="space-x-4">
@@ -57,10 +62,10 @@ export default function Home() {
                     </div>
                     <div className="space-x-3 text-sm mt-2 text-gray-400 flex items-center">
                       <a href="/go/test" className="bg-slate-100 text-gray-400 hover:bg-slate-200 rounded-sm transition-all duration-100 px-1 py-1 text-xs">{randomGetOneFromArr(testNodes)}</a>
-                      <a href="/go" className="hover:underline text-gray-400 font-medium">{randomGetOneFromArr(["Min-广州-PETS3","布布-上海-PETS","本老师-广州-中考","乐乐-浙江-PETS2"])}</a>
-                      <span className="text-gray-300">{randomGetOneFromArr(["1小时30分钟前","3小时50分钟前","2分钟前","刚刚"])}</span>
+                      <a href="/go" className="hover:underline text-gray-400 font-medium">{randomGetOneFromArr(["Min-广州-PETS3", "布布-上海-PETS", "本老师-广州-中考", "乐乐-浙江-PETS2"])}</a>
+                      <span className="text-gray-300">{randomGetOneFromArr(["1小时30分钟前", "3小时50分钟前", "2分钟前", "刚刚"])}</span>
                       <span className="text-gray-300">最后回复来自于
-                      <a href="/go" className="hover:underline text-gray-400 font-medium">{randomGetOneFromArr(["Min","布布","惠惠子","大鱼","Ben老师"])}</a>
+                        <a href="/go" className="hover:underline text-gray-400 font-medium">{randomGetOneFromArr(["Min", "布布", "惠惠子", "大鱼", "Ben老师"])}</a>
                       </span>
                     </div>
                   </div>
@@ -81,7 +86,7 @@ export default function Home() {
           className="space-y-2"
         >
           <CardPanel>
-            <div>this is user panel</div>
+            <UserPanel></UserPanel>
           </CardPanel>
           <CardPanel>
             settings

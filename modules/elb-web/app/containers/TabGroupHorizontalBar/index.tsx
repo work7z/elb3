@@ -1,5 +1,6 @@
 import { getPureWebsiteName } from "@/app/common/config"
 import { Dot } from "@/app/utils/TranslationUtils"
+import { useRouter } from "next/navigation";
 import React from 'react'
 
 
@@ -53,9 +54,10 @@ export let getGroupAndNodeData = (): TabGroupType[] => {
    return list
 }
 
-export default (props: {}) => {
+export default (props: { activeId: string }) => {
    let list = getGroupAndNodeData()
-   let activeId = list[0].id
+   let activeId = props.activeId
+   // get id path varialble from url in next.js
    return <div className="px-2 py-2 space-x-2 flex">{
       list.map(x => {
          return <a className={(activeId == x.id ? ' !bg-zinc-800 hover:!bg-zinc-700 text-white ' : '') + ` p-2   transition-all duration-200 rounded hover:bg-slate-100  `} href={'/?tabs=' + x.id} >{x.label}</a>
