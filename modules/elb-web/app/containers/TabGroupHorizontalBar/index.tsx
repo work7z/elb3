@@ -57,6 +57,7 @@ export let getGroupAndNodeData = (): TabGroupType[] => {
 export default (props: { activeId: string }) => {
    let list = getGroupAndNodeData()
    let activeId = props.activeId
+   if (!activeId) activeId = list[0].id
    // get id path varialble from url in next.js
    return <div className="px-2 py-2 space-x-2 flex">{
       list.map(x => {

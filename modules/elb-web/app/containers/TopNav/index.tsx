@@ -4,6 +4,8 @@ import { Dot } from "@/app/utils/TranslationUtils"
 // import 'react-tooltip/dist/react-tooltip.css'
 import NoSsr from "@/app/components/NoSsr";
 import dynamic from 'next/dynamic'
+import HomeLink from "./HomeLink";
+import SearchBar from "./SearchBar";
 
 
 export let TopNav = () => {
@@ -28,14 +30,10 @@ export let TopNav = () => {
             }}>
                 <div className="flex items-center flex-shrink-0 mr-8">
                     <img src="/icon6.png" alt="logo" className="fill-current h-8 w-22 mr-2 rounded-sm border-zinc-100  shadow-sm " />
-                    <span data-tooltip-id="my-tooltip-1" className="ml-1 font-semibold text-xl tracking-tight">{getPureWebsiteName()}</span>
-                    <div className="text-sm ml-6">
-                        <input
-                            type="search"
-                            className="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:bg-gray-800 dark:text-white dark:border-gray-600"
-                            placeholder={Dot("_ncx4GSft", "Search Topics")}>
-                        </input>
-                    </div>
+                    <HomeLink>
+                        <span data-tooltip-id="my-tooltip-1" className="ml-1 font-semibold text-xl tracking-tight">{getPureWebsiteName()}</span>
+                    </HomeLink>
+                    <SearchBar></SearchBar>
                 </div>
                 <div className="  flex-grow lg:flex lg:items-center lg:w-auto flex justify-end">
                     <div>
