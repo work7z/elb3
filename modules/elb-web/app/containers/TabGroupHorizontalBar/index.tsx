@@ -54,7 +54,7 @@ export let getGroupAndNodeData = (): TabGroupType[] => {
    return list
 }
 
-export default (props: { activeId: string }) => {
+export default (props: { activeId?: string }) => {
    let list = getGroupAndNodeData()
    let activeId = props.activeId
    if (!activeId) activeId = list[0].id

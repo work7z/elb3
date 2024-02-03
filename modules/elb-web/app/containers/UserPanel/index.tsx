@@ -18,7 +18,7 @@ export default () => {
     let notificationCtn = 0;
     return <div className="p-2">
         <div className="flex ">
-            <div className="w-12 h-12 rounded bg-zinc-300 text-xl flex justify-center items-center text-gray font-bold "></div>
+            <div className="w-12 h-12 rounded bg-zinc-300  text-xl flex justify-center items-center text-gray font-bold "></div>
             <div className="flex-shrink flex-1 ml-2">
                 <div>
                     <a href="/" className="text-gray-800 hover:underline font-bold">Min</a>

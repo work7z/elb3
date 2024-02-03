@@ -22,8 +22,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang={getCurrentLang()} >
-      <body className={inter.className}>
+    <html lang={getCurrentLang()} className={true ? '' : " dark "}>
+      <body className={'  dark:bg-zinc-900 dark:text-white ' + inter.className}>
         <TopNav></TopNav>
         <CenterPart children={children as any}>
         </CenterPart>
