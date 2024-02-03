@@ -24,13 +24,15 @@ export default function RootLayout(props: {
   let { children } = props;
   return (
     <html lang={getCurrentLang()}>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        <body className={'  dark:bg-solarized-base03 dark:text-slate-300    ' + inter.className}>
-          <TopNav></TopNav>
-          <CenterPart children={children as any} />
-          <Footer></Footer>
-        </body>
-      </ThemeProvider>
+      <body className={'  dark:bg-solarized-base03 dark:text-slate-300    ' + inter.className}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <div className="w-full h-full">
+            <TopNav></TopNav>
+            <CenterPart children={children as any} />
+            <Footer></Footer>
+          </div>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

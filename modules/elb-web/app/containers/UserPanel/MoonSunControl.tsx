@@ -17,7 +17,7 @@ export default () => {
     }, [])
 
     if (!mounted) {
-        return null;
+        return <span></span>;
     }
 
     return theme == "dark" ? (

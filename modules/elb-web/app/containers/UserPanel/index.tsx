@@ -8,7 +8,7 @@ import MoonSunControl from "./MoonSunControl"
 
 
 let EachInfoCell = (props: { href?: string, className?: string, name: string, content: any }) => {
-    return <a href={props.href || 'javascript:void(0);'} className={"w-full h-full   space-x-1 text-sm text-gray-400 dark:text-inherit flex flex-col text-center items-center justify-center hover:bg-zinc-50 dark:hover:bg-solarized-base02 transition-all duration-300 pt-2 pb-2 " + ' ' + props.className}>
+    return <a href={props.href || '/'} className={"w-full h-full   space-x-1 text-sm text-gray-400 dark:text-inherit flex flex-col text-center items-center justify-center hover:bg-zinc-50 dark:hover:bg-solarized-base02 transition-all duration-300 pt-2 pb-2 " + ' ' + props.className}>
         <div className="text-base mb-1 text-gray-500 dark:text-inherit font-medium ">{props.name}</div>
         <div className="font-light">{props.content}</div>
     </a>
@@ -47,7 +47,7 @@ export default (props: CombindSearchProps) => {
         <div className='flex flex-row  justify-between items-center '>
             <div className="flex">
                 <img src={notificationCtn != 0 ? "/controls/email.png" : "/controls/city.png"} className={"w-5 mr-2 " + (
-                    notificationCtn != 0 ? "" : " opacity-70 "
+                    notificationCtn != 0 ? "" : " opacity-60 "
                 )}></img>
                 <RegularLink href={'/notifications'} children={<span className={COMMON_CLZ_ANCHOR_TEXT}>{Dot("2RbUh6TyJ", "{0} Unread Notifications", notificationCtn)}</span>}>
                 </RegularLink>

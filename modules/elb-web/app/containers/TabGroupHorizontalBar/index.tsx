@@ -27,16 +27,16 @@ export let getGroupAndNodeData = (): TabGroupType[] => {
          id: "latest"
       },
       {
-         label: Dot("nncQE", "Life"),
-         id: "life",
-      },
-      {
          label: "PETS",
          id: "pets",
       },
       {
          label: Dot("englishcorner", "English"),
          id: "english"
+      },
+      {
+         label: Dot("nncQE", "Life"),
+         id: "life",
       },
       {
          label: Dot("b7wgrhuXl", "Tech"),
