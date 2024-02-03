@@ -36,7 +36,7 @@ export default (props: {
                 }}>
                     <NodeHorizontalBar activeId={activeTabs}></NodeHorizontalBar>
 
-                    <div className="px-4 py-3 flex justify-between items-center bg-gray-100 dark:bg-solarized-base03 dark:text-white  min-h-8 border-slate-200  dark:border-solarized-base03Dark  shadow-inner border-t border-b" >
+                    <div className="px-4 py-3 flex justify-between items-center bg-gray-100 dark:bg-solarized-base03 dark:text-white  min-h-8 border-slate-200  dark:border-solarized-base02Light1  shadow-inner border-t border-b" >
                         <div className="space-x-4">
                             {
                                 testNodes.map(x => {
