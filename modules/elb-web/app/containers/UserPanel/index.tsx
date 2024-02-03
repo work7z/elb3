@@ -49,7 +49,7 @@ export default (props: CombindSearchProps) => {
                 <img src={notificationCtn != 0 ? "/controls/email.png" : "/controls/city.png"} className={"w-5 mr-2 " + (
                     notificationCtn != 0 ? "" : " opacity-60 "
                 )}></img>
-                <RegularLink href={'/notifications'} children={<span className={COMMON_CLZ_ANCHOR_TEXT}>{Dot("2RbUh6TyJ", "{0} Unread Notifications", notificationCtn)}</span>}>
+                <RegularLink href={'/notifications'} children={<span className={(notificationCtn != 0 ? ' text-yellow-500 dark:text-yellow-400  ' : '') + COMMON_CLZ_ANCHOR_TEXT}>{Dot("2RbUh6TyJ", "{0} Unread Notifications", notificationCtn)}</span>}>
                 </RegularLink>
             </div>
             <div className="flex space-x-1">

@@ -13,7 +13,7 @@ import UserPanel from "./containers/UserPanel";
 import { useParams, useSearchParams } from "next/navigation";
 import InnerHome from './home'
 import { usePathname } from 'next/navigation';
-import React, { useContext } from "react";
+import React, { } from "react";
 
 
 type SearchParamType = Partial<{

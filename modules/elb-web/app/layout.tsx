@@ -14,30 +14,16 @@ import NodeHorizontalBar from "./containers/TabGroupHorizontalBar";
 import Footer from "./containers/Footer";
 import { CombindSearchProps } from "./page";
 import { ThemeProvider } from "./theme-provider";
-
-
-const inter = Inter({ subsets: ["latin"] });
+import Layout from './containers/Layout'
 
 export default function RootLayout(props: {
   children,
 }) {
   let { children } = props;
   return (
-    <html lang={getCurrentLang()}>
-      <body className={'  dark:bg-solarized-base03 dark:text-slate-300    ' + inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="w-full h-full">
-            <TopNav></TopNav>
-            <CenterPart children={children as any} />
-            <Footer></Footer>
-          </div>
-        </ThemeProvider>
-      </body>
-    </html>
+    <Layout>{children}</Layout>
   );
 }
-
-
 
 export async function generateMetadata(
   { }: Props,
