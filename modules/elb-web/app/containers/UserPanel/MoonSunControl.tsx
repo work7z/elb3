@@ -15,7 +15,7 @@ export default () => {
             setTheme('light')
         }} />
     ) : (
-        <MoonIcon className=" cursor-pointer h-5 w-5 text-blue-300" onClick={() => {
+        <MoonIcon className=" cursor-pointer h-5 w-5 text-solarized-cyan" onClick={() => {
             setTheme('dark')
         }} />
     )
