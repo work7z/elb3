@@ -4,7 +4,7 @@ import { Dot } from "@/app/utils/TranslationUtils"
 // import 'react-tooltip/dist/react-tooltip.css'
 import NoSsr from "@/app/components/NoSsr";
 import dynamic from 'next/dynamic'
-import HomeLink from "./HomeLink";
+import HomeLink from "../../components/HomeLink";
 import SearchBar from "./SearchBar";
 
 

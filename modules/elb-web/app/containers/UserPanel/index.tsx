@@ -1,3 +1,5 @@
+import { COMMON_CLZ_ANCHOR_TEXT } from "@/app/common/clz"
+import RegularLink from "@/app/components/RegularLink"
 import { Dot } from "@/app/utils/TranslationUtils"
 
 let EachInfoCell = (props: { href?: string, className?: string, name: string, content: any }) => {
@@ -9,6 +11,8 @@ let EachInfoCell = (props: { href?: string, className?: string, name: string, co
 }
 
 export default () => {
+    // let notificationCtn = 3;
+    let notificationCtn = 0;
     return <div className="p-2">
         <div className="flex ">
             <div className="w-12 h-12 rounded bg-zinc-300 text-xl flex justify-center items-center text-gray font-bold "></div>
@@ -33,11 +37,17 @@ export default () => {
             } />
         </div>
         <hr className=" mb-2"></hr>
-
-        <div className='flex flex-row '>
-            <a>b1</a>
-            <a>b2</a>
-            <a>b3 还在开发中</a>
+        <div className='flex flex-row  items-center '>
+            {
+                true ?
+                    <img src={notificationCtn != 0 ? "/controls/email.png" : "/controls/city.png"} className={"w-5 mr-2 " + (
+                        notificationCtn != 0 ? "" : " opacity-70 "
+                    )}></img> : ''
+            }
+            <RegularLink href={'/notifications'} children={<span className={COMMON_CLZ_ANCHOR_TEXT}>{Dot("2RbUh6TyJ", "{0} Unread Notifications", notificationCtn)}</span>}>
+            </RegularLink>
         </div>
+
     </div>
 }
+
