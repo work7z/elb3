@@ -20,3 +20,6 @@ I really appreciate those who have created beautiful icons which are commonly us
 <a href="https://www.flaticon.com/free-icons/notification" title="notification icons">Notification icons created by Pixel perfect - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/mail" title="mail icons">Mail icons created by Freepik - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/post" title="post icons">Post icons created by Atif Arshad - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/moon" title="moon icons">Moon icons created by Freepik - Flaticon</a>
+
+<a href="https://www.flaticon.com/free-icons/screen-darkness" title="screen darkness icons">Screen darkness icons created by bsd - Flaticon</a>

@@ -11,6 +11,7 @@ import { TopNav } from "./containers/TopNav";
 import CenterPart from "./containers/CenterPart";
 import CardPanel from './components/CardPanel'
 import NodeHorizontalBar from "./containers/TabGroupHorizontalBar";
+import Footer from "./containers/Footer";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -26,6 +27,7 @@ export default function RootLayout({
         <TopNav></TopNav>
         <CenterPart children={children as any}>
         </CenterPart>
+        <Footer></Footer>
       </body>
     </html>
   );

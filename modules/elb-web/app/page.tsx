@@ -12,6 +12,7 @@ import _, { random } from "lodash";
 import UserPanel from "./containers/UserPanel";
 import { useParams, useSearchParams } from "next/navigation";
 import { usePathname } from 'next/navigation';
+import { MoonIcon } from '@heroicons/react/24/solid'
 
 export default function Home({ searchParams }) {
   let testNodes = ['生活', '闲聊', '历程', 'PETS3', '纯英语', '语法交流', '单词PK']
@@ -19,11 +20,15 @@ export default function Home({ searchParams }) {
     return arr[Math.floor(Math.random() * arr.length)]
   }
   let activeTabs = searchParams.tabs
+  let controlsArr: { href: string, icon: any }[] = [
+    {
+      href: '',
+      icon: <MoonIcon className="h-6 w-6 text-blue-300" />,
+    },
+  ]
   return (
     <main className="">
       <div className=" flex flex-row space-x-4 ">
-
-
         <CardPanel className='' style={{
           flex: '1'
         }}>
@@ -97,7 +102,10 @@ export default function Home({ searchParams }) {
             <UserPanel></UserPanel>
           </CardPanel>
           <CardPanel>
-            settings
+
+            {controlsArr.map(x => {
+              return <a href={x.href}>{x.icon}</a>
+            })}
           </CardPanel>
         </div>
       </div>
