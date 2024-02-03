@@ -26,6 +26,7 @@ export default (props: {
     let randomGetOneFromArr = (arr: string[]) => {
         return arr[Math.floor(Math.random() * arr.length)]
     }
+    let clzForUserLabel = "hover:underline  font-medium dark:text-slate-400"
 
     let activeTabs = searchParams.tabs
     return (
@@ -72,20 +73,20 @@ export default (props: {
                                         </div>
                                         <div className="space-x-3 text-sm mt-2  text-gray-400 flex items-center">
                                             <a href="/go/test" className="bg-slate-100  dark:bg-solarized-base02 dark:text-slate-400 hover:dark:bg-slate-300    hover:dark:text-slate-700 hover:bg-slate-200 rounded-sm transition-all duration-100 px-1 py-1 text-xs">{randomGetOneFromArr(testNodes)}</a>
-                                            <a href="/go" className="hover:underline  font-medium dark:text-slate-400">{randomGetOneFromArr(["Min-广州-PETS3", "布布-上海-PETS", "本老师-广州-中考", "大鱼-上海-PETS3", "VIVI-成都-P3"])}</a>
+                                            <a href="/go" className={clzForUserLabel}>{randomGetOneFromArr(["Min-广州-PETS3", "布布-上海-PETS", "本老师-广州-中考", "大鱼-上海-PETS3", "VIVI-成都-P3"])}</a>
                                             <span className="text-gray-300 dark:text-slate-500">{randomGetOneFromArr(["1小时30分钟前", "3小时50分钟前", "2分钟前", "刚刚"])}</span>
-                                            <span className="text-gray-300 dark:text-slate-500 space-x-1">
-                                                <span>
+                                            <span className="space-x-1">
+                                                <span className="text-gray-300 dark:text-slate-500 ">
                                                     最后回复来自于
                                                 </span>
-                                                <span className="dark:text-slate-400">
+                                                <span className={clzForUserLabel}>
                                                     <a href="/go" className="hover:underline  font-medium">{randomGetOneFromArr(["Min", "布布", "惠惠子", "Longings", "大鱼", "Ben老师"])}</a>
                                                 </span>
                                             </span>
                                         </div>
                                     </div>
                                     <div className='p-2 mt-2'>
-                                        <a href="/t/1" target="_blank" className=" nav-size-icon flex justify-center items-center rounded-lg  text-white bg-violet-300 dark:bg-solarized-cyanDark dark:text-slate-50 mt-1 font-mono text-bold  px-2 text-md py-0" style={{
+                                        <a href="/t/1" target="_blank" className=" nav-size-icon flex justify-center items-center rounded-lg  text-white bg-solarized-violetLight hover:bg-solarized-violet dark:hover:bg-solarized-cyan dark:bg-solarized-cyanDark dark:text-slate-50 mt-1 font-mono text-bold  px-2 text-md py-0" style={{
                                             fontWeight: 'bold'
                                         }}>3</a>
                                     </div>
