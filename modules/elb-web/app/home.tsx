@@ -36,7 +36,7 @@ export default (props: {
                 }}>
                     <NodeHorizontalBar activeId={activeTabs}></NodeHorizontalBar>
 
-                    <div className="px-4 py-3 flex justify-between items-center bg-gray-100 dark:bg-slate-900 dark:text-white  min-h-8 border-slate-200   shadow-inner border-t border-b" >
+                    <div className="px-4 py-3 flex justify-between items-center bg-gray-100 dark:bg-solarized-base03 dark:text-white  min-h-8 border-slate-200  dark:border-solarized-base03Dark  shadow-inner border-t border-b" >
                         <div className="space-x-4">
                             {
                                 testNodes.map(x => {
@@ -50,14 +50,14 @@ export default (props: {
                             /** write a topic list, with example value */
                             _.fill(Array(10), 1).map(x => {
                                 return <div className=" p-3 py-3 flex border-slate-100 border-b  ">
-                                    <div className={" rounded flex items-center justify-center w-14 h-14  bg-sky-200 dark:bg-sky-900"}>
+                                    <div className={" rounded flex items-center justify-center w-14 h-14  bg-sky-200 dark:bg-sky-700"}>
                                         L
                                     </div>
                                     <div className="ml-2 flex-shrink " style={{
                                         flex: '1'
                                     }}>
                                         <div>
-                                            <a href="/t/1" className="text-slate-600 hover:underline text-md ">{
+                                            <a href="/t/1" className="text-slate-600 hover:underline dark:text-solarized-base00Light text-md ">{
                                                 randomGetOneFromArr([
                                                     'A virtual Language Exchange',
                                                     '学英语，最难的事情算是背单词',
@@ -67,25 +67,20 @@ export default (props: {
                                                     '大英赛23年的智力题, every body try try',
                                                     'PETS3明天就要报考了 有一些紧张',
                                                     '我现在词汇量有3500，这样考P3够吗'
-                                                    // "群晖相册管理 photos mobile 的逻辑是？",
-                                                    // "想买个 Typec 转 3.5mm 的转接头，音质好一点的，各位有推荐吗",
-                                                    // "遇到玄学问题了， v2ray ws tls 模式无法配置 path 路径，配置了就不能连接。",
-                                                    // "总想要个高 base 咋办",
-                                                    // "请问国外，闯红灯的多吗？"
                                                 ])
                                             }</a>
                                         </div>
-                                        <div className="space-x-3 text-sm mt-2 text-gray-400 flex items-center">
-                                            <a href="/go/test" className="bg-slate-100  text-gray-400 hover:bg-slate-200 rounded-sm transition-all duration-100 px-1 py-1 text-xs">{randomGetOneFromArr(testNodes)}</a>
-                                            <a href="/go" className="hover:underline text-gray-400 font-medium">{randomGetOneFromArr(["Min-广州-PETS3", "布布-上海-PETS", "本老师-广州-中考", "大鱼-上海-PETS3", "VIVI-成都-P3"])}</a>
+                                        <div className="space-x-3 text-sm mt-2  text-gray-400 flex items-center">
+                                            <a href="/go/test" className="bg-slate-100   hover:bg-slate-200 rounded-sm transition-all duration-100 px-1 py-1 text-xs">{randomGetOneFromArr(testNodes)}</a>
+                                            <a href="/go" className="hover:underline  font-medium">{randomGetOneFromArr(["Min-广州-PETS3", "布布-上海-PETS", "本老师-广州-中考", "大鱼-上海-PETS3", "VIVI-成都-P3"])}</a>
                                             <span className="text-gray-300">{randomGetOneFromArr(["1小时30分钟前", "3小时50分钟前", "2分钟前", "刚刚"])}</span>
                                             <span className="text-gray-300">最后回复来自于
-                                                <a href="/go" className="hover:underline text-gray-400 font-medium">{randomGetOneFromArr(["Min", "布布", "惠惠子", "Longings", "大鱼", "Ben老师"])}</a>
+                                                <a href="/go" className="hover:underline  font-medium">{randomGetOneFromArr(["Min", "布布", "惠惠子", "Longings", "大鱼", "Ben老师"])}</a>
                                             </span>
                                         </div>
                                     </div>
                                     <div className='p-2 mt-2'>
-                                        <a href="/t/1" target="_blank" className=" nav-size-icon flex justify-center items-center rounded-lg  text-white bg-violet-300 mt-1 font-mono text-bold  px-2 text-md py-0" style={{
+                                        <a href="/t/1" target="_blank" className=" nav-size-icon flex justify-center items-center rounded-lg  text-white bg-violet-300 dark:bg-solarized-violetLight dark:text-slate-50 mt-1 font-mono text-bold  px-2 text-md py-0" style={{
                                             fontWeight: 'bold'
                                         }}>3</a>
                                     </div>

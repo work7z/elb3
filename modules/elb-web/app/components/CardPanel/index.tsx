@@ -7,5 +7,5 @@ import { Props } from "next/script";
 type PassProps = { className?: string, children: any, style?: any }
 
 export default (props: PassProps) => {
-    return <div className={'  rounded-sm shadow-sm   bg-white dark:bg-slate-800 w-full ' + props.className} style={props.style}>{props.children}</div>
+    return <div className={'  rounded-sm shadow-sm   bg-white dark:bg-solarized-base03Dark   w-full ' + props.className} style={props.style}>{props.children}</div>
 }
