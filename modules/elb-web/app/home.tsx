@@ -50,14 +50,24 @@ export default (props: {
                             /** write a topic list, with example value */
                             _.fill(Array(10), 1).map(x => {
                                 return <div className=" p-3 py-3 flex border-slate-100 border-b dark:border-solarized-base03 ">
-                                    <div className={" rounded flex items-center justify-center w-14 h-14  bg-sky-200 dark:bg-sky-700"}>
-                                        L
+                                    <div className={" rounded flex text-2xl mr-1  font-semibold text-slate-700 items-center justify-center w-14 h-14  " + (randomGetOneFromArr([
+                                        " bg-sky-200 dark:bg-sky-700 ",
+                                        " bg-purple-200 dark:bg-purple-700",
+                                        "bg-yellow-200 dark:bg-yellow-500",
+                                        "bg-green-200 dark:bg-green-500",
+                                        "bg-red-200 dark:bg-red-500",
+                                        "bg-pink-200 dark:bg-pink-500",
+                                        "bg-violet-200 dark:bg-violet-700",
+                                        "bg-sky-200 dark:bg-sky-500",
+                                    ]))}>
+                                        <img src="https://www.gravatar.com/avatar/c160f8cc69a4f0bf2b0362752353d060?d=identicon" className="w-full h-full rounded"></img>
+                                        {/* {randomGetOneFromArr(["问", "考", "论", "难", "哭", "笑", "乐", "码"])} */}
                                     </div>
                                     <div className="ml-2 flex-shrink " style={{
                                         flex: '1'
                                     }}>
                                         <div>
-                                            <a href="/t/1" className="text-slate-600 hover:underline dark:text-slate-400 text-md ">{
+                                            <a href="/t/1" className="text-slate-600 hover:underline dark:text-slate-300 text-md ">{
                                                 randomGetOneFromArr([
                                                     'A virtual Language Exchange',
                                                     '学英语，最难的事情算是背单词',
@@ -71,11 +81,16 @@ export default (props: {
                                             }</a>
                                         </div>
                                         <div className="space-x-3 text-sm mt-2  text-gray-400 flex items-center">
-                                            <a href="/go/test" className="bg-slate-100  dark:bg-solarized-base02 dark:text-slate-400  hover:bg-slate-200 rounded-sm transition-all duration-100 px-1 py-1 text-xs">{randomGetOneFromArr(testNodes)}</a>
-                                            <a href="/go" className="hover:underline  font-medium">{randomGetOneFromArr(["Min-广州-PETS3", "布布-上海-PETS", "本老师-广州-中考", "大鱼-上海-PETS3", "VIVI-成都-P3"])}</a>
-                                            <span className="text-gray-300">{randomGetOneFromArr(["1小时30分钟前", "3小时50分钟前", "2分钟前", "刚刚"])}</span>
-                                            <span className="text-gray-300">最后回复来自于
-                                                <a href="/go" className="hover:underline  font-medium">{randomGetOneFromArr(["Min", "布布", "惠惠子", "Longings", "大鱼", "Ben老师"])}</a>
+                                            <a href="/go/test" className="bg-slate-100  dark:bg-solarized-base02 dark:text-slate-400 hover:dark:bg-slate-300    hover:dark:text-slate-700 hover:bg-slate-200 rounded-sm transition-all duration-100 px-1 py-1 text-xs">{randomGetOneFromArr(testNodes)}</a>
+                                            <a href="/go" className="hover:underline  font-medium dark:text-slate-400">{randomGetOneFromArr(["Min-广州-PETS3", "布布-上海-PETS", "本老师-广州-中考", "大鱼-上海-PETS3", "VIVI-成都-P3"])}</a>
+                                            <span className="text-gray-300 dark:text-slate-500">{randomGetOneFromArr(["1小时30分钟前", "3小时50分钟前", "2分钟前", "刚刚"])}</span>
+                                            <span className="text-gray-300 dark:text-slate-500 space-x-1">
+                                                <span>
+                                                    最后回复来自于
+                                                </span>
+                                                <span className="dark:text-slate-400">
+                                                    <a href="/go" className="hover:underline  font-medium">{randomGetOneFromArr(["Min", "布布", "惠惠子", "Longings", "大鱼", "Ben老师"])}</a>
+                                                </span>
                                             </span>
                                         </div>
                                     </div>
