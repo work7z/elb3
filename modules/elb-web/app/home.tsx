@@ -77,7 +77,7 @@ export default (props: {
                                             <span className="text-gray-300 dark:text-slate-500">{randomGetOneFromArr(["1小时30分钟前", "3小时50分钟前", "2分钟前", "刚刚"])}</span>
                                             <span className="space-x-1">
                                                 <span className="text-gray-300 dark:text-slate-500 ">
-                                                    最后回复来自于
+                                                    {Dot("lastreplyby", "Last reply by")}
                                                 </span>
                                                 <span className={clzForUserLabel}>
                                                     <a href="/go" className="hover:underline  font-medium">{randomGetOneFromArr(["Min", "布布", "惠惠子", "Longings", "大鱼", "Ben老师"])}</a>
