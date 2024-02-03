@@ -1,8 +1,10 @@
 import { COMMON_CLZ_ANCHOR_TEXT } from "@/app/common/clz"
 import RegularLink from "@/app/components/RegularLink"
-import { MoonIcon, Cog8ToothIcon } from '@heroicons/react/24/solid'
+import { MoonIcon, Cog8ToothIcon, SunIcon } from '@heroicons/react/24/solid'
 
 import { Dot } from "@/app/utils/TranslationUtils"
+import { CombindSearchProps } from "@/app/page"
+import MoonSunControl from "./MoonSunControl"
 
 
 let EachInfoCell = (props: { href?: string, className?: string, name: string, content: any }) => {
@@ -10,10 +12,9 @@ let EachInfoCell = (props: { href?: string, className?: string, name: string, co
         <div className="text-base mb-1 text-gray-500 font-medium ">{props.name}</div>
         <div className="font-light">{props.content}</div>
     </a>
-
 }
 
-export default () => {
+export default (props: CombindSearchProps) => {
     // let notificationCtn = 3;
     let notificationCtn = 0;
     return <div className="p-2">
@@ -52,9 +53,7 @@ export default () => {
                 </RegularLink>
             </div>
             <div className="flex space-x-1">
-                <RegularLink href="/settings" children={(
-                    <MoonIcon className="h-5 w-5 text-blue-300" />
-                )}></RegularLink>
+                <MoonSunControl></MoonSunControl>
                 <RegularLink href="/xksd" children={(
                     <Cog8ToothIcon className="h-5 w-5 text-zinc-400 "></Cog8ToothIcon>
                 )}></RegularLink>

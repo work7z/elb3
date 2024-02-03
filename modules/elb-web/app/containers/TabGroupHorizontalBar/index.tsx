@@ -61,7 +61,7 @@ export default (props: { activeId?: string }) => {
    // get id path varialble from url in next.js
    return <div className="px-2 py-2 space-x-2 flex">{
       list.map(x => {
-         return <a className={(activeId == x.id ? ' !bg-zinc-800 hover:!bg-zinc-700 text-white ' : '') + ` p-2   transition-all duration-200 rounded hover:bg-slate-100  `} href={'/?tabs=' + x.id} >{x.label}</a>
+         return <a className={(activeId == x.id ? ' !bg-zinc-800 hover:!bg-zinc-700 text-white  ' : '') + ` p-2   transition-all duration-200 rounded hover:bg-slate-100  `} href={'/?tabs=' + x.id} >{x.label}</a>
       })
    }</div>
 }

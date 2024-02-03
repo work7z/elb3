@@ -12,23 +12,25 @@ import CenterPart from "./containers/CenterPart";
 import CardPanel from './components/CardPanel'
 import NodeHorizontalBar from "./containers/TabGroupHorizontalBar";
 import Footer from "./containers/Footer";
+import { CombindSearchProps } from "./page";
+import { ThemeProvider } from "./theme-provider";
 
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function RootLayout({
+export default function RootLayout(props: {
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}) {
+  let { children } = props;
   return (
-    <html lang={getCurrentLang()} className={true ? '' : " dark "}>
-      <body className={'  dark:bg-zinc-900 dark:text-white ' + inter.className}>
-        <TopNav></TopNav>
-        <CenterPart children={children as any}>
-        </CenterPart>
-        <Footer></Footer>
-      </body>
+    <html lang={getCurrentLang()}>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <body className={'  dark:bg-solarized-base03 dark:text-white    ' + inter.className}>
+          <TopNav></TopNav>
+          <CenterPart children={children as any} />
+          <Footer></Footer>
+        </body>
+      </ThemeProvider>
     </html>
   );
 }

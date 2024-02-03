@@ -29,18 +29,18 @@ export default (props: {
 
     let activeTabs = searchParams.tabs
     return (
-        <main className="">
+        <main className="" >
             <div className=" flex flex-row space-x-4 ">
                 <CardPanel className='' style={{
                     flex: '1'
                 }}>
                     <NodeHorizontalBar activeId={activeTabs}></NodeHorizontalBar>
 
-                    <div className="px-4 py-3 flex justify-between items-center bg-gray-100  min-h-8 border-slate-200   shadow-inner border-t border-b" >
+                    <div className="px-4 py-3 flex justify-between items-center bg-gray-100 dark:bg-slate-900 dark:text-white  min-h-8 border-slate-200   shadow-inner border-t border-b" >
                         <div className="space-x-4">
                             {
                                 testNodes.map(x => {
-                                    return <a href={'/go/' + x} className="hover:underline text-slate-700">{x}</a>
+                                    return <a href={'/go/' + x} className="hover:underline text-slate-700 dark:text-slate-400">{x}</a>
                                 })
                             }
                         </div>
@@ -50,7 +50,7 @@ export default (props: {
                             /** write a topic list, with example value */
                             _.fill(Array(10), 1).map(x => {
                                 return <div className=" p-3 py-3 flex border-slate-100 border-b  ">
-                                    <div className={" rounded flex items-center justify-center w-14 h-14  bg-sky-200"}>
+                                    <div className={" rounded flex items-center justify-center w-14 h-14  bg-sky-200 dark:bg-sky-900"}>
                                         L
                                     </div>
                                     <div className="ml-2 flex-shrink " style={{
@@ -76,7 +76,7 @@ export default (props: {
                                             }</a>
                                         </div>
                                         <div className="space-x-3 text-sm mt-2 text-gray-400 flex items-center">
-                                            <a href="/go/test" className="bg-slate-100 text-gray-400 hover:bg-slate-200 rounded-sm transition-all duration-100 px-1 py-1 text-xs">{randomGetOneFromArr(testNodes)}</a>
+                                            <a href="/go/test" className="bg-slate-100  text-gray-400 hover:bg-slate-200 rounded-sm transition-all duration-100 px-1 py-1 text-xs">{randomGetOneFromArr(testNodes)}</a>
                                             <a href="/go" className="hover:underline text-gray-400 font-medium">{randomGetOneFromArr(["Min-广州-PETS3", "布布-上海-PETS", "本老师-广州-中考", "大鱼-上海-PETS3", "VIVI-成都-P3"])}</a>
                                             <span className="text-gray-300">{randomGetOneFromArr(["1小时30分钟前", "3小时50分钟前", "2分钟前", "刚刚"])}</span>
                                             <span className="text-gray-300">最后回复来自于
@@ -101,7 +101,7 @@ export default (props: {
                     className="space-y-2"
                 >
                     <CardPanel>
-                        <UserPanel></UserPanel>
+                        <UserPanel {...combindSearchProps}></UserPanel>
                     </CardPanel>
                 </div>
             </div>
