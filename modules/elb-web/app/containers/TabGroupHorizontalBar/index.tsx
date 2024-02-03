@@ -27,6 +27,10 @@ export let getGroupAndNodeData = (): TabGroupType[] => {
          id: "latest"
       },
       {
+         label: Dot("nncQE", "Life"),
+         id: "life",
+      },
+      {
          label: "PETS",
          id: "pets",
       },
@@ -35,8 +39,8 @@ export let getGroupAndNodeData = (): TabGroupType[] => {
          id: "english"
       },
       {
-         label: Dot("nncQE", "Life"),
-         id: "life",
+         label: Dot("b7wgrhuXl", "Tech"),
+         id: 'tech'
       },
       {
          label: Dot("43be5", "Diary"),

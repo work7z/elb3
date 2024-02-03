@@ -50,18 +50,8 @@ export default (props: {
                             /** write a topic list, with example value */
                             _.fill(Array(10), 1).map(x => {
                                 return <div className=" p-3 py-3 flex border-slate-100 border-b dark:border-solarized-base03 ">
-                                    <div className={" rounded flex text-2xl mr-1  font-semibold text-slate-700 items-center justify-center w-14 h-14  " + (randomGetOneFromArr([
-                                        " bg-sky-200 dark:bg-sky-700 ",
-                                        " bg-purple-200 dark:bg-purple-700",
-                                        "bg-yellow-200 dark:bg-yellow-500",
-                                        "bg-green-200 dark:bg-green-500",
-                                        "bg-red-200 dark:bg-red-500",
-                                        "bg-pink-200 dark:bg-pink-500",
-                                        "bg-violet-200 dark:bg-violet-700",
-                                        "bg-sky-200 dark:bg-sky-500",
-                                    ]))}>
-                                        <img src="https://www.gravatar.com/avatar/c160f8cc69a4f0bf2b0362752353d060?d=identicon" className="w-full h-full rounded"></img>
-                                        {/* {randomGetOneFromArr(["问", "考", "论", "难", "哭", "笑", "乐", "码"])} */}
+                                    <div className={" rounded flex text-2xl mr-1  font-semibold text-slate-700 items-center justify-center w-14 h-14  "}>
+                                        <img src={"/avatar/a-" + _.random(1, 30) + ".png"} className="w-full h-full rounded"></img>
                                     </div>
                                     <div className="ml-2 flex-shrink " style={{
                                         flex: '1'
@@ -114,7 +104,7 @@ export default (props: {
                         <UserPanel {...combindSearchProps}></UserPanel>
                     </CardPanel>
                 </div>
-            </div>
-        </main>
+            </div >
+        </main >
     );
 }
