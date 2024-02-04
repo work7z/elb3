@@ -5,6 +5,7 @@ import { MoonIcon, Cog8ToothIcon, SunIcon } from '@heroicons/react/24/solid'
 import { Dot } from "@/app/utils/TranslationUtils"
 import { CombindSearchProps } from "@/app/page"
 import MoonSunControl from "./MoonSunControl"
+import _ from 'lodash'
 
 
 let EachInfoCell = (props: { href?: string, className?: string, name: string, content: any }) => {

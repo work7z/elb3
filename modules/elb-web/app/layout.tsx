@@ -18,9 +18,13 @@ import Layout from './containers/Layout'
 import { Sequelize, DataTypes } from 'sequelize';
 import fs from 'fs'
 
-export default function RootLayout(props: {
+// import dbconn from '../app/db/index'
+
+export default async function RootLayout(props: {
   children,
 }) {
+// let a=  await dbconn()
+
   let { children } = props;
   return (
     <Layout>{children}</Layout>
