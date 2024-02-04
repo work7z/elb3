@@ -14,19 +14,18 @@ import { useParams, useSearchParams } from "next/navigation";
 import InnerHome from './home'
 import { usePathname } from 'next/navigation';
 import React, { } from "react";
-
+import {PageProps} from './types/pages'
 
 type SearchParamType = Partial<{
   tabs: string
 }>
 
-export type CombindSearchProps = {
-  searchParams: SearchParamType
-}
+export type CombindSearchProps = PageProps<{}, SearchParamType>
 
 export default function Home(props: { searchParams: SearchParamType }) {
   let { searchParams } = props
   let combindSearchProps: CombindSearchProps = {
+    params:{},
     searchParams
   }
   return <InnerHome combindSearchProps={combindSearchProps}></InnerHome>

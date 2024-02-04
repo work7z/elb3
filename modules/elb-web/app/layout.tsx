@@ -15,6 +15,8 @@ import Footer from "./containers/Footer";
 import { CombindSearchProps } from "./page";
 import { ThemeProvider } from "./theme-provider";
 import Layout from './containers/Layout'
+import { Sequelize, DataTypes } from 'sequelize';
+import fs from 'fs'
 
 export default function RootLayout(props: {
   children,

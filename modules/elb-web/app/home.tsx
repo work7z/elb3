@@ -47,7 +47,8 @@ export default (props: {
             <div>
                 {
                     /** write a topic list, with example value */
-                    _.fill(Array(10), 1).map(x => {
+                    _.fill(Array(10), 1).map((x,d) => {
+                        let tLink = "/t/"+d
                         return <div className=" p-3 py-3 flex border-slate-100 border-b dark:border-solarized-base03 ">
                             <div className={" rounded flex text-2xl mr-1  font-semibold text-slate-700 items-center justify-center w-14 h-14  "}>
                                 <img src={"/avatar/a-" + _.random(1, 30) + ".png"} className="w-full h-full rounded"></img>
@@ -56,7 +57,7 @@ export default (props: {
                                 flex: '1'
                             }}>
                                 <div>
-                                    <a href="/t/1" className="text-slate-600 hover:underline dark:text-slate-300 text-md ">{
+                                    <a href={tLink} className="text-slate-600 hover:underline dark:text-slate-300 text-md ">{
                                         randomGetOneFromArr([
                                             'A virtual Language Exchange',
                                             '学英语，最难的事情算是背单词',
@@ -84,7 +85,7 @@ export default (props: {
                                 </div>
                             </div>
                             <div className='p-2 mt-2'>
-                                <a href="/t/1" target="_blank" className=" nav-size-icon flex justify-center items-center rounded-lg  text-white bg-solarized-violetLight hover:bg-solarized-violet dark:hover:bg-solarized-cyan dark:bg-solarized-cyanDark dark:text-slate-50 mt-1 font-mono text-bold  px-2 text-md py-0" style={{
+                                <a href={tLink} target="_blank" className=" nav-size-icon flex justify-center items-center rounded-lg  text-white bg-solarized-violetLight hover:bg-solarized-violet dark:hover:bg-solarized-cyan dark:bg-solarized-cyanDark dark:text-slate-50 mt-1 font-mono text-bold  px-2 text-md py-0" style={{
                                     fontWeight: 'bold'
                                 }}>3</a>
                             </div>

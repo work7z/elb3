@@ -1,3 +1,3 @@
 export default function Page() {
-    return <h1>this is a optional page</h1>
+    return <h1>this is about page</h1>
 }

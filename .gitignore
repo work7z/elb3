@@ -1,4 +1,7 @@
 var/log/
+modules/elb-web/config/dev/**
+modules/elb-web/config/prod/**/*
+modules/elb-web/config/dev/**/*
 modules/web
 b3333*
 pnpm-lock.yaml

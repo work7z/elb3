@@ -19,7 +19,7 @@ export default () => {
             <span className="">{Dot("ky6JphiKk", "{0} Online Users", 3012)}</span>
             <span>{Dot("gmK3pKyRI", "{0} Peak Online Count", 1293)}</span>
         </div>
-        <div className="text-xs text-slate-500 font-serif  dark:text-slate-300">
+        <div className="text-xs text-slate-500 font-serif  dark:text-slate-400">
             ELB3.com is derived from <i>English Learning Base</i> group that was founded on August 1st, 2021.  It is technically built with the FOSS project <a href="https://github.com/work7z/elb3" rel='nofollow' target='_blank' className="text-slate-600">ELB3</a> which is licensed under AGPL v3.0.
         </div>
         <div className="text-xs space-x-4 flex font-semibold text-slate-500 items-center mt-6 ">
