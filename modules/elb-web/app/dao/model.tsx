@@ -93,7 +93,7 @@ export class TopicComment extends Model<InferAttributes<TopicComment>, InferCrea
 }
 
 // model for audit table, can contains history of topic content and topic comment model
-export type AuditType = "topic" | "topicContent" | "topicComment" | "changeUserName"
+export type AuditType = "editTopicContent" | "editTopicComment" | "changeUserName"
 export class Audit extends Model<InferAttributes<Audit>, InferCreationAttributes<Audit>> {
     declare id: number;
     declare userId: number;

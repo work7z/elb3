@@ -18,11 +18,11 @@
 
  ::selection {
   color: #f1f5f9;
-  background-color: #334155;
+  background-color: #1a828d;
 }
 .dark   ::selection {
-  color: #1c2128;
-  background-color: #adbac7;
+  color: #bccfce;
+  background-color: #197174;
 }
 
 
