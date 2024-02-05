@@ -15,6 +15,14 @@ test('Test Conn', async () => {
     let sequelize = daoRef.sequelize
 })
 
+
+
+test('Test Conn', async () => {
+    let daoRef = await fn("dev")
+
+    let sequelize = daoRef.sequelize
+})
+
 test('Test Create and Mantain Table', async () => {
     let daoRef = await fn("test")
 

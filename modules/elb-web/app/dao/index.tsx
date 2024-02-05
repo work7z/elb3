@@ -2,6 +2,7 @@ import { Sequelize, DataTypes } from 'sequelize';
 import { SystemConfig as SystemConfig } from "../config/types"
 import fs from 'fs'
 import path from 'path'
+import { log } from 'console';
 
 type DaoRef = {
     sequelize: Sequelize
@@ -16,9 +17,12 @@ export let getConfigByFlag = (envFlag: SystemFlag): SystemConfig => {
 
 
 export default async (envFlag: SystemFlag): Promise<DaoRef> => {
+    log("envFlag", envFlag)
     let config = getConfigByFlag(envFlag)
 
-    let sequelize = new Sequelize(`${config.database.link}`);
+    let link = config.database.link
+    log("connect to DB: "+link)
+    let sequelize = new Sequelize(`${link}`);
 
     try {
         await sequelize.authenticate();
