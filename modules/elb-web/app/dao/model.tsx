@@ -13,6 +13,7 @@ export class User extends Model<InferAttributes<User>, InferCreationAttributes<U
     declare source: string;
     declare password: string;
     declare role: UserRole;
+    declare avatarPath: string;
     declare status: "normal" | "banned" | "deleted";
     declare topicCount: number; // the number of topics that's sent by this user up to now
     declare banReason: string | null; // the reason why this user is banned
@@ -115,5 +116,340 @@ export default (daoRef: DaoRef) => {
     // options
     sequelize.sync({ alter: true })
     // init model
-
+    User.init({
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        username: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        phoneNumber: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        source: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        role: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        avatarPath: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        status: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        topicCount: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        banReason: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        banUntil: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        cityId: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        goal: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        deleteAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        }
+    }, {
+        sequelize,
+        modelName: "User",
+        tableName: "user"
+    })
+    UserToken.init({
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        userId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        token: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        deleteAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        }
+    }, {
+        sequelize,
+        modelName: "UserToken",
+        tableName: "user_token"
+    })
+    UserLoginLog.init({
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        userId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        loginIp: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        loginTime: {
+            type: DataTypes.DATE,
+            allowNull: false
+        }
+    }, {
+        sequelize,
+        modelName: "UserLoginLog",
+        tableName: "user_login_log"
+    })
+    Block.init({
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        userId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        blockUserId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        deleteAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        }
+    }, {
+        sequelize,
+        modelName: "Block",
+        tableName: "block"
+    })
+    Topic.init({
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        userId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        nodeId: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        viewCount: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        favouriteCount: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        commentCount: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        lastCommenter: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        deleteAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        }
+    }, {
+        sequelize,
+        modelName: "Topic",
+        tableName: "topic"
+    })
+    TopicContent.init({
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        topicId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        publishType: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        renderType: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        content: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        editTimes: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        deleteAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        }
+    }, {
+        sequelize,
+        modelName: "TopicContent",
+        tableName: "topic_content"
+    })
+    TopicComment.init({
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        topicId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        userId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        content: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        editTimes: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        agreeCount: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        disagreeCount: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        deleteAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        }
+    }, {
+        sequelize,
+        modelName: "TopicComment",
+        tableName: "topic_comment"
+    })
+    Audit.init({
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        userId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        type: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        content: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        deleteAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        }
+    }, {
+        sequelize,
+        modelName: "Audit",
+        tableName: "audit"
+    })
 }
