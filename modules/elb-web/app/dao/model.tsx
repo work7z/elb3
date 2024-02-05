@@ -13,9 +13,10 @@ export class User extends Model<InferAttributes<User>, InferCreationAttributes<U
     declare source: string;
     declare password: string;
     declare role: UserRole;
-    declare status: string;
+    declare status: "normal" | "banned" | "deleted";
     declare topicCount: number; // the number of topics that's sent by this user up to now
-
+    declare banReason: string | null; // the reason why this user is banned
+    declare banUntil: Date | null;
     // settings
     declare cityId: string; // city id, from fixed static data in node.js
     declare goal: string; // goal, from fixed static data in node.js
@@ -63,7 +64,7 @@ export class Topic extends Model<InferAttributes<Topic>, InferCreationAttributes
     declare viewCount: number;
     declare favouriteCount: number;
     declare commentCount: number;
-    declare lastCommenter: number; 
+    declare lastCommenter: number;
     declare createdAt: CreationOptional<Date> | null;
     declare updatedAt: CreationOptional<Date> | null;
     declare deleteAt: CreationOptional<Date> | null;
@@ -73,7 +74,7 @@ export class Topic extends Model<InferAttributes<Topic>, InferCreationAttributes
 export class TopicContent extends Model<InferAttributes<TopicContent>, InferCreationAttributes<TopicContent>> {
     declare id: number;
     declare topicId: number;
-    declare publishType: "main"|"append";
+    declare publishType: "main" | "append";
     declare renderType: "markdown" | "lexical";
     declare content: string; // varchar(20000)
     declare editTimes: number;
