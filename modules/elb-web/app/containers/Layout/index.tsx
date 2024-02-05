@@ -1,9 +1,9 @@
 
 import { Inter } from "next/font/google";
 import { getCurrentLang } from "../../utils/TranslationUtils";
-import { TopNav } from "../../containers/TopNav";
-import CenterPart from "../../containers/CenterPart";
-import Footer from "../../containers/Footer";
+import { TopNav } from "../TopNav";
+import CenterPart from "../CenterPart";
+import Footer from "../Footer";
 import { ThemeProvider } from "../../theme-provider";
 
 

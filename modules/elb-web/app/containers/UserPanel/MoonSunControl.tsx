@@ -4,7 +4,7 @@ import { COMMON_CLZ_ANCHOR_TEXT } from "@/app/common/clz"
 import RegularLink from "@/app/components/RegularLink"
 import { MoonIcon, Cog8ToothIcon, SunIcon } from '@heroicons/react/24/solid'
 import { Dot } from "@/app/utils/TranslationUtils"
-import { CombindSearchProps } from "@/app/page"
+import { CombindSearchProps } from "@/page"
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react"
 

@@ -12,13 +12,11 @@ import CenterPart from "./containers/CenterPart";
 import CardPanel from './components/CardPanel'
 import NodeHorizontalBar from "./containers/TabGroupHorizontalBar";
 import Footer from "./containers/Footer";
-import { CombindSearchProps } from "./page";
-import { ThemeProvider } from "./theme-provider";
 import Layout from './containers/Layout'
 import { Sequelize, DataTypes } from 'sequelize';
 import fs from 'fs'
 
-// import dbconn from '../app/db/index'
+// import dbconn from '.../app/db/index'
 
 export default async function RootLayout(props: {
   children,
