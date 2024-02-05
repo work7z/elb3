@@ -16,6 +16,16 @@
   }
 }
 
+ ::selection {
+  color: #f1f5f9;
+  background-color: #334155;
+}
+.dark   ::selection {
+  color: #1c2128;
+  background-color: #adbac7;
+}
+
+
 .nav-size-icon{
   font-weight: bold;
   height: 20px;

@@ -36,6 +36,7 @@ export class Topic extends Model<InferAttributes<Topic>, InferCreationAttributes
     declare userId: number;
     declare nodeId: string; // varchar(15)
     declare viewCount: number;
+    declare favouriteCount: number;
     declare commentCount: number;
     declare lastCommenter: number; 
     declare createdAt: CreationOptional<Date> | null;
@@ -50,18 +51,45 @@ export class TopicContent extends Model<InferAttributes<TopicContent>, InferCrea
     declare publishType: "main"|"append";
     declare renderType: "markdown" | "lexical";
     declare content: string; // varchar(20000)
+    declare editTimes: number;
     declare createdAt: CreationOptional<Date> | null;
     declare updatedAt: CreationOptional<Date> | null;
     declare deleteAt: CreationOptional<Date> | null;
 }
 
-// model for topic reply, including topicId, userId, content
+// model for topic comments, including topicId, userId, content
+export class TopicComment extends Model<InferAttributes<TopicComment>, InferCreationAttributes<TopicComment>> {
+    declare id: number;
+    declare topicId: number;
+    declare userId: number;
+    declare content: string; // varchar(20000)
+    declare editTimes: number;
+    declare agreeCount: number; // agree with this comment, visible
+    declare disagreeCount: number; // disagree with this comment, invisible
+    declare createdAt: CreationOptional<Date> | null;
+    declare updatedAt: CreationOptional<Date> | null;
+    declare deleteAt: CreationOptional<Date> | null;
+}
+
+// model for audit table, can contains history of topic content and topic comment model
+export type AuditType = "topic" | "topicContent" | "topicComment"
+export class Audit extends Model<InferAttributes<Audit>, InferCreationAttributes<Audit>> {
+    declare id: number;
+    declare userId: number;
+    declare type: AuditType;
+    declare content: string; // varchar(20000)
+    declare createdAt: CreationOptional<Date> | null;
+    declare updatedAt: CreationOptional<Date> | null;
+    declare deleteAt: CreationOptional<Date> | null;
+}
+
+
+
 
 export default (daoRef: DaoRef) => {
     let sequelize = daoRef.sequelize
     // option
     sequelize.sync({ alter: true })
-
 
 
     User.init({
