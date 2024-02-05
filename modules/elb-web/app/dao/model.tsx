@@ -14,6 +14,9 @@ export class User extends Model<InferAttributes<User>, InferCreationAttributes<U
     declare password: string;
     declare role: UserRole;
     declare status: string;
+    declare cityId: string; // city id, from fixed static data in node.js
+    declare goal: string; // goal, from fixed static data in node.js
+    declare topicCount: number; // the number of topics that's sent by this user up to now
     declare createdAt: CreationOptional<Date> | null;
     declare updatedAt: CreationOptional<Date> | null;
     declare deleteAt: CreationOptional<Date> | null;
@@ -24,6 +27,24 @@ export class UserToken extends Model<InferAttributes<UserToken>, InferCreationAt
     declare id: number;
     declare userId: number;
     declare token: string;
+    declare createdAt: CreationOptional<Date> | null;
+    declare updatedAt: CreationOptional<Date> | null;
+    declare deleteAt: CreationOptional<Date> | null;
+}
+
+// model for UserLoginLog
+export class UserLoginLog extends Model<InferAttributes<UserLoginLog>, InferCreationAttributes<UserLoginLog>> {
+    declare id: number;
+    declare userId: number;
+    declare loginIp: string;
+    declare loginTime: Date;
+}
+
+// model for block amongst users
+export class Block extends Model<InferAttributes<Block>, InferCreationAttributes<Block>> {
+    declare id: number;
+    declare userId: number;
+    declare blockUserId: number;
     declare createdAt: CreationOptional<Date> | null;
     declare updatedAt: CreationOptional<Date> | null;
     declare deleteAt: CreationOptional<Date> | null;
@@ -72,7 +93,7 @@ export class TopicComment extends Model<InferAttributes<TopicComment>, InferCrea
 }
 
 // model for audit table, can contains history of topic content and topic comment model
-export type AuditType = "topic" | "topicContent" | "topicComment"
+export type AuditType = "topic" | "topicContent" | "topicComment" | "changeUserName"
 export class Audit extends Model<InferAttributes<Audit>, InferCreationAttributes<Audit>> {
     declare id: number;
     declare userId: number;
@@ -84,61 +105,10 @@ export class Audit extends Model<InferAttributes<Audit>, InferCreationAttributes
 }
 
 
-
-
 export default (daoRef: DaoRef) => {
     let sequelize = daoRef.sequelize
-    // option
+    // options
     sequelize.sync({ alter: true })
+    // init model
 
-
-    User.init({
-        id: {
-            type: DataTypes.INTEGER.UNSIGNED,
-            autoIncrement: true,
-            primaryKey: true,
-        },
-        username: {
-            type: new DataTypes.STRING(20),
-            allowNull: false,
-        },
-        email: {
-            type: new DataTypes.STRING(20),
-            allowNull: true,
-        },
-        phoneNumber: {
-            type: new DataTypes.STRING(18),
-            allowNull: true,
-        },
-        source: {
-            type: new DataTypes.STRING(10),
-            allowNull: false,
-        },
-        password: {
-            type: new DataTypes.STRING(32),
-            allowNull: false,
-        },
-        role: {
-            type: new DataTypes.STRING(6), // replace 'role1', 'role2' with your actual roles
-            allowNull: false,
-        },
-        status: {
-            type: new DataTypes.STRING(12),
-            allowNull: false,
-        },
-        createdAt: {
-            type: DataTypes.DATE,
-            allowNull: true,
-        },
-        updatedAt: {
-            type: DataTypes.DATE,
-            allowNull: true,
-        },
-        deleteAt: {
-            type: DataTypes.DATE,
-            allowNull: true,
-        },
-    }, {
-        sequelize,
-    });
 }
