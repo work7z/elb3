@@ -14,9 +14,13 @@ export class User extends Model<InferAttributes<User>, InferCreationAttributes<U
     declare password: string;
     declare role: UserRole;
     declare status: string;
+    declare topicCount: number; // the number of topics that's sent by this user up to now
+
+    // settings
     declare cityId: string; // city id, from fixed static data in node.js
     declare goal: string; // goal, from fixed static data in node.js
-    declare topicCount: number; // the number of topics that's sent by this user up to now
+
+    // timestamps
     declare createdAt: CreationOptional<Date> | null;
     declare updatedAt: CreationOptional<Date> | null;
     declare deleteAt: CreationOptional<Date> | null;
