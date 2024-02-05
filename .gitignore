@@ -22,6 +22,8 @@ myproject
 nouse
 .DS_Store
 tmp-translate-result
+dev-config.json
+dev.json
 time-consumer
 laft.tmp.gz
 dist
