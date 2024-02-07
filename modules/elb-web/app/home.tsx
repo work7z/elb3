@@ -32,7 +32,10 @@ export default (props: {
 
     let activeTabs = searchParams.tabs
     return <GrailLayoutWithUser combindSearchProps={combindSearchProps}>
-        <>
+                        <CardPanel className={''} style={{
+                    flex: '1'
+                }}>
+
             <NodeHorizontalBar activeId={activeTabs}></NodeHorizontalBar>
 
             <div className="px-4 py-3 flex justify-between items-center bg-gray-100 dark:bg-solarized-base03 dark:text-white  min-h-8 border-slate-200  dark:border-solarized-base02Light1  shadow-inner border-t border-b" >
@@ -51,7 +54,7 @@ export default (props: {
                         let tLink = "/t/"+d
                         return <div className=" p-3 py-3 flex border-slate-100 border-b dark:border-solarized-base03 ">
                             <div className={" rounded flex text-2xl mr-1  font-semibold text-slate-700 items-center justify-center w-14 h-14  "}>
-                                <img src={"/avatar/a-" + _.random(1, 30) + ".png"} className="w-full h-full rounded"></img>
+                                <img src={"/avatar/" + _.random(1, 200) + ".png"} className="w-full h-full rounded"></img>
                             </div>
                             <div className="ml-2 flex-shrink " style={{
                                 flex: '1'
@@ -93,7 +96,7 @@ export default (props: {
                     })
                 }
             </div>
-        </>
+        </CardPanel>
     </GrailLayoutWithUser>
 }
 

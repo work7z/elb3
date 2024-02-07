@@ -21,7 +21,7 @@ export default (props: CombindSearchProps) => {
     let eachInfoCellClz = borderStyleClz + " border-r-[1px]"
     return <div className="p-2">
         <div className="flex ">
-            <img src={"/avatar/a-" + _.random(1, 30) + ".png"} className="w-12 h-12 rounded bg-zinc-100  text-xl flex justify-center items-center text-gray font-bold ">
+            <img src={"/avatar/" + _.random(1, 100) + ".png"} className="w-12 h-12 rounded bg-zinc-100  text-xl flex justify-center items-center text-gray font-bold ">
 
 
             </img>

@@ -22,6 +22,6 @@
       "console": "integratedTerminal",
       "args": ["server"],
       "internalConsoleOptions": "neverOpen"
-    }
+    },
   ]
 }

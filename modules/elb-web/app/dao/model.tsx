@@ -110,6 +110,40 @@ export class Audit extends Model<InferAttributes<Audit>, InferCreationAttributes
     declare deleteAt: CreationOptional<Date> | null;
 }
 
+// chat group, chat group members, chat group history
+
+// model for chat group
+export class ChatGroup extends Model<InferAttributes<ChatGroup>, InferCreationAttributes<ChatGroup>> {
+    declare id: number;
+    declare name: string;
+    declare createdAt: CreationOptional<Date> | null;
+    declare updatedAt: CreationOptional<Date> | null;
+    declare deleteAt: CreationOptional<Date> | null;
+}
+
+// model for chat group members 
+export class ChatGroupMember extends Model<InferAttributes<ChatGroupMember>, InferCreationAttributes<ChatGroupMember>> {
+    declare id: number;
+    declare groupId: number;
+    declare userId: number;
+    declare createdAt: CreationOptional<Date> | null;
+    declare updatedAt: CreationOptional<Date> | null;
+    declare deleteAt: CreationOptional<Date> | null;
+}
+
+// model for chat group history
+export class ChatGroupHistory extends Model<InferAttributes<ChatGroupHistory>, InferCreationAttributes<ChatGroupHistory>> {
+    declare id: number;
+    declare groupId: number;
+    declare userId: number;
+    declare type: string; // text, emoji, image, file, etc...
+    declare content: string;
+    declare createdAt: CreationOptional<Date> | null;
+    declare updatedAt: CreationOptional<Date> | null;
+    declare deleteAt: CreationOptional<Date> | null;
+}
+
+
 
 export default (daoRef: DaoRef) => {
     let sequelize = daoRef.sequelize

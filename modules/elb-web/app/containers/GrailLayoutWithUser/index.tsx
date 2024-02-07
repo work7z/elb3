@@ -17,16 +17,12 @@ import { usePathname } from 'next/navigation';
 import React, { } from "react";
 
 export default (props: {
-    combindSearchProps: CombindSearchProps
+    combindSearchProps: CombindSearchProps & { rounded?: boolean }
 } & { children: any }) => {
     return (
         <main className="" >
             <div className=" flex flex-row space-x-4 ">
-                <CardPanel className='' style={{
-                    flex: '1'
-                }}>
-                    {props.children}
-                </CardPanel>
+                {props.children}
                 <div
                     style={{
                         width: '290px'

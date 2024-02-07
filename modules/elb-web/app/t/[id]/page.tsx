@@ -1,7 +1,36 @@
 import React from 'react'
 import { PageProps } from '../../types/pages'
+import GrailLayoutWithUser from '@/app/containers/GrailLayoutWithUser'
+import { CombindSearchProps } from '@/app/page'
+import CardPanel from '@/app/components/CardPanel';
 
 
-export default function Page(props:PageProps<{id:number},{}>) {
-    return <h1>this is a topic page,{props.params.id}</h1>
+export default function Page(props: PageProps<{ id: number }, {}>) {
+    let { searchParams, params } = props;
+    let combindSearchProps = props;
+    return <GrailLayoutWithUser combindSearchProps={combindSearchProps}>
+        <div className='space-y-2 flex-1'>
+        <CardPanel className={''} style={{
+                flex: '1'
+            }}>
+
+                <div className='p-2 min-h-20'>
+                    求推荐个 Node.js 的 orm 轮子,看轮子都看花眼了
+                </div>
+            </CardPanel>
+            {
+                _.fill(Array(10), 1).map((x, d) => {
+                    return             <CardPanel className={''} style={{
+                        flex: '1'
+                    }}>
+        
+                        <div className='p-2'>
+                            {'這是一個測試連接'}
+                        </div>
+                    </CardPanel>
+        
+                })
+            }
+        </div>
+    </GrailLayoutWithUser>
 }

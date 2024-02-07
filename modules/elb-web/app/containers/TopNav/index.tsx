@@ -39,7 +39,7 @@ export let TopNav = () => {
                     <div>
                         {links.map(x => {
                             return (
-                                <a href={x.href} target="_blank" className="inline-block hover:opacity-70 text-lg px-4 py-2 leading-none ">{x.name}</a>
+                                <a href={x.href}  className="inline-block hover:opacity-70 text-lg px-4 py-2 leading-none ">{x.name}</a>
                             )
                         })}
                     </div>
