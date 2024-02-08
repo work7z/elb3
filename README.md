@@ -8,12 +8,7 @@ From the first commit onwards, I have its opened the entire source code, welcome
 
 Welcome to register and discuss with us: https://elb3.com
 
-# 🪪 License
-
-This project is protected under the GNU Affero General Public License.  
-Please see the LICENSE file for more details.
-
-# ☘️ Acknowledgements
+# 🎷 Acknowledgements
 
 I really appreciate those who have created beautiful icons which are commonly used in this project. According to the attribution requirement, I have detailed these icons information as below.
 
@@ -23,3 +18,8 @@ I really appreciate those who have created beautiful icons which are commonly us
 <a href="https://www.flaticon.com/free-icons/moon" title="moon icons">Moon icons created by Freepik - Flaticon</a>
 
 <a href="https://www.flaticon.com/free-icons/screen-darkness" title="screen darkness icons">Screen darkness icons created by bsd - Flaticon</a>
+
+# 🪪 License
+
+This project is protected under the GNU Affero General Public License.  
+Please see the LICENSE file for more details.

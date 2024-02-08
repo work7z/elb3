@@ -6,23 +6,23 @@ import NoSsr from "@/app/__CORE__/components/NoSsr";
 import dynamic from 'next/dynamic'
 import HomeLink from "../../components/HomeLink";
 import SearchBar from "./SearchBar";
+import { useIsLoggedIn } from "../../hooks/user";
 
 
 export let TopNav = () => {
-    // write a function that returns a component for top nav, written by tailwindcss, which should 
-    // 1. has a logo on the left
-    // 2. the search bar is placed after logo 
-    // 3. the search bar should be able to search for a word or a phrase
-    // 4. in the float right part, there should be a login button, a register button, and a language switch button
-    // 5. once you're ready, print out the logic code below 
-    // 6. MOst important, we should look into its dark class name in tailwindcss also, like dark:
-    // bg-gradient-to-t from-gray-200 to-white border dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-900 dark:border-gray-700
-    let links: { name: string, href: string }[] = [
+
+    let isLoginIn = useIsLoggedIn()
+
+    let links: { name: string, href: string }[] = isLoginIn ? [
         { name: Dot("UjkOS50wO", "Home"), href: "/" },
         { name: "Min", href: "/min" },
         { name: Dot("TV09-obNr", "Milestone"), href: "/milestone" },
-        { name: Dot("geHXwByxy", "Settings"), href: "/contact" },
-        { name: Dot("xhxY6iLDH", "Logout"), href: "/contact" },
+        { name: Dot("geHXwByxy", "Settings"), href: "/settings" },
+        { name: Dot("xhxY6iLDH", "Logout"), href: "/logout" },
+    ] : [
+        { name: Dot("UjkOS50wO", "Home"), href: "/" },
+        { name: Dot("gTOv6abWT", "Login"), href: "/login" },
+        { name: Dot("gTOv6adbWT", "Register"), href: "/register" },
     ]
     return (
         <div className="border-b-2  dark:border-solarized-green dark:border-opacity-80  " >
