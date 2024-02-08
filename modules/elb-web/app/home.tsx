@@ -3,19 +3,18 @@ import Image from "next/image";
 import type { Metadata, ResolvingMetadata } from "next";
 import Head from 'next/head'
 import { Props } from "next/script";
-import { Dot } from "./utils/TranslationUtils";
-import { getWebsiteName } from "./common/config";
-import { TopNav } from "./containers/TopNav";
-import CenterPart from "./containers/CenterPart";
-import CardPanel from './components/CardPanel'
-import NodeHorizontalBar from "./containers/TabGroupHorizontalBar";
+import { Dot } from "./__CORE__/utils/TranslationUtils";
+import { getWebsiteName } from "./__CORE__/common/config";
+import { TopNav } from "./__CORE__/containers/TopNav";
+import CenterPart from "./__CORE__/containers/CenterPart";
+import CardPanel from './__CORE__/components/CardPanel'
+import NodeHorizontalBar from "./__CORE__/containers/TabGroupHorizontalBar";
 import _, { random } from "lodash";
-import UserPanel from "./containers/UserPanel";
+import UserPanel from "./__CORE__/containers/UserPanel";
 import { useParams, useSearchParams } from "next/navigation";
-import HomeInner from './home'
 import { usePathname } from 'next/navigation';
 import React, { } from "react";
-import GrailLayoutWithUser from "./containers/GrailLayoutWithUser";
+import GrailLayoutWithUser from "./__CORE__/containers/GrailLayoutWithUser";
 
 
 export default (props: {
@@ -32,9 +31,9 @@ export default (props: {
 
     let activeTabs = searchParams.tabs
     return <GrailLayoutWithUser combindSearchProps={combindSearchProps}>
-                        <CardPanel className={''} style={{
-                    flex: '1'
-                }}>
+        <CardPanel className={''} style={{
+            flex: '1'
+        }}>
 
             <NodeHorizontalBar activeId={activeTabs}></NodeHorizontalBar>
 
@@ -50,8 +49,8 @@ export default (props: {
             <div>
                 {
                     /** write a topic list, with example value */
-                    _.fill(Array(10), 1).map((x,d) => {
-                        let tLink = "/t/"+d
+                    _.fill(Array(10), 1).map((x, d) => {
+                        let tLink = "/t/" + d
                         return <div className=" p-3 py-3 flex border-slate-100 border-b dark:border-solarized-base03 ">
                             <div className={" rounded flex text-2xl mr-1  font-semibold text-slate-700 items-center justify-center w-14 h-14  "}>
                                 <img src={"/avatar/" + _.random(1, 200) + ".png"} className="w-full h-full rounded"></img>

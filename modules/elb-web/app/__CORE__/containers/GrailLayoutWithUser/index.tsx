@@ -3,7 +3,7 @@ import Image from "next/image";
 import type { Metadata, ResolvingMetadata } from "next";
 import Head from 'next/head'
 import { Props } from "next/script";
-import { Dot } from "../../utils/TranslationUtils";
+import { Dot } from "../.../__CORE__/_utils/TranslationUtils";
 import { getWebsiteName } from "../../common/config";
 import { TopNav } from "../TopNav";
 import CenterPart from "../CenterPart";

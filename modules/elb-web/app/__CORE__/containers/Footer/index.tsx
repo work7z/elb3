@@ -1,4 +1,4 @@
-import { Dot } from "@/app/utils/TranslationUtils";
+import { Dot } from "@/app/__CORE__/utils/TranslationUtils";
 import React from "react";
 
 export default () => {

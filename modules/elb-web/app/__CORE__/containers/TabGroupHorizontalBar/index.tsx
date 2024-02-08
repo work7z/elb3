@@ -1,5 +1,5 @@
-import { getPureWebsiteName } from "@/app/common/config"
-import { Dot } from "@/app/utils/TranslationUtils"
+import { getPureWebsiteName } from "@/app/__CORE__/common/config"
+import { Dot } from "@/app/__CORE__/utils/TranslationUtils"
 import { useRouter } from "next/navigation";
 import React from 'react'
 

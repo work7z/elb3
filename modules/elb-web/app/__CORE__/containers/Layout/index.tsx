@@ -4,7 +4,7 @@ import { getCurrentLang } from "../../utils/TranslationUtils";
 import { TopNav } from "../TopNav";
 import CenterPart from "../CenterPart";
 import Footer from "../Footer";
-import { ThemeProvider } from "../../theme-provider";
+import { ThemeProvider } from "../../../theme-provider";
 
 
 const inter = Inter({ subsets: ["latin"] });

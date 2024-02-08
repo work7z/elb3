@@ -1,5 +1,5 @@
 import CardPanel from "../components/CardPanel";
-import { Dot } from "../utils/TranslationUtils";
+import { Dot } from "../__CORE__/_utils/TranslationUtils";
 
 export default function Page() {
     return <CardPanel className='' style={{

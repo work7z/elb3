@@ -1,27 +1,25 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { getCurrentLang } from "./utils/TranslationUtils";
 import Image from "next/image";
 import type { Metadata, ResolvingMetadata } from "next";
 import Head from 'next/head'
 import { Props } from "next/script";
-import { Dot } from "./utils/TranslationUtils";
-import { getWebDesc, getWebsiteName } from "./common/config";
-import { TopNav } from "./containers/TopNav";
-import CenterPart from "./containers/CenterPart";
-import CardPanel from './components/CardPanel'
-import NodeHorizontalBar from "./containers/TabGroupHorizontalBar";
-import Footer from "./containers/Footer";
-import Layout from './containers/Layout'
+import { getWebDesc, getWebsiteName } from "./__CORE__/common/config";
+import { TopNav } from "./__CORE__/containers/TopNav";
+import CenterPart from "./__CORE__/containers/CenterPart";
+import CardPanel from './__CORE__/components/CardPanel'
+import NodeHorizontalBar from "./__CORE__/containers/TabGroupHorizontalBar";
+import Footer from "./__CORE__/containers/Footer";
+import Layout from './__CORE__/containers/Layout'
 import { Sequelize, DataTypes } from 'sequelize';
 import fs from 'fs'
 
-// import dbconn from '.../app/db/index'
+// import dbconn from '.../__CORE__/app/db/index'
 
 export default async function RootLayout(props: {
   children,
 }) {
-// let a=  await dbconn()
+  // let a=  await dbconn()
 
   let { children } = props;
   return (

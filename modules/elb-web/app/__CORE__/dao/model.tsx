@@ -2,7 +2,7 @@ import { Sequelize, DataTypes, Model, InferCreationAttributes, InferAttributes, 
 import { SystemConfig as SystemConfig } from "../config/types"
 import { DaoRef } from './index'
 
-export type UserRole = "root" | "admin" | "user"
+export type UserRole = "webmaster" | "moderator" | "user"
 
 
 export class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {

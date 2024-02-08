@@ -91,7 +91,7 @@ const TranslationUtils = {
   Dot(id: string, enText: string, ...args: any[]): string {
     let language = getCurrentLang();
     if (language != 'en_US') {
-      let pmap = require("../../public/static/lang/" + language + ".json")
+      let pmap = require("../../../public/static/lang/" + language + ".json")
       TranslationUtils.LangMap[language] = pmap
     }
     if (language == LANG_EN_US) {

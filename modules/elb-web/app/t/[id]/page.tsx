@@ -1,8 +1,8 @@
 import React from 'react'
-import { PageProps } from '../../types/pages'
+import { PageProps } from '../../__CORE__/_types/pages'
 import GrailLayoutWithUser from '@/app/containers/GrailLayoutWithUser'
 import { CombindSearchProps } from '@/app/page'
-import CardPanel from '@/app/components/CardPanel';
+import CardPanel from '@/app/__CORE__/components/CardPanel';
 
 
 export default function Page(props: PageProps<{ id: number }, {}>) {
@@ -10,7 +10,7 @@ export default function Page(props: PageProps<{ id: number }, {}>) {
     let combindSearchProps = props;
     return <GrailLayoutWithUser combindSearchProps={combindSearchProps}>
         <div className='space-y-2 flex-1'>
-        <CardPanel className={''} style={{
+            <CardPanel className={''} style={{
                 flex: '1'
             }}>
 
@@ -20,15 +20,15 @@ export default function Page(props: PageProps<{ id: number }, {}>) {
             </CardPanel>
             {
                 _.fill(Array(10), 1).map((x, d) => {
-                    return             <CardPanel className={''} style={{
+                    return <CardPanel className={''} style={{
                         flex: '1'
                     }}>
-        
+
                         <div className='p-2'>
                             {'這是一個測試連接'}
                         </div>
                     </CardPanel>
-        
+
                 })
             }
         </div>
