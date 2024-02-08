@@ -3,7 +3,7 @@ import RegularLink from "@/app/__CORE__/components/RegularLink"
 import { MoonIcon, Cog8ToothIcon, SunIcon } from '@heroicons/react/24/solid'
 
 import { Dot } from "@/app/__CORE__/utils/TranslationUtils"
-import { CombindSearchProps } from "@/page"
+import { CombindSearchProps } from "../../../page"
 import MoonSunControl from "./MoonSunControl"
 import _ from 'lodash'
 
@@ -22,8 +22,6 @@ export default (props: CombindSearchProps) => {
     return <div className="p-2">
         <div className="flex ">
             <img src={"/avatar/" + _.random(1, 100) + ".png"} className="w-12 h-12 rounded bg-zinc-100  text-xl flex justify-center items-center text-gray font-bold ">
-
-
             </img>
             <div className="flex-shrink flex-1 ml-2">
                 <div>
