@@ -26,7 +26,7 @@ export default function RegisterPage(props:{registerPageProps:RegisterPageProps}
     if (!mounted) {
         return <div>loading...</div>
     }
-    return <div className=''>
+    return <form className='' method="POST" action="/register" >
         <CardPanel className='p-4 py-8'>
             <div className='mx-20 '>
                 <div className='text-2xl mb-4 font-bold'>
@@ -43,7 +43,7 @@ export default function RegisterPage(props:{registerPageProps:RegisterPageProps}
                     <VerifyCodeInput  codeImgBase64={''}></VerifyCodeInput>
                     <div className='clearfix  clear-none'></div>
                     <div className='pt-6'>
-                        <button type="button" className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-solarized-base02Light5 text-white hover:bg-solarized-base02Light3 transition-all disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                        <button type="submit" className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-solarized-base02Light5 text-white hover:bg-solarized-base02Light3 transition-all disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                             {Dot("register","Register Now")}
                         </button>
                     </div>
@@ -58,7 +58,7 @@ export default function RegisterPage(props:{registerPageProps:RegisterPageProps}
                 </div>
             </div>
         </CardPanel>
-    </div>
+    </form>
 }
 
 export type RegisterPageProps =  PageProps<{},{ type: string }>

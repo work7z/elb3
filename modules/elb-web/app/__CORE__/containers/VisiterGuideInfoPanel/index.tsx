@@ -1,6 +1,7 @@
 import CardPanel from "../../components/CardPanel"
 import { Dot } from "../../utils/TranslationUtils"
 import MoonSunControl from "../UserPanel/MoonSunControl"
+import LanguagePicker from '../../containers/LanguagePicker'
 
 export default () => {
     return <div className="space-y-2 ">
@@ -20,5 +21,8 @@ export default () => {
             <MoonSunControl></MoonSunControl>
         </div>}>
         </CardPanel>
+
+
+     <LanguagePicker></LanguagePicker>
     </div>
 }

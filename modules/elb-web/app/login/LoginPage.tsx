@@ -67,7 +67,7 @@ export default function LoginPage(props:{loginPageProps:LoginPageProps}) {
                     <VerifyCodeInput codeImgBase64={''}></VerifyCodeInput>
                     <div className='clearfix  clear-none'></div>
                     <div className='pt-6'>
-                        <button type="button" className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent transition-all bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                        <button type="submit" className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent transition-all bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                             {Dot("Sa-gP","Sign In")}
                         </button>
                     </div>
