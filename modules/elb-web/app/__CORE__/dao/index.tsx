@@ -3,9 +3,12 @@ import { SystemConfig as SystemConfig } from "../config/types"
 import fs from 'fs'
 import path from 'path'
 import { log } from 'console';
+import { RedisClientType, createClient } from 'redis';
+
 
 export type DaoRef = {
-    sequelize: Sequelize
+    db: Sequelize,
+    redis: RedisClientType
 }
 
 export type SystemFlag = "dev" | "prod" | "test"
@@ -34,7 +37,20 @@ export default async (envFlag: SystemFlag = crtRef.flag): Promise<DaoRef> => {
         console.error('Unable to connect to the database:', error);
     }
 
-    return {
-        sequelize: sequelize,
+    // 2. redis
+    const client = await createClient({
+        //   url: 'redis://alice:foobared@awesome.redis.server:6380'
+    })
+    .on('error', err => console.log('Redis Client Error', err))
+    .connect();
+
+    await client.set('key', 'value');
+    const value = await client.get('key');
+    await client.disconnect();
+
+    let r:DaoRef = {
+        redis: client as any,
+        db: sequelize,
     }
+    return r
 }

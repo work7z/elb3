@@ -3,7 +3,7 @@ import { PageProps } from '../../__CORE__/types/pages'
 import GrailLayoutWithUser from '@/app/__CORE__/containers/GrailLayoutWithUser'
 import { CombindSearchProps } from '@/app/page'
 import CardPanel from '@/app/__CORE__/components/CardPanel';
-
+import _ from 'lodash'
 
 export default function Page(props: PageProps<{ id: number }, {}>) {
     let { searchParams, params } = props;

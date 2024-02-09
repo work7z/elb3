@@ -12,7 +12,7 @@ class TestUser extends Model {
 test('Test Conn', async () => {
     let daoRef = await fn("test")
 
-    let sequelize = daoRef.sequelize
+    let sequelize = daoRef.db
 })
 
 
@@ -20,13 +20,13 @@ test('Test Conn', async () => {
 test('Test Conn', async () => {
     let daoRef = await fn("dev")
 
-    let sequelize = daoRef.sequelize
+    let sequelize = daoRef.db
 })
 
 test('Test Create and Mantain Table', async () => {
     let daoRef = await fn("test")
 
-    let sequelize = daoRef.sequelize
+    let sequelize = daoRef.db
     sequelize.sync({alter:true,})
 
     TestUser.init({
@@ -45,7 +45,7 @@ test('Test Create and Mantain Table', async () => {
 test('Test Create and Mantain Table', async () => {
     let daoRef = await fn("test")
 
-    let sequelize = daoRef.sequelize
+    let sequelize = daoRef.db
     sequelize.sync({alter:true})
 
     TestUser.init({

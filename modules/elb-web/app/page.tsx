@@ -32,7 +32,7 @@ export default function Home(props: { searchParams: SearchParamType }) {
 
 
 export async function generateMetadata(
-  { }: Props,
+  Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   return {

@@ -146,7 +146,7 @@ export class ChatGroupHistory extends Model<InferAttributes<ChatGroupHistory>, I
 
 
 export default (daoRef: DaoRef) => {
-    let sequelize = daoRef.sequelize
+    let sequelize = daoRef.db
     // options
     sequelize.sync({ alter: true })
     // init model

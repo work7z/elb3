@@ -6,6 +6,7 @@
   "scripts": {
     "fe-web": "(cd ./modules/elb-web && npm run dev)",
     "fe-scan": "(cd ./dev/scripts/scan/ && node ./scan-entry.js)",
+    "fe-build":"(cd ./modules/elb-web && npm run build)",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
