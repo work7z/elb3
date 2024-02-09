@@ -3,7 +3,7 @@ import path from 'path';
 import fileSystem from 'fs'
 import { readFileSync } from 'fs';
 import dao from '@/app/__CORE__/dao';
-
+import { setCookie, getCookie } from 'cookies-next';
 export const dynamic = 'force-dynamic' // defaults to auto
 
 
@@ -12,17 +12,19 @@ export let getImgBase64 = (): any => {
   let elb3Root = process.env["ELB3_ROOT"] || ''
   let file = path.join(elb3Root, 'precompiled', 'dev', `${random}.png`)
   let b = readFileSync(file)
-  // return "data:image/png;base64," + b
   return b
 }
 
-export async function GET(request: Request,response:Response) {
+export async function GET(request: Request) {
   let daoRef = await dao()
   // daoRef.redis.set()
-  request.headers.set("x-captcha-code","mm100")
-  return new Response(getImgBase64(),{
+  setCookie("v-001", "12345")
+  
+  let response = new Response(getImgBase64(),{
     headers: {
-      "content-type": "image/png"
+      "content-type": "image/png",
+      "cache-control": "no-cache",
     }
   })
+  return response
 }

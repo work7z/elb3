@@ -2,12 +2,86 @@ import React from 'react';
 import '../../script/preline-init'
 import { Dot } from '../../utils/TranslationUtils';
 
-export default () => {
+export default (props:{ph?:string,label?:string,strongMode?:boolean}) => {
+    let clz = `py-3 px-4 pl-11 block w-full border-gray-200  border-[1px] rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600`
+    if(props.strongMode){
+        return (
+            <div className="w-full">
+            <label className="block text-sm mb-2 dark:text-white w-full ">{props.label||Dot("CqhsJp", "Password")}</label>
+              <div className="flex">
+                <div className="relative flex-1">
+                  <input type="password" id="hs-strong-password-with-indicator-and-hint-in-popover" className="border-gray-200 rounded-lg border-[1px] py-3 px-4 block w-full  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 " placeholder="Enter password"/>
+                  <div id="hs-strong-password-popover" className="z-30 hidden absolute  w-full bg-white shadow-md rounded-lg p-4 dark:bg-gray-800 dark:border dark:border-gray-700 dark:divide-gray-700">
+                    <div id="hs-strong-password-in-popover" data-hs-strong-password='{
+                        "target": "#hs-strong-password-with-indicator-and-hint-in-popover",
+                        "hints": "#hs-strong-password-popover",
+                        "stripClasses": "hs-strong-password:opacity-100 hs-strong-password-accepted:bg-teal-500 h-2 flex-auto rounded-full bg-blue-500 opacity-50 mx-1",
+                        "mode": "popover"
+                      }' className="flex mt-2 -mx-1">
+                    </div>
+            
+                    <h4 className="mt-3 text-sm font-semibold text-gray-800 dark:text-white">
+                      Your password must contain:
+                    </h4>
+            
+                    <ul className="space-y-1 text-sm text-gray-500">
+                      <li data-hs-strong-password-hints-rule-text="min-length" className="hs-strong-password-active:text-teal-500 flex items-center gap-x-2">
+                        <span className="hidden" data-check>
+                          <svg className="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        </span>
+                        <span data-uncheck>
+                          <svg className="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        </span>
+                        Minimum number of characters is 6.
+                      </li>
+                      <li data-hs-strong-password-hints-rule-text="lowercase" className="hs-strong-password-active:text-teal-500 flex items-center gap-x-2">
+                        <span className="hidden" data-check>
+                          <svg className="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        </span>
+                        <span data-uncheck>
+                          <svg className="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        </span>
+                        Should contain lowercase.
+                      </li>
+                      <li data-hs-strong-password-hints-rule-text="uppercase" className="hs-strong-password-active:text-teal-500 flex items-center gap-x-2">
+                        <span className="hidden" data-check>
+                          <svg className="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        </span>
+                        <span data-uncheck>
+                          <svg className="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        </span>
+                        Should contain uppercase.
+                      </li>
+                      <li data-hs-strong-password-hints-rule-text="numbers" className="hs-strong-password-active:text-teal-500 flex items-center gap-x-2">
+                        <span className="hidden" data-check>
+                          <svg className="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        </span>
+                        <span data-uncheck>
+                          <svg className="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        </span>
+                        Should contain numbers.
+                      </li>
+                      <li data-hs-strong-password-hints-rule-text="special-characters" className="hs-strong-password-active:text-teal-500 flex items-center gap-x-2">
+                        <span className="hidden" data-check>
+                          <svg className="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        </span>
+                        <span data-uncheck>
+                          <svg className="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        </span>
+                        Should contain special characters.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+        )
+    }
     return (
         <div className="">
-            <label className="block text-sm mb-2 dark:text-white w-full ">{Dot("CqhsJp", "Password")}</label>
+            <label className="block text-sm mb-2 dark:text-white w-full ">{props.label||Dot("CqhsJp", "Password")}</label>
             <div className="relative">
-                <input name='password' id="hs-toggle-password" type="password" className="py-3 px-4 pl-11 block w-full border-gray-200  border-[1px] rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder={Dot("SVQdwv", "Enter password")} />
+                <input name='password' id="hs-toggle-password" type="password" className={clz} placeholder={props.ph||Dot("SVQdwv", "Enter password")} />
                 <button type="button" data-hs-toggle-password='{
         "target": "#hs-toggle-password"
       }' className="absolute top-0 end-0 p-3.5 rounded-e-md dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">

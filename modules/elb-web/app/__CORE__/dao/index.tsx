@@ -44,7 +44,10 @@ export default async (): Promise<DaoRef> => {
 
     let link = config.database.link
     log("connect to DB: " + link)
-    let sequelize = new Sequelize(`${link}`);
+    let sequelize = new Sequelize(`${link}`,{
+        dialect:'mysql',
+        dialectModule: require('mysql2'),
+    });
 
     try {
         await sequelize.authenticate();
@@ -55,7 +58,7 @@ export default async (): Promise<DaoRef> => {
 
     // 2. redis
     const client = await createClient({
-        // url: 'redis://localhost:6379'
+        url: 'redis://localhost:6379'
         //   url: 'redis://alice:foobared@awesome.redis.server:6380'
     })
         .on('error', err => console.log('Redis Client Error', err))

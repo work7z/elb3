@@ -7,6 +7,7 @@ export type UserRole = "webmaster" | "moderator" | "user"
 
 export class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
     declare id: number;
+    declare uid: number; // member uid
     declare username: string;
     declare email: string;
     declare phoneNumber: string;
@@ -155,6 +156,11 @@ export default (daoRef: DaoRef) => {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true
+        },
+        uid: {
+            type: DataTypes.INTEGER,
+            allowNull:true,
+            unique: true
         },
         username: {
             type: DataTypes.STRING,

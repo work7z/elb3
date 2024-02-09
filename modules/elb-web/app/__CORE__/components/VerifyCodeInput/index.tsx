@@ -9,7 +9,7 @@ import { readFileSync } from 'fs';
 
 
 export default (props: { codeImgBase64: string }) => {
-    let [ts, onTS] = React.useState(0)
+    let [ts, onTS] = React.useState(Date.now())
     return (
         <div className="">
             <label className="block text-sm mb-2 dark:text-white w-full ">{Dot("ChsJp", "CAPTCHA")}</label>
