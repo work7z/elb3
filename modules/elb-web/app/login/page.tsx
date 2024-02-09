@@ -5,27 +5,21 @@ import CardPanel from '@/app/__CORE__/components/CardPanel';
 import { PageProps } from '../__CORE__/types/pages';
 import { Dot } from '../__CORE__/utils/TranslationUtils';
 import VisiterGuideInfoPanel from '../__CORE__/containers/VisiterGuideInfoPanel';
+import PasswordInput from '../__CORE__/components/PasswordInput'
+import UserEMailInput from '../__CORE__/components/UserEMailInput'
+import '../__CORE__/script/preline-init'
 
 // write LoginPage for including phone number and password
 function LoginPage() {
     return <div className=''>
-        <CardPanel className='p-4'>
-            <div className='w-[80%] mx-auto'>
-                <div className='text-2xl font-bold'>
-                    登录
+        <CardPanel className='p-4 py-8'>
+            <div className='mx-20 '>
+                <div className='text-2xl mb-4 font-bold'>
+                    {Dot("yOwRB", "Sign In")}
                 </div>
                 <div className='space-y-2'>
-                    <div className='space-y-2'>
-                        <label className='text-sm'>手机号</label>
-                        <input type='text' className='w-full border border-gray-300 rounded-md p-2' />
-                    </div>
-                    <div className='space-y-2'>
-                        <label className='text-sm'>密码</label>
-                        <input type='password' className='w-full border border-gray-300 rounded-md p-2' />
-                    </div>
-                    <div className='space-y-2'>
-                        <button className='w-full bg-blue-500 text-white rounded-md p-2'>登录</button>
-                    </div>
+                    <UserEMailInput></UserEMailInput>
+                    <PasswordInput></PasswordInput>
                 </div>
             </div>
         </CardPanel>

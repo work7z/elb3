@@ -13,7 +13,7 @@ import Footer from "./__CORE__/containers/Footer";
 import Layout from './__CORE__/containers/Layout'
 import { Sequelize, DataTypes } from 'sequelize';
 import fs from 'fs'
-
+import PrelintInit from './__CORE__/script/preline-init'
 // import dbconn from '.../__CORE__/app/db/index'
 
 export default async function RootLayout(props: {
@@ -23,7 +23,10 @@ export default async function RootLayout(props: {
 
   let { children } = props;
   return (
-    <Layout>{children}</Layout>
+    <Layout>
+      {children}
+    <PrelintInit></PrelintInit>
+    </Layout>
   );
 }
 
