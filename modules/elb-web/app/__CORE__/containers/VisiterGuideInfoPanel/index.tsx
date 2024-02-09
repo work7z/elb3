@@ -2,6 +2,21 @@ import CardPanel from "../../components/CardPanel"
 import { Dot } from "../../utils/TranslationUtils"
 import MoonSunControl from "../UserPanel/MoonSunControl"
 import LanguagePicker from '../../containers/LanguagePicker'
+import moment from 'moment'
+
+export let WeekDay = ()=>{
+    let week = moment().week()
+    let weekLabel = [
+        "Happy Sunday",
+        "Marvelous Monday",
+        "Terrific Tuesday",
+        "Wonderful Wednesday",
+        "Thrilling Thursday",
+        "Fantastic Friday",
+        "Satisfying Saturday"
+    ]
+    return <div className="font-sans text-sm text-slate-500 dark:text-slate-300">{weekLabel[week]}</div>
+}
 
 export default () => {
     return <div className="space-y-2 ">
@@ -17,8 +32,8 @@ export default () => {
         </CardPanel>
 
         <CardPanel className="mt-2" children={<div className='p-2 flex flex-row justify-between items-center'>
-            <div>{Dot("23o9bKU4N", "Page Settings")}</div>
-            <MoonSunControl></MoonSunControl>
+            <MoonSunControl labelMode></MoonSunControl>
+            <WeekDay></WeekDay>
         </div>}>
         </CardPanel>
 

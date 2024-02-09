@@ -8,7 +8,7 @@ import { CombindSearchProps } from "../../../page"
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react"
 
-export default () => {
+export default (props:{labelMode?:boolean}) => {
     const { theme, setTheme } = useTheme();
 
     let [mounted, setMount] = useState(false)
@@ -20,13 +20,21 @@ export default () => {
         return <span></span>;
     }
 
-    return theme == "dark" ? (
-        <SunIcon className="cursor-pointer h-5 w-5 text-yellow-300" onClick={() => {
-            setTheme('light')
-        }} />
-    ) : (
-        <MoonIcon className=" cursor-pointer h-5 w-5 text-solarized-cyan" onClick={() => {
-            setTheme('dark')
-        }} />
-    )
+    return <span className='flex space-x-2 items-center justify-start flex-row '>
+        {
+            theme == "dark" ? (
+                <SunIcon className="cursor-pointer h-5 w-5 text-yellow-300" onClick={() => {
+                    setTheme('light')
+                }} />
+            ) : (
+                <MoonIcon className=" cursor-pointer h-5 w-5 text-solarized-cyan" onClick={() => {
+                    setTheme('dark')
+                }} />
+            )
+        }
+     <span onClick={()=>{
+        setTheme(theme=='dark'?'light':'dark')
+     }} className={' cursor-pointer text-sm ' +(theme=='dark'?' text-yellow-400 ':' text-solarized-cyan ')}>
+     {props.labelMode ? theme == 'dark' ? Dot("JAbVG","Light Theme"):Dot("OnP4s","Dark Theme"):''}</span>
+    </span>
 }
