@@ -4,8 +4,7 @@
 
 
 .anchor-text {
-  color: #0f7b87;
-  text-decoration: none;
+  @apply text-cyan-700 hover:text-cyan-500 hover:underline hover:cursor-pointer;
   transition: color 0.2s ease-in-out;
 }
 
