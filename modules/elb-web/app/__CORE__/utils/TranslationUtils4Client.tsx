@@ -1,3 +1,4 @@
+'use client'
 // LafTools - The Leading All-In-One ToolBox for Programmers.
 //
 // Date: Fri, 29 Sep 2023

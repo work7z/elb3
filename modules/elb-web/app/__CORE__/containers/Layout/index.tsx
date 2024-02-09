@@ -1,6 +1,6 @@
 
 import { Inter } from "next/font/google";
-import { getCurrentLang } from "../../utils/TranslationUtils";
+import { getCurrentLangWithServerMode } from "../../utils/TranslationUtils";
 import { TopNav } from "../TopNav";
 import CenterPart from "../CenterPart";
 import Footer from "../Footer";
@@ -14,7 +14,7 @@ export default function RootLayout(props: {
 }) {
     let { children } = props;
     return (
-        <html lang={getCurrentLang()}>
+        <html lang={getCurrentLangWithServerMode()}>
             <body className={'  dark:bg-solarized-base03 dark:text-slate-300    ' + inter.className}>
                 <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
                     <div className="w-full h-full">
