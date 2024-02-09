@@ -25,13 +25,11 @@ function RegisterPage(props:{registerPageProps:RegisterPageProps}) {
                 <div className='space-y-2 mt-4 max-w-md'>
                    <div className='mb-2'>
                    </div>
-                    {
-                        pageProps.searchParams.type == 'username' ? <UserInput></UserInput>:
-                        <EmailInput/>
-                    }
-                    <PasswordInput strongMode></PasswordInput>
-                    <PasswordInput label={Dot("TXh_K","Confirm Password")} ph={Dot("sfooX","Confirm your password")}></PasswordInput>
-                    <VerifyCodeInput codeImgBase64={''}></VerifyCodeInput>
+                    <UserInput name='user'></UserInput>
+                    <EmailInput name='email'/>
+                    <PasswordInput name='password' strongMode></PasswordInput>
+                    <PasswordInput name='confirmPassword' label={Dot("TXh_K","Confirm Password")} ph={Dot("sfooX","Confirm your password")}></PasswordInput>
+                    <VerifyCodeInput  codeImgBase64={''}></VerifyCodeInput>
                     <div className='clearfix  clear-none'></div>
                     <div className='pt-6'>
                         <button type="button" className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-solarized-base02Light5 text-white hover:bg-solarized-base02Light3 transition-all disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
