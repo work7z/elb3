@@ -60,7 +60,7 @@ function LoginPage(props:{loginPageProps:LoginPageProps}) {
                         </button>
                     </div>
                     <div className=' text-right text-sm space-x-2'>
-                        <span>                        {Dot("8Br0H","New to {0} Community?",'ELB3')}</span>
+                        <span>                        {Dot("newtoelb","New to {0} Community?",'ELB3')}</span>
                         <a className='anchor-text text-sm' href="/reset-password">
                             {Dot("9gzkh", "Create New Account","")}
                         </a>
