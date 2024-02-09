@@ -1,6 +1,6 @@
 import React from 'react'
-import { PageProps } from '../../__CORE__/_types/pages'
-import GrailLayoutWithUser from '@/app/containers/GrailLayoutWithUser'
+import { PageProps } from '../../__CORE__/types/pages'
+import GrailLayoutWithUser from '@/app/__CORE__/containers/GrailLayoutWithUser'
 import { CombindSearchProps } from '@/app/page'
 import CardPanel from '@/app/__CORE__/components/CardPanel';
 

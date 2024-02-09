@@ -49,6 +49,7 @@ export default (props: {
             <div>
                 {
                     /** write a topic list, with example value */
+                    // _.fill(Array(10), 1).map((x, d) => {
                     _.fill(Array(10), 1).map((x, d) => {
                         let tLink = "/t/" + d
                         return <div className=" p-3 py-3 flex border-slate-100 border-b dark:border-solarized-base03 ">
