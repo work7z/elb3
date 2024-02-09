@@ -6,14 +6,17 @@ import { PageProps } from '../__CORE__/types/pages';
 import { Dot } from '../__CORE__/utils/TranslationUtils';
 import VisiterGuideInfoPanel from '../__CORE__/containers/VisiterGuideInfoPanel';
 import PasswordInput from '../__CORE__/components/PasswordInput'
-import UserEMailInput from '../__CORE__/components/UsernameInput'
+import UserInput from '../__CORE__/components/UsernameInput'
 import PhoneInput from '../__CORE__/components/PhoneInput'
+import EmailInput from '../__CORE__/components/EmailInput'
 import VerifyCodeInput from '../__CORE__/components/VerifyCodeInput'
 import TwTabs from '../__CORE__/components/TwTabs'
 import '../__CORE__/script/preline-init'
+import { getImgBase64 } from '../__CORE__/hooks/auth';
 
 // write LoginPage for including phone number and password
 function LoginPage(props:{loginPageProps:LoginPageProps}) {
+    let imgBase64 = getImgBase64()
     let {loginPageProps} = props;
     return <div className=''>
         <CardPanel className='p-4 py-8'>
@@ -30,20 +33,20 @@ function LoginPage(props:{loginPageProps:LoginPageProps}) {
                                 label: Dot("kO7kX","Username"),
                                 value: 'username'
                             },
+                            // {
+                            //     label:Dot("nVqME","Phone Number"),
+                            //     value: 'phonenumber'
+                            // },
                             {
-                                label:Dot("nVqME","Phone Number"),
-                                value: 'phonenumber'
-                            },
-                            {
-                                label:Dot("APPR7","Email"),
+                                label:Dot("APPR7","Email Address"),
                                 value: 'email'
                             },
                         ]
                     }></TwTabs>
                    </div>
                     {
-                        loginPageProps.searchParams.type == 'username' ? <UserEMailInput></UserEMailInput>:
-                        <PhoneInput></PhoneInput>
+                        loginPageProps.searchParams.type == 'username' ? <UserInput></UserInput>:
+                        <EmailInput/>
                     }
                     <PasswordInput></PasswordInput>
                     <div className=' text-right'>
@@ -51,8 +54,8 @@ function LoginPage(props:{loginPageProps:LoginPageProps}) {
                             {Dot("dKfY3I", "Forgot password?")}
                         </a>
                     </div>
-                    <VerifyCodeInput></VerifyCodeInput>
-                    <div className=''>
+                    <VerifyCodeInput codeImgBase64={imgBase64}></VerifyCodeInput>
+                    <div className='mt-8'>
                         <button type="button" className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                             {Dot("Sa-gP","Sign In")}
                         </button>

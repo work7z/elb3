@@ -1,4 +1,7 @@
 var/log/
+prod
+prod/**/*
+prod/*
 modules/elb-web/config/dev/**
 get-dev-config.tsx
 get-prod-config.tsx
