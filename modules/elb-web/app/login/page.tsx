@@ -34,6 +34,10 @@ function LoginPage(props:{loginPageProps:LoginPageProps}) {
                                 label:Dot("nVqME","Phone Number"),
                                 value: 'phonenumber'
                             },
+                            {
+                                label:Dot("APPR7","Email"),
+                                value: 'email'
+                            },
                         ]
                     }></TwTabs>
                    </div>
@@ -42,12 +46,12 @@ function LoginPage(props:{loginPageProps:LoginPageProps}) {
                         <PhoneInput></PhoneInput>
                     }
                     <PasswordInput></PasswordInput>
-                    <VerifyCodeInput></VerifyCodeInput>
                     <div className=' text-right'>
                         <a className='anchor-text text-sm' href="/reset-password">
                             {Dot("dKfY3I", "Forgot password?")}
                         </a>
                     </div>
+                    <VerifyCodeInput></VerifyCodeInput>
                     <div className=''>
                         <button type="button" className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                             {Dot("Sa-gP","Sign In")}
