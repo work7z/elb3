@@ -55,7 +55,7 @@ export default async (): Promise<DaoRef> => {
 
     // 2. redis
     const client = await createClient({
-        url: 'redis://localhost:6379'
+        // url: 'redis://localhost:6379'
         //   url: 'redis://alice:foobared@awesome.redis.server:6380'
     })
         .on('error', err => console.log('Redis Client Error', err))
