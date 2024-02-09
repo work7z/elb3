@@ -12,11 +12,9 @@ import EmailInput from '../__CORE__/components/EmailInput'
 import VerifyCodeInput from '../__CORE__/components/VerifyCodeInput'
 import TwTabs from '../__CORE__/components/TwTabs'
 import '../__CORE__/script/preline-init'
-import { getImgBase64 } from '../__CORE__/hooks/auth';
 
 // write LoginPage for including phone number and password
 function LoginPage(props:{loginPageProps:LoginPageProps}) {
-    let imgBase64 = getImgBase64()
     let {loginPageProps} = props;
     return <div className=''>
         <CardPanel className='p-4 py-8'>
@@ -54,16 +52,15 @@ function LoginPage(props:{loginPageProps:LoginPageProps}) {
                             {Dot("dKfY3I", "Forgot password?")}
                         </a>
                     </div>
-                    <VerifyCodeInput codeImgBase64={imgBase64}></VerifyCodeInput>
-                    <div className='mt-8'>
+                    <VerifyCodeInput codeImgBase64={''}></VerifyCodeInput>
+                    <div className='clearfix  clear-none'></div>
+                    <div className='pt-6'>
                         <button type="button" className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                             {Dot("Sa-gP","Sign In")}
                         </button>
                     </div>
                     <div className=' text-right text-sm space-x-2'>
-                        <span>
-                        {Dot("newtoelb","New to {0}?",'ELB3')}
-                        </span>
+                        <span>                        {Dot("8Br0H","New to {0} Community?",'ELB3')}</span>
                         <a className='anchor-text text-sm' href="/reset-password">
                             {Dot("9gzkh", "Create New Account","")}
                         </a>

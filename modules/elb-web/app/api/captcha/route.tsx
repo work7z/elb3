@@ -2,6 +2,7 @@ import os from 'os'
 import path from 'path';
 import fileSystem from 'fs'
 import { readFileSync } from 'fs';
+import dao from '@/app/__CORE__/dao';
 
 export const dynamic = 'force-dynamic' // defaults to auto
 
@@ -16,7 +17,9 @@ export let getImgBase64 = (): any => {
 }
 
 export async function GET(request: Request,response:Response) {
-  
+  let daoRef = await dao()
+  // daoRef.redis.set()
+  request.headers.set("x-captcha-code","mm100")
   return new Response(getImgBase64(),{
     headers: {
       "content-type": "image/png"
