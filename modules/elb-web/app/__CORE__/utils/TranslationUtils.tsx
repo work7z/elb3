@@ -60,9 +60,11 @@ function formatResultWithReplacer(val = "", ...args) {
   return val;
 }
 
+export let getWebsiteLocale = () => {
+  return 'zh-CN'
+}
 export let getCurrentLang = () => {
-  // return 'zh_CN'
-  return 'zh_HK'
+  return 'zh_CN'
 }
 
 const TranslationUtils = {
@@ -77,7 +79,7 @@ const TranslationUtils = {
   RealtimeObj: {},
   Dot(id: string, enText: string, ...args: any[]): string {
     let language = '';
-      language = getCurrentLang()
+    language = getCurrentLang()
 
     if (language != 'en_US') {
       let pmap = require("../../../public/static/lang/" + language + ".json")

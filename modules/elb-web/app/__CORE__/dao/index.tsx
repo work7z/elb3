@@ -1,5 +1,5 @@
 import { Sequelize, DataTypes, Model } from 'sequelize';
-import { SystemConfig as SystemConfig } from "../config/types"
+import { SystemConfig as SystemConfig } from "../../../../../config/types"
 import fs from 'fs'
 import path from 'path'
 import { log } from 'console';
@@ -20,7 +20,7 @@ export let crtRef: { flag: SystemFlag } = {
 }
 
 export let getConfigByFlag = (envFlag: SystemFlag = crtRef.flag): SystemConfig => {
-    let config = fs.readFileSync(path.join(getELB3Root(),'config',  envFlag + '.json'), { encoding: 'utf-8' })
+    let config = fs.readFileSync(path.join(getELB3Root(), 'config', envFlag + '.json'), { encoding: 'utf-8' })
     return JSON.parse(config) as SystemConfig
 }
 if (process.env.NODE_ENV === 'production') {
@@ -44,8 +44,8 @@ export default async (): Promise<DaoRef> => {
 
     let link = config.database.link
     log("connect to DB: " + link)
-    let sequelize = new Sequelize(`${link}`,{
-        dialect:'mysql',
+    let sequelize = new Sequelize(`${link}`, {
+        dialect: 'mysql',
         dialectModule: require('mysql2'),
     });
 

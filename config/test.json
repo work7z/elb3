@@ -1,5 +1,5 @@
 {
-    "database":{
+    "database": {
         "link": "sqlite::memory:"
     }
 }

@@ -1,5 +1,5 @@
 import { Sequelize, DataTypes, Model, InferCreationAttributes, InferAttributes, CreationOptional } from 'sequelize';
-import { SystemConfig as SystemConfig } from "../config/types"
+import { SystemConfig as SystemConfig } from "../../../../../config/types"
 import { DaoRef } from './index'
 
 export type UserRole = "webmaster" | "moderator" | "user"
@@ -159,7 +159,7 @@ export default (daoRef: DaoRef) => {
         },
         uid: {
             type: DataTypes.INTEGER,
-            allowNull:true,
+            allowNull: true,
             unique: true
         },
         username: {

@@ -16,27 +16,27 @@ import React, { } from "react";
 import { PageProps } from './__CORE__/types/pages'
 
 type SearchParamType = Partial<{
-  tabs: string
+    tabs: string
 }>
 
 export type CombindSearchProps = PageProps<{}, SearchParamType>
 
 export default function Home(props: { searchParams: SearchParamType }) {
-  let { searchParams } = props
-  let combindSearchProps: CombindSearchProps = {
-    params: {},
-    searchParams
-  }
-  return <InnerHome combindSearchProps={combindSearchProps}></InnerHome>
+    let { searchParams } = props
+    let combindSearchProps: CombindSearchProps = {
+        params: {},
+        searchParams
+    }
+    return <InnerHome combindSearchProps={combindSearchProps}></InnerHome>
 }
 
 
 export async function generateMetadata(
-  Props,
-  parent: ResolvingMetadata
+    Props,
+    parent: ResolvingMetadata
 ): Promise<Metadata> {
-  return {
-    title: getWebsiteName(),
-  };
+    return {
+        title: getWebsiteName(),
+    };
 }
 
