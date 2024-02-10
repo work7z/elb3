@@ -1,0 +1,5 @@
+{
+    "database":{
+        "link": "mysql://root:mypw@127.0.0.1:3306/elb"
+    }
+}
