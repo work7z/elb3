@@ -1,6 +1,6 @@
 
 import { Inter } from "next/font/google";
-import { getCurrentLangWithServerMode } from "../../utils/TranslationUtils";
+import { getCurrentLang as getCurrentLangWithServerMode } from "../../utils/TranslationUtils";
 import { TopNav } from "../TopNav";
 import CenterPart from "../CenterPart";
 import Footer from "../Footer";
