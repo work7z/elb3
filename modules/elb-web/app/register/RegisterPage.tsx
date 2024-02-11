@@ -17,6 +17,7 @@ import '../__CORE__/script/preline-init'
 import { Metadata, ResolvingMetadata } from 'next';
 import { getWebsiteName } from '../__CORE__/common/config';
 import create from './createAction'
+import { useFormState } from 'react-dom'
 
 export default function RegisterPage(props: { pageProps: RegisterPageProps }) {
     let { pageProps } = props;
@@ -27,7 +28,20 @@ export default function RegisterPage(props: { pageProps: RegisterPageProps }) {
     if (!mounted) {
         return <div>loading...</div>
     }
-    return <form className='' method="POST" action={create} >
+    return <form className='' method="POST" onSubmit={async e => {
+        e.preventDefault();
+
+        // get form data 
+        let formData = new FormData(e.target as HTMLFormElement);
+        let v = await create({
+            username: formData.get("username")?.toString(),
+            password: formData.get("password")?.toString(),
+            email: formData.get("email")?.toString(),
+            confirmPassword: formData.get("confirmPassword")?.toString(),
+            vcode: formData.get("vcode")?.toString(),
+        })
+        alert(v.message)
+    }}  >
         <div>username: {props.pageProps.params.username}</div>
         <CardPanel className='p-4 py-8'>
             <div className='mx-20 '>
