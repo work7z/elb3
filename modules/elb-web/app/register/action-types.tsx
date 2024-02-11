@@ -9,15 +9,15 @@ export type AsyncCreateResponse = {
 export type CheckRules = {
     type: "non-empty" | "valid-email" | "check-fn",
     name: string,
-    validateFn?: (val: string) => any,
-    message?: string
+    validateFn?: (val: string) => Promise<any>,
+    label?: string
 }
 
-export let validateEachRuleInArr = (rules: CheckRules[], formData: any): AsyncCreateResponse | null => {
+export let validateEachRuleInArr = async (rules: CheckRules[], formData: any): Promise<AsyncCreateResponse | null> => {
     let valid = true;
     let lastMsg = ''
     for (let rule of rules) {
-        lastMsg = rule.message || 'no message'
+        lastMsg = rule.label || 'no message'
         if (rule.type === "non-empty") {
             if (!formData[rule.name]) {
                 valid = false;
@@ -31,7 +31,7 @@ export let validateEachRuleInArr = (rules: CheckRules[], formData: any): AsyncCr
             }
         }
         if (rule.type === "check-fn" && rule.validateFn) {
-            let result = rule.validateFn(formData[rule.name])
+            let result = await rule.validateFn(formData[rule.name])
             if (result) {
                 valid = false;
                 break;

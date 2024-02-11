@@ -42,7 +42,6 @@ export default function RegisterPage(props: { pageProps: RegisterPageProps }) {
         })
         alert(v.message)
     }}  >
-        <div>username: {props.pageProps.params.username}</div>
         <CardPanel className='p-4 py-8'>
             <div className='mx-20 '>
                 <div className='text-2xl mb-4 font-bold'>
