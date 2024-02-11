@@ -4,18 +4,18 @@ import MoonSunControl from "../UserPanel/MoonSunControl"
 import LanguagePicker from '../../containers/LanguagePicker'
 import moment from 'moment'
 
-export let WeekDay = ()=>{
+export let WeekDay = () => {
     let week = moment().week()
     let weekLabel = [
-        "Happy Sunday",
         "Marvelous Monday",
         "Terrific Tuesday",
         "Wonderful Wednesday",
         "Thrilling Thursday",
         "Fantastic Friday",
-        "Satisfying Saturday"
+        "Satisfying Saturday",
+        "Happy Sunday",
     ]
-    return <div className="font-sans text-sm text-slate-500 dark:text-slate-300">{weekLabel[week]}</div>
+    return <div className="font-sans text-sm text-slate-500 dark:text-slate-300">{weekLabel[week - 1]}</div>
 }
 
 export default () => {
@@ -38,6 +38,6 @@ export default () => {
         </CardPanel>
 
 
-     <LanguagePicker></LanguagePicker>
+        <LanguagePicker></LanguagePicker>
     </div>
 }

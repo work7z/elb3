@@ -24,7 +24,7 @@ export default function Page(props: RegisterPageProps) {
         <VisiterGuideInfoPanel></VisiterGuideInfoPanel>
     } combindSearchProps={combindSearchProps}>
         <div className='space-y-2 flex-1'>
-            <RegisterPage registerPageProps={props}></RegisterPage>
+            <RegisterPage pageProps={props}></RegisterPage>
         </div>
     </GrailLayoutWithUser>
 }

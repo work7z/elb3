@@ -16,9 +16,10 @@ import TwTabs from '../__CORE__/components/TwTabs'
 import '../__CORE__/script/preline-init'
 import { Metadata, ResolvingMetadata } from 'next';
 import { getWebsiteName } from '../__CORE__/common/config';
+import create from './createAction'
 
-export default function RegisterPage(props: { registerPageProps: RegisterPageProps }) {
-    let { registerPageProps: pageProps } = props;
+export default function RegisterPage(props: { pageProps: RegisterPageProps }) {
+    let { pageProps } = props;
     let [mounted, setMounted] = React.useState(false);
     React.useEffect(() => {
         setMounted(true);
@@ -26,7 +27,8 @@ export default function RegisterPage(props: { registerPageProps: RegisterPagePro
     if (!mounted) {
         return <div>loading...</div>
     }
-    return <form className='' method="POST" action="/register" >
+    return <form className='' method="POST" action={create} >
+        <div>username: {props.pageProps.params.username}</div>
         <CardPanel className='p-4 py-8'>
             <div className='mx-20 '>
                 <div className='text-2xl mb-4 font-bold'>
@@ -61,4 +63,6 @@ export default function RegisterPage(props: { registerPageProps: RegisterPagePro
     </form>
 }
 
-export type RegisterPageProps = PageProps<{}, { type: string }>
+export type RegisterPageProps = PageProps<{
+    username?: string
+}, { type: string, }>
