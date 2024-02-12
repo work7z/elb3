@@ -64,10 +64,6 @@ export default async (): Promise<DaoRef> => {
         .on('error', err => console.log('Redis Client Error', err))
         .connect();
 
-    await client.set('key', 'value');
-    const value = await client.get('key');
-    await client.disconnect();
-
     let r: DaoRef = {
         redis: client as any,
         db: sequelize,

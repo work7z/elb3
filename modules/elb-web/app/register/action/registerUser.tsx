@@ -1,16 +1,54 @@
 'use server'
 
+import { getImgBase64Result } from "@/app/api/captcha/route";
 import dao from "../../__CORE__/dao";
 import { Dot } from "../../__CORE__/utils/TranslationUtils";
 import { AsyncCreateResponse, CheckRules, validateEachRuleInArr } from "../action-types";
+import { setCookie, getCookie } from 'cookies-next';
+import { cookies } from 'next/headers';
+import _ from "lodash";
+export let fn_verifyVCode = (): any => {
+    return {
+        type: "check-fn",
+        name: "vcode",
+        validateFn: async (val) => {
+            let daoRef = await dao()
+            let vcodeLabel = getCookie('vcode', {
+                cookies,
+            })
+            if (!vcodeLabel) {
+                return Dot("4sQWoTgfr", "Verification code is expired, please refresh the page and try again")
+            }
+            let fn_cleanVCode = async () => {
+                if (vcodeLabel) {
+                    await daoRef.redis.del(vcodeLabel)
+                }
+            }
+            let vcodeValOrderIdx = await daoRef.redis.get(vcodeLabel)
+            if (_.isNil(vcodeValOrderIdx)) {
+                await fn_cleanVCode()
+                return Dot("4sdQWoTgfr", "Verification code is expired, please refresh the page and try again.")
+            }
+            let vcodeActualVal = getImgBase64Result(parseInt(vcodeValOrderIdx))
+            console.log('vcode', { vcodeActualVal, val })
+            if (_.toLower(vcodeActualVal) !== _.toLower(val)) {
+                await fn_cleanVCode()
+                return Dot("HaU4NMabv", "Verification code is incorrect, please re-input or refresh the image.")
+            }
+            return null;
+        }
+    }
+}
+
 
 export default async function create(formData: {
     username?: string,
     password?: string,
-    email?: string,
+    phoneNumber?: string,
     confirmPassword?: string,
     vcode?: string
 }): Promise<AsyncCreateResponse> {
+    let daoRef = await dao()
     let rules: CheckRules[] = [
         {
             type: "non-empty",
@@ -24,28 +62,22 @@ export default async function create(formData: {
         },
         {
             type: "non-empty",
-            name: "email",
-            label: Dot("TXdh_wK", "Email"),
-        },
-        {
-            type: "non-empty",
             name: "confirmPassword",
             label: Dot("TqXdh_K", "Confirm Password"),
+        },
+        {
+            type: 'non-empty',
+            name: 'phoneNumber',
+            label: Dot("TqXdd3h_wK", "Telephone Number"),
         },
         {
             type: "non-empty",
             name: "vcode",
             label: Dot("TqXddh_K", "Verification Code"),
         },
-        // {
-        //     type: "valid-email",
-        //     name: "email",
-        //     label: Dot("TXddh_wK", "Email"),
-        // },
         {
             type: "valid-phone",
-            name: "phonenumber",
-            // label: Dot("TXddh_wK", "Email"),
+            name: "phoneNumber",
             label: Dot("TdXddh_wK", "Telephone Number"),
         },
         {
@@ -66,6 +98,7 @@ export default async function create(formData: {
                 }
             }
         },
+        fn_verifyVCode()
     ]
 
     let validObj = await validateEachRuleInArr(rules, formData);

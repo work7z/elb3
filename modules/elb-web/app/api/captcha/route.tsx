@@ -4,15 +4,22 @@ import fileSystem from 'fs'
 import { readFileSync } from 'fs';
 import dao from '@/app/__CORE__/dao';
 import { setCookie, getCookie } from 'cookies-next';
+import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 export const dynamic = 'force-dynamic' // defaults to auto
-import { cookies } from 'next/headers';
 import { randomUUID } from 'crypto';
 
 export let getImgBase64 = (random: number): any => {
   let elb3Root = process.env["ELB3_ROOT"] || ''
   let file = path.join(elb3Root, 'precompiled', 'dev', `${random}.png`)
   let b = readFileSync(file)
+  return b
+}
+
+export let getImgBase64Result = (random: number): string => {
+  let elb3Root = process.env["ELB3_ROOT"] || ''
+  let file = path.join(elb3Root, 'precompiled', 'dev', `${random}.txt`)
+  let b = readFileSync(file, 'utf-8')
   return b
 }
 

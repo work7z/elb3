@@ -31,7 +31,7 @@ export default function Page(props: RegisterPageProps) {
                             {Dot("o4GdNzX6xS", "Firstly, Owing to the well-known regulation requirement on the Earth, each user is required to provide a valid telephone number to register.")}
                         </div>
                         <div>
-                            {Dot("7BtpddC", "Secondly, in this community, we do not talk about politics or any other sensitve topics, and of course do not welcome spam or advertisement. That is why we require a valid telephone number for registeration, to prevent any illicit or improper activities.")}
+                            {Dot("7BtpddC", "Secondly, in this community, we do not talk about politics or any other sensitve topics, and of course do not welcome spam or advertisement. That is why we require a valid telephone number for registeration, to prevent any illicit or improper activities.")} {Dot("Jf4iDTZ28", "Besides, for sure, please be assured that we will never sell out your telephone number or make it public.")}
                         </div>
                         <div>
                             {Dot("KAiEq6dcwL5", "Lastly, as a friendly reminder, each user should take the responsibility for their own words and actions.")}
@@ -49,7 +49,7 @@ export default function Page(props: RegisterPageProps) {
                         <div>{Dot("ufSPh0ad", "If it is impossible to register your account via your current telephone number, please reach the webmaster on his email {0} or WeChat account {1}. We can assist you to register your account manually.", "work7z@outlook.com", "lafting755")}</div>
                     </p>
                 </div>
-            }></CardPanel>
+            }></CardPanel>,
         ]
     } combindSearchProps={combindSearchProps}>
         <div className='space-y-2 flex-1'>

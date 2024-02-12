@@ -42,7 +42,7 @@ export let validateEachRuleInArr = async (rules: CheckRules[], formData: any): P
         }
         if (rule.type === "valid-phone" && rule.validateFn) {
             if (formData[rule.name].length != 11) {
-                lastMsg = Dot("CuHb3UN9m", "{0} is not a valid phone number, currently system accept 11 digits telephone number only.", rule.label)
+                lastMsg = Dot("CuHqw9m", "{0} is not a valid phone number, currently system accept 11 digits telephone number only.", rule.label)
                 valid = false;
                 break;
             }

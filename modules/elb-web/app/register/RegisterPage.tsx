@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import GrailLayoutWithUser from '@/app/__CORE__/containers/GrailLayoutWithUser'
 import { CombindSearchProps } from '@/app/page'
 import CardPanel from '@/app/__CORE__/components/CardPanel';
@@ -20,28 +20,36 @@ import create from './action/registerUser'
 import { useFormState } from 'react-dom'
 import LoadingWrapper from '../__CORE__/containers/LoadingWrapper';
 import AlertErrorPanel from '../__CORE__/containers/AlertErrorPanel';
+import GeneralInput from '../__CORE__/components/GeneralInput';
 
 export default function RegisterPage(props: { pageProps: RegisterPageProps }) {
     let { pageProps } = props;
     let [errMsg, setErrMsg] = React.useState<string[]>([])
+    let [vcodeFactor, onVCodeFactor] = useState(0)
     return <LoadingWrapper><form className='' method="POST" onSubmit={async e => {
         e.preventDefault();
         setErrMsg([])
         // get form data 
         let formData = new FormData(e.target as HTMLFormElement);
-        let v = await create({
-            username: formData.get("username")?.toString(),
-            password: formData.get("password")?.toString(),
-            email: formData.get("email")?.toString(),
-            confirmPassword: formData.get("confirmPassword")?.toString(),
-            vcode: formData.get("vcode")?.toString(),
-        })
-        if (v.error) {
-            setErrMsg([v.error || ''])
+        try {
+            let v = await create({
+                username: formData.get("username")?.toString(),
+                password: formData.get("password")?.toString(),
+                phoneNumber: formData.get("phoneNumber")?.toString(),
+                confirmPassword: formData.get("confirmPassword")?.toString(),
+                vcode: formData.get("vcode")?.toString(),
+            })
+            if (v.error) {
+                onVCodeFactor(Date.now())
+                setErrMsg([v.error || ''])
+                window.scrollTo(0, 0)
+                return;
+            };
+            location.href = '/welcome'
+        } catch (e: any) {
+            setErrMsg([e.message || ''])
             window.scrollTo(0, 0)
-            return;
-        };
-        location.href = '/'
+        }
     }}  >
         <CardPanel className='p-4 py-8'>
             <div className='mx-20 '>
@@ -54,11 +62,11 @@ export default function RegisterPage(props: { pageProps: RegisterPageProps }) {
                     <div className='mb-2'>
                     </div>
                     <UserInput name='user' />
-                    {/* <EmailInput name='email' /> */}
-                    <PhoneInput name='phonenumber'></PhoneInput>
+                    <GeneralInput label={Dot("39dIhsVvd", "Invitation Code")} name='invitationCode' ph={Dot("lcMhf", "This community is invite-only.")}></GeneralInput>
+                    <PhoneInput name='phoneNumber'></PhoneInput>
                     <PasswordInput name='password' strongMode></PasswordInput>
                     <PasswordInput name='confirmPassword' label={Dot("TXh_K", "Confirm Password")} ph={Dot("sfooX", "Confirm your password")}></PasswordInput>
-                    <VerifyCodeInput codeImgBase64={''}></VerifyCodeInput>
+                    <VerifyCodeInput vcodeFactor={vcodeFactor} codeImgBase64={''}></VerifyCodeInput>
                     <div className='clearfix  clear-none'></div>
                     <div className='pt-6'>
                         <button type="submit" className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-solarized-base02Light5 text-white hover:bg-solarized-base02Light3 transition-all disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
@@ -77,7 +85,7 @@ export default function RegisterPage(props: { pageProps: RegisterPageProps }) {
             </div>
         </CardPanel>
     </form>
-    </LoadingWrapper>
+    </LoadingWrapper >
 }
 
 export type RegisterPageProps = PageProps<{

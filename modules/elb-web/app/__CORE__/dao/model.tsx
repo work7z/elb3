@@ -9,6 +9,7 @@ export class User extends Model<InferAttributes<User>, InferCreationAttributes<U
     declare id: number;
     declare uid: number; // member uid
     declare username: string;
+    declare invitationCode: string;
     declare email: string;
     declare phoneNumber: string;
     declare source: string;
@@ -157,7 +158,7 @@ export default (daoRef: DaoRef) => {
             autoIncrement: true,
             primaryKey: true
         },
-        uid: {
+        uid: { // meaning user unique id. if it's null, then it's not an activated account.
             type: DataTypes.INTEGER,
             allowNull: true,
             unique: true
@@ -168,11 +169,11 @@ export default (daoRef: DaoRef) => {
         },
         email: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         phoneNumber: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         source: {
             type: DataTypes.STRING,
