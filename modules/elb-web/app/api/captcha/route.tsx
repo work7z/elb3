@@ -18,7 +18,6 @@ export async function GET(request: Request) {
   let daoRef = await dao()
   daoRef.redis.set('', '')
   let random = Math.floor(Math.random() * 10)
-  setCookie("v-001", "12345")
 
   let response = new Response(getImgBase64(random), {
     headers: {
