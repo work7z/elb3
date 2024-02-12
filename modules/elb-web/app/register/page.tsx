@@ -31,10 +31,11 @@ export default function Page(props: RegisterPageProps) {
                             {Dot("o4GdNzX6xS", "Firstly, Owing to the well-known regulation requirement on the Earth, each user is required to provide a valid telephone number to register.")}
                         </div>
                         <div>
-                            {Dot("7Btpd34afuC", "ALso, in this community, we do not talk about politics or any other sensitve topics, and of course do not welcome spam or advertisement. That is why we require a valid telephone number for registeration, to prevent any illicit activities.")}
+                            {Dot("7BtpafuC", "ALso, in this community, we do not talk about politics or any other sensitve topics, and of course do not welcome spam or advertisement. That is why we require a valid telephone number for registeration, to prevent any illicit or improper activities.")}
                         </div>
                         <div>
-                            {Dot("KAiEq6cwL5", "Lastly, as a friendly reminder, each user should take the responsibility for their own words and actions.")}
+                            {Dot("KAiEq6dcwL5", "Lastly, as a friendly reminder, each user should take the responsibility for their own words and actions.")}
+                            {Dot("VWERmdNh", "Do love your life, and respect others, and never ever forever do anything illegal in this community.")}
                         </div>
                     </p>
                 </div>
