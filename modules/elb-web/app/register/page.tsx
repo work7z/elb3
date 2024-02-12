@@ -35,7 +35,7 @@ export default function Page(props: RegisterPageProps) {
                         </div>
                         <div>
                             {Dot("KAiEq6dcwL5", "Lastly, as a friendly reminder, each user should take the responsibility for their own words and actions.")}
-                            {Dot("VWERmdNh", "Do love your life, and respect others, and never ever forever do anything illegal in this community.")}
+                            {Dot("C7jECCVt9", "Do value your time and never ever forever do anything illegal in this community.")}
                         </div>
                     </p>
                 </div>
