@@ -7,13 +7,13 @@ import moment from 'moment'
 export let WeekDay = () => {
     let week = moment().week()
     let weekLabel = [
-        "Marvelous Monday",
         "Terrific Tuesday",
         "Wonderful Wednesday",
         "Thrilling Thursday",
         "Fantastic Friday",
         "Satisfying Saturday",
         "Happy Sunday",
+        "Marvelous Monday",
     ]
     return <div className="font-sans text-sm text-slate-500 dark:text-slate-300">{weekLabel[week - 1]}</div>
 }

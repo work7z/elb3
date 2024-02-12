@@ -67,6 +67,12 @@ let processWithArg = async ({
   // iterate all files
   for (let eachFile of allFiles) {
     let file = getFile(eachFile); // replace with appropriate function
+    if (
+      file.filepath.indexOf("node_modules") != -1 ||
+      file.filepath.indexOf(".next") != -1
+    ) {
+      continue;
+    }
     let text = file.text();
     if (!disableLoadingDot) {
       let loadDOTIdx = text.indexOf("loadDOT(");

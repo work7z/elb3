@@ -59,7 +59,7 @@ export default async function create(formData: {
                     return Dot("Y-svpKvUz", "two passwords do not match")
                 }
             }
-        }
+        },
     ]
 
     let validObj = await validateEachRuleInArr(rules, formData);

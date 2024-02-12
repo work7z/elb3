@@ -18,19 +18,16 @@ import { Metadata, ResolvingMetadata } from 'next';
 import { getWebsiteName } from '../__CORE__/common/config';
 import create from './createAction'
 import { useFormState } from 'react-dom'
+import LoadingWrapper from '../__CORE__/containers/LoadingWrapper';
+import AlertErrorPanel from '../__CORE__/containers/AlertErrorPanel';
 
 export default function RegisterPage(props: { pageProps: RegisterPageProps }) {
     let { pageProps } = props;
-    let [mounted, setMounted] = React.useState(false);
-    React.useEffect(() => {
-        setMounted(true);
-    }, [])
-    if (!mounted) {
-        return <div>loading...</div>
-    }
-    return <form className='' method="POST" onSubmit={async e => {
-        e.preventDefault();
+    let [errMsg, setErrMsg] = React.useState<string[]>([])
 
+    return <LoadingWrapper><form className='' method="POST" onSubmit={async e => {
+        e.preventDefault();
+        setErrMsg([])
         // get form data 
         let formData = new FormData(e.target as HTMLFormElement);
         let v = await create({
@@ -40,13 +37,19 @@ export default function RegisterPage(props: { pageProps: RegisterPageProps }) {
             confirmPassword: formData.get("confirmPassword")?.toString(),
             vcode: formData.get("vcode")?.toString(),
         })
-        alert(v.message)
+        if (v.error) {
+            setErrMsg([v.error || ''])
+            window.scrollTo(0, 0)
+            return;
+        };
+        location.href = '/'
     }}  >
         <CardPanel className='p-4 py-8'>
             <div className='mx-20 '>
                 <div className='text-2xl mb-4 font-bold'>
                     {Dot("yOwdRB", "Create an Account")}
                 </div>
+                <AlertErrorPanel errorMsg={errMsg}></AlertErrorPanel>
 
                 <div className='space-y-2 mt-4 max-w-md'>
                     <div className='mb-2'>
@@ -74,6 +77,7 @@ export default function RegisterPage(props: { pageProps: RegisterPageProps }) {
             </div>
         </CardPanel>
     </form>
+    </LoadingWrapper>
 }
 
 export type RegisterPageProps = PageProps<{
