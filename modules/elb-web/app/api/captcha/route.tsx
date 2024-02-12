@@ -7,8 +7,7 @@ import { setCookie, getCookie } from 'cookies-next';
 export const dynamic = 'force-dynamic' // defaults to auto
 
 
-export let getImgBase64 = (): any => {
-  let random = Math.floor(Math.random() * 10)
+export let getImgBase64 = (random: number): any => {
   let elb3Root = process.env["ELB3_ROOT"] || ''
   let file = path.join(elb3Root, 'precompiled', 'dev', `${random}.png`)
   let b = readFileSync(file)
@@ -17,10 +16,11 @@ export let getImgBase64 = (): any => {
 
 export async function GET(request: Request) {
   let daoRef = await dao()
-  // daoRef.redis.set()
+  daoRef.redis.set('', '')
+  let random = Math.floor(Math.random() * 10)
   setCookie("v-001", "12345")
-  
-  let response = new Response(getImgBase64(),{
+
+  let response = new Response(getImgBase64(random), {
     headers: {
       "content-type": "image/png",
       "cache-control": "no-cache",

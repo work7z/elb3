@@ -24,7 +24,6 @@ import AlertErrorPanel from '../__CORE__/containers/AlertErrorPanel';
 export default function RegisterPage(props: { pageProps: RegisterPageProps }) {
     let { pageProps } = props;
     let [errMsg, setErrMsg] = React.useState<string[]>([])
-
     return <LoadingWrapper><form className='' method="POST" onSubmit={async e => {
         e.preventDefault();
         setErrMsg([])
