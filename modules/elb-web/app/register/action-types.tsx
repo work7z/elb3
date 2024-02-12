@@ -8,7 +8,7 @@ export type AsyncCreateResponse = {
 }
 
 export type CheckRules = {
-    type: "non-empty" | "valid-email" | "check-fn",
+    type: "non-empty" | "valid-email" | "check-fn" | "valid-phone",
     name: string,
     validateFn?: (val: string) => Promise<string | undefined>,
     label?: string
@@ -36,6 +36,13 @@ export let validateEachRuleInArr = async (rules: CheckRules[], formData: any): P
             let result = await rule.validateFn(formData[rule.name])
             if (result) {
                 lastMsg = result
+                valid = false;
+                break;
+            }
+        }
+        if (rule.type === "valid-phone" && rule.validateFn) {
+            if (formData[rule.name].length != 11) {
+                lastMsg = Dot("CuHb3UN9m", "{0} is not a valid phone number, currently system accept 11 digits telephone number only.", rule.label)
                 valid = false;
                 break;
             }

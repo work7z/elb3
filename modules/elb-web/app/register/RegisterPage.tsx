@@ -16,7 +16,7 @@ import TwTabs from '../__CORE__/components/TwTabs'
 import '../__CORE__/script/preline-init'
 import { Metadata, ResolvingMetadata } from 'next';
 import { getWebsiteName } from '../__CORE__/common/config';
-import create from './createAction'
+import create from './action/registerUser'
 import { useFormState } from 'react-dom'
 import LoadingWrapper from '../__CORE__/containers/LoadingWrapper';
 import AlertErrorPanel from '../__CORE__/containers/AlertErrorPanel';
@@ -54,7 +54,8 @@ export default function RegisterPage(props: { pageProps: RegisterPageProps }) {
                     <div className='mb-2'>
                     </div>
                     <UserInput name='user' />
-                    <EmailInput name='email' />
+                    {/* <EmailInput name='email' /> */}
+                    <PhoneInput name='phonenumber'></PhoneInput>
                     <PasswordInput name='password' strongMode></PasswordInput>
                     <PasswordInput name='confirmPassword' label={Dot("TXh_K", "Confirm Password")} ph={Dot("sfooX", "Confirm your password")}></PasswordInput>
                     <VerifyCodeInput codeImgBase64={''}></VerifyCodeInput>

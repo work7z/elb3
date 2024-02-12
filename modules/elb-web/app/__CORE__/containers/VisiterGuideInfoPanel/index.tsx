@@ -37,7 +37,6 @@ export default () => {
         </div>}>
         </CardPanel>
 
-
         <LanguagePicker></LanguagePicker>
     </div>
 }

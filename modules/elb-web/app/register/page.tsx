@@ -21,7 +21,26 @@ export default function Page(props: RegisterPageProps) {
     let { searchParams, params } = props;
     let combindSearchProps = props;
     return <GrailLayoutWithUser rightJSX={
-        <VisiterGuideInfoPanel></VisiterGuideInfoPanel>
+        [
+            <VisiterGuideInfoPanel></VisiterGuideInfoPanel>,
+            <CardPanel className="mt-2" children={
+                <div className='p-2 '>
+                    <h3 className='font-semibold mb-2'>{Dot("Pu0pj23rR", "Why Telephone number is required?")}</h3>
+                    <p className='text-xs space-y-2'>
+                        <div>
+                            {Dot("o4GdNzX6xS", "Firstly, Owing to the well-known regulation requirement on the Earth, each user is required to provide a valid telephone number to register.")}
+                        </div>
+                        <div>
+                            {Dot("7Btpd34afuC", "ALso, in this community, we do not talk about politics or any other sensitve topics, and of course do not welcome spam or advertisement. That is why we require a valid telephone number for registeration, to prevent any illicit activities.")}
+                        </div>
+                        <div>
+                            {Dot("KAiEq6cwL5", "Lastly, as a friendly reminder, each user should take the responsibility for their own words and actions.")}
+                        </div>
+                    </p>
+                </div>
+            }>
+            </ CardPanel>
+        ]
     } combindSearchProps={combindSearchProps}>
         <div className='space-y-2 flex-1'>
             <RegisterPage pageProps={props}></RegisterPage>
