@@ -19,6 +19,11 @@ export default async function create(formData: {
     vcode: string
 }): Promise<AsyncCreateResponse<{ newUser?: User }>> {
     let daoRef = await dao()
+    let invitationCodeItem = await InvitationCode.findOne({
+        where: {
+            code: formData.invitationCode
+        }
+    })
     let rules: CheckRules[] = [
         {
             type: "non-empty",
@@ -78,21 +83,19 @@ export default async function create(formData: {
             name: "invitationCode",
             validateFn: async (val) => {
                 if (val.length > 0) {
-                    let item = await InvitationCode.findOne({
-                        where: {
-                            code: val
-                        }
-                    })
+                    let item = invitationCodeItem
                     if (!item) {
                         return Dot("8s1RXhx", "Invitation code does not exist")
                     }
                     if (item.expiredAt < new Date()) {
                         return Dot("8saIR-LCjyChx", "Invitation code has expired")
                     }
-                    if (item.maxUseCount <= 0) {
+                    if (item.useCount <= 0) {
                         return Dot("8saIt5r5nGxwwChx", "Invitation code has been used up")
                     }
                     // all good
+                } else {
+                    return Dot("8s1R5nChx", "Invitation code is empty, this community is not open to public but limited to invited users.")
                 }
             }
         },
@@ -104,9 +107,6 @@ export default async function create(formData: {
         return validObj
     }
 
-    const rawFormData = {
-        ...formData
-    };
     let newUser = await daoRef.db.transaction(async () => {
         let newUser = await User.create({
             userid: formData.userid + '',
@@ -118,6 +118,10 @@ export default async function create(formData: {
             status: 'newly-created',
             topicCount: 0,
             replyCount: 0,
+        })
+
+        await invitationCodeItem?.update({
+            useCount: invitationCodeItem.useCount - 1
         })
         return newUser
     })

@@ -9,6 +9,7 @@ export class InvitationCode extends Model<InferAttributes<InvitationCode>, Infer
     declare id: number | null;
     declare code: string;
     declare maxUseCount: number;
+    declare useCount: number;
     declare expiredAt: Date;
     declare createdAt: CreationOptional<Date> | null;
     declare updatedAt: CreationOptional<Date> | null;
@@ -165,6 +166,10 @@ export default async (daoRef: DaoRef) => {
     sequelize.sync({ alter: true })
     // init model
     InvitationCode.init({
+        useCount: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
         maxUseCount: {
             type: DataTypes.INTEGER,
             allowNull: false
@@ -557,6 +562,8 @@ export default async (daoRef: DaoRef) => {
     if (isDevEnv()) {
         let a = await InvitationCode.create({
             code: "test100",
+            useCount: 0,
+            maxUseCount: 500,
             expiredAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30) // expired after 30 days
         },)
         console.log('test invitation code', a.toJSON())
