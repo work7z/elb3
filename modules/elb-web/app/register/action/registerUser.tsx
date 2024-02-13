@@ -4,7 +4,7 @@ import { getImgBase64Result } from "@/app/api/captcha/route";
 import dao from "../../__CORE__/dao";
 import { Dot } from "../../__CORE__/utils/TranslationUtils";
 import { AsyncCreateResponse, CheckRules, fn_verifyVCode, validateEachRuleInArr } from "../action-types";
-import { setCookie, getCookie } from 'cookies-next';
+import { setCookie, getCookie, getCookies } from 'cookies-next';
 import { cookies } from 'next/headers';
 import _ from "lodash";
 import { InvitationCode, User, UserToken } from "@/app/__CORE__/dao/model";
@@ -26,7 +26,6 @@ export let signInWithUserId = async (userAcctId: string) => {
     }
     let daoRef = await dao()
     let key_sessionGroup = 'session-group';
-    let token = randomUUID();
     // init set
     await daoRef.redis.sAdd(key_sessionGroup, userAcctId) // add user acct into the set
     let sessionVal = await daoRef.redis.hGet(key_sessionGroup + ':' + userAcctId, 'token')
@@ -39,9 +38,11 @@ export let signInWithUserId = async (userAcctId: string) => {
         userAcctId: userInfo.userAcctId,
         sessionVal: sessionVal + ''
     }
-    setCookie('elb3-auth', JSON.stringify(push), {
-        maxAge: -1,
-        path: '/'
+    setCookie('elb3-auth', encodeURIComponent(JSON.stringify(push)), {
+        cookies
+    })
+    setCookie('elb3-hello', 'world', {
+        cookies
     })
 }
 
@@ -219,7 +220,7 @@ export default async function create(formData: {
             useCount: invitationCodeItem.useCount - 1
         })
 
-        signInWithUserId(formData.userAcctId + '')
+        await signInWithUserId(formData.userAcctId + '')
 
         return newUser
     })
