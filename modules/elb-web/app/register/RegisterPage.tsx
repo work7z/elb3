@@ -26,18 +26,21 @@ export default function RegisterPage(props: { pageProps: RegisterPageProps }) {
     let { pageProps } = props;
     let [errMsg, setErrMsg] = React.useState<string[]>([])
     let [vcodeFactor, onVCodeFactor] = useState(0)
+    let [working, setWorking] = useState(false)
     return <LoadingWrapper><form className='' method="POST" onSubmit={async e => {
         e.preventDefault();
         setErrMsg([])
         // get form data 
         let formData = new FormData(e.target as HTMLFormElement);
         try {
+            setWorking(true)
             let v = await create({
-                username: formData.get("username")?.toString(),
-                password: formData.get("password")?.toString(),
-                phoneNumber: formData.get("phoneNumber")?.toString(),
-                confirmPassword: formData.get("confirmPassword")?.toString(),
-                vcode: formData.get("vcode")?.toString(),
+                userid: formData.get("userid")?.toString() || '',
+                password: formData.get("password")?.toString() || '',
+                phoneNumber: formData.get("phoneNumber")?.toString() || '',
+                confirmPassword: formData.get("confirmPassword")?.toString() || '',
+                vcode: formData.get("vcode")?.toString() || '',
+                invitationCode: formData.get("invitationCode")?.toString() || '',
             })
             if (v.error) {
                 onVCodeFactor(Date.now())
@@ -49,6 +52,8 @@ export default function RegisterPage(props: { pageProps: RegisterPageProps }) {
         } catch (e: any) {
             setErrMsg([e.message || ''])
             window.scrollTo(0, 0)
+        } finally {
+            setWorking(false)
         }
     }}  >
         <CardPanel className='p-4 py-8'>
@@ -61,7 +66,7 @@ export default function RegisterPage(props: { pageProps: RegisterPageProps }) {
                 <div className='space-y-2 mt-4 max-w-md'>
                     <div className='mb-2'>
                     </div>
-                    <UserInput name='user' />
+                    <UserInput name='userid' />
                     <GeneralInput fn_svgJSX={
                         (clz: string) =>
                             <svg className={clz} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
@@ -74,7 +79,7 @@ export default function RegisterPage(props: { pageProps: RegisterPageProps }) {
                     <VerifyCodeInput vcodeFactor={vcodeFactor} codeImgBase64={''}></VerifyCodeInput>
                     <div className='clearfix  clear-none'></div>
                     <div className='pt-6'>
-                        <button type="submit" className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-solarized-base02Light5 text-white hover:bg-solarized-base02Light3 transition-all disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                        <button disabled={working} type="submit" className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-solarized-base02Light5 text-white hover:bg-solarized-base02Light3 transition-all disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                             {Dot("register", "Register Now")}
                         </button>
                     </div>

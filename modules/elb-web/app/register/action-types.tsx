@@ -7,9 +7,10 @@ import _ from "lodash";
 import dao from "../__CORE__/dao";
 import { getImgBase64Result } from "../api/captcha/route";
 
-export type AsyncCreateResponse = {
+export type AsyncCreateResponse<T> = {
     message?: string, // normal message
     error?: string, // error
+    data?: T
 }
 
 export type CheckRules = {
@@ -19,7 +20,7 @@ export type CheckRules = {
     label?: string
 }
 
-export let validateEachRuleInArr = async (rules: CheckRules[], formData: any): Promise<AsyncCreateResponse | null> => {
+export let validateEachRuleInArr = async (rules: CheckRules[], formData: any): Promise<AsyncCreateResponse<{}> | null> => {
     let valid = true;
     let lastMsg = ''
     for (let rule of rules) {

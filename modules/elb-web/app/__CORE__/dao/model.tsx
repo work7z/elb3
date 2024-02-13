@@ -8,34 +8,38 @@ export type UserRole = "webmaster" | "moderator" | "user"
 export class InvitationCode extends Model<InferAttributes<InvitationCode>, InferCreationAttributes<InvitationCode>> {
     declare id: number | null;
     declare code: string;
+    declare maxUseCount: number;
+    declare expiredAt: Date;
     declare createdAt: CreationOptional<Date> | null;
     declare updatedAt: CreationOptional<Date> | null;
     declare deleteAt: CreationOptional<Date> | null;
 }
 
 export class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
-    declare id: number;
-    declare uid: number; // member uid
-    declare username: string;
+    declare userid: string;
+    declare username?: string; // can be changed at any time, can be duplicate
+    declare uid?: number | null;
     declare invitationCode: string;
-    declare email: string;
     declare phoneNumber: string;
-    declare source: string;
+    declare vcode?: string;
+    declare email?: string;
+    declare source?: string;
     declare password: string;
     declare role: UserRole;
-    declare avatarPath: string;
-    declare status: "normal" | "banned" | "deleted";
+    declare avatarPath?: string;
+    declare status: "newly-created" | "normal" | "banned" | "deleted";
     declare topicCount: number; // the number of topics that's sent by this user up to now
-    declare banReason: string | null; // the reason why this user is banned
-    declare banUntil: Date | null;
+    declare replyCount: number;
+    declare banReason?: string | null; // the reason why this user is banned
+    declare banUntil?: Date | null;
     // settings
-    declare cityId: string; // city id, from fixed static data in node.js
-    declare goal: string; // goal, from fixed static data in node.js
+    declare cityId?: string; // city id, from fixed static data in node.js
+    declare goal?: string; // goal, from fixed static data in node.js
 
     // timestamps
-    declare createdAt: CreationOptional<Date> | null;
-    declare updatedAt: CreationOptional<Date> | null;
-    declare deleteAt: CreationOptional<Date> | null;
+    declare createdAt?: CreationOptional<Date> | null;
+    declare updatedAt?: CreationOptional<Date> | null;
+    declare deleteAt?: CreationOptional<Date> | null;
 }
 
 // model for UserToken
@@ -161,6 +165,14 @@ export default async (daoRef: DaoRef) => {
     sequelize.sync({ alter: true })
     // init model
     InvitationCode.init({
+        maxUseCount: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        expiredAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -189,9 +201,16 @@ export default async (daoRef: DaoRef) => {
         tableName: "invitation_code"
     })
     User.init({
-        id: {
+        replyCount: {
             type: DataTypes.INTEGER,
-            autoIncrement: true,
+            allowNull: false
+        },
+        vcode: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        userid: {
+            type: DataTypes.STRING,
             primaryKey: true
         },
         uid: { // meaning user unique id. if it's null, then it's not an activated account.
@@ -201,7 +220,7 @@ export default async (daoRef: DaoRef) => {
         },
         username: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true,
         },
         email: {
             type: DataTypes.STRING,
@@ -213,7 +232,7 @@ export default async (daoRef: DaoRef) => {
         },
         source: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true,
         },
         password: {
             type: DataTypes.STRING,
@@ -538,6 +557,7 @@ export default async (daoRef: DaoRef) => {
     if (isDevEnv()) {
         let a = await InvitationCode.create({
             code: "test100",
+            expiredAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30) // expired after 30 days
         },)
         console.log('test invitation code', a.toJSON())
     }

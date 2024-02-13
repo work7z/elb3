@@ -7,21 +7,23 @@ import { AsyncCreateResponse, CheckRules, fn_verifyVCode, validateEachRuleInArr 
 import { setCookie, getCookie } from 'cookies-next';
 import { cookies } from 'next/headers';
 import _ from "lodash";
+import { InvitationCode, User } from "@/app/__CORE__/dao/model";
 
 
 export default async function create(formData: {
-    username?: string,
-    password?: string,
-    phoneNumber?: string,
-    confirmPassword?: string,
-    vcode?: string
-}): Promise<AsyncCreateResponse> {
+    userid: string,
+    password: string,
+    phoneNumber: string,
+    invitationCode: string,
+    confirmPassword: string,
+    vcode: string
+}): Promise<AsyncCreateResponse<{ newUser?: User }>> {
     let daoRef = await dao()
     let rules: CheckRules[] = [
         {
             type: "non-empty",
-            name: "username",
-            label: Dot("RfqYACPtV", "Username"),
+            name: "userid",
+            label: Dot("oHQNQ4mRw", "User ID"),
         },
         {
             type: "non-empty",
@@ -71,6 +73,29 @@ export default async function create(formData: {
                 }
             }
         },
+        {
+            type: "check-fn",
+            name: "invitationCode",
+            validateFn: async (val) => {
+                if (val.length > 0) {
+                    let item = await InvitationCode.findOne({
+                        where: {
+                            code: val
+                        }
+                    })
+                    if (!item) {
+                        return Dot("8s1RXhx", "Invitation code does not exist")
+                    }
+                    if (item.expiredAt < new Date()) {
+                        return Dot("8saIR-LCjyChx", "Invitation code has expired")
+                    }
+                    if (item.maxUseCount <= 0) {
+                        return Dot("8saIt5r5nGxwwChx", "Invitation code has been used up")
+                    }
+                    // all good
+                }
+            }
+        },
         fn_verifyVCode()
     ]
 
@@ -82,9 +107,28 @@ export default async function create(formData: {
     const rawFormData = {
         ...formData
     };
-    let dbref = await dao()
-    console.log(rawFormData);
+    let newUser = await daoRef.db.transaction(async () => {
+        let newUser = await User.create({
+            userid: formData.userid + '',
+            password: formData.password + '',
+            phoneNumber: formData.phoneNumber + '',
+            invitationCode: formData.invitationCode + '',
+            vcode: formData.vcode + '',
+            role: 'user',
+            status: 'newly-created',
+            topicCount: 0,
+            replyCount: 0,
+        })
+        return newUser
+    })
+    if (!newUser) {
+        return {
+            error: "create user failed"
+        }
+    }
     return {
-        message: 'this is new item'
+        data: {
+            newUser: newUser
+        },
     }
 }
