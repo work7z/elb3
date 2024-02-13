@@ -34,11 +34,13 @@ if (process.env.NODE_ENV === 'development') {
     crtRef.flag = 'dev'
 }
 let lock = false
-let refMap = {}
-export default async (): Promise<DaoRef> => {
-    while (lock) {
-        await new Promise((resolve) => setTimeout(resolve, 100))
-    }
+let refMap: { [key: string]: DaoRef } = {}
+let loadDAO = async (): Promise<DaoRef> => {
+    console.log('initializing DAO Ref...')
+    // while (lock) {
+    //     console.log('locking')
+    //     await new Promise((resolve) => setTimeout(resolve, 100))
+    // }
     lock = true;
     try {
         let envFlag: SystemFlag = crtRef.flag
@@ -77,7 +79,6 @@ export default async (): Promise<DaoRef> => {
 
         // 3. setup model 
         await model(r)
-
         refMap[envFlag] = r;
 
         lock = false;
@@ -88,3 +89,5 @@ export default async (): Promise<DaoRef> => {
         throw e;
     }
 }
+loadDAO() // initial launch
+export default loadDAO
