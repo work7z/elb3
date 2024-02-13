@@ -10,6 +10,7 @@ import _ from "lodash";
 import { InvitationCode, User, UserToken } from "@/app/__CORE__/dao/model";
 import { checkIfStrOnlyHasAlphanumeric } from "./utils";
 import { randomUUID } from "crypto";
+import { key_sessionGroup } from "../redis-types";
 
 export type Elb3AuthBody = {
     userAcctId: string,
@@ -25,7 +26,6 @@ export let signInWithUserId = async (userAcctId: string) => {
         throw new Error('user id not found')
     }
     let daoRef = await dao()
-    let key_sessionGroup = 'session-group';
     // init set
     await daoRef.redis.sAdd(key_sessionGroup, userAcctId) // add user acct into the set
     let sessionVal = await daoRef.redis.hGet(key_sessionGroup + ':' + userAcctId, 'token')
