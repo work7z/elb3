@@ -16,6 +16,7 @@ import '../__CORE__/script/preline-init'
 import { Metadata, ResolvingMetadata } from 'next';
 import { getWebsiteName } from '../__CORE__/common/config';
 import RegisterPage, { RegisterPageProps } from './RegisterPage'
+import { contact_webmaster_email, contact_webmaster_wechat } from '../__CORE__/types/contact';
 
 export default function Page(props: RegisterPageProps) {
     let { searchParams, params } = props;
@@ -46,7 +47,20 @@ export default function Page(props: RegisterPageProps) {
                     <h3 className='font-semibold mb-2'>{Dot("OPevedpOM", "What if I do not have a telephone number?")}</h3>
                     <p className='text-xs space-y-2'>
                         <div>{Dot("Jfr4RzEZG", "Currently, we only accept {0} telephone number to register your account.", "+86")}</div>
-                        <div>{Dot("ufSPh0ad", "If it is impossible to register your account via your current telephone number, please reach the webmaster on his email {0} or WeChat account {1}. We can assist you to register your account manually.", "work7z@outlook.com", "lafting755")}</div>
+                        <div>{Dot("ufSPh0ad", "If it is impossible to register your account via your current telephone number, please reach the webmaster on his email {0} or WeChat account {1}. We can assist you to register your account manually.", contact_webmaster_email, contact_webmaster_wechat)}</div>
+                    </p>
+                </div>
+            }></CardPanel>,
+            <CardPanel className="mt-2" children={
+                <div className='p-2 '>
+                    <h3 className='font-semibold mb-2'>{Dot("fcGTPc7HP", "Where can I get the invitation code?")}</h3>
+                    <p className='text-xs space-y-2'>
+                        <div>
+                            {Dot("9pBpiYcCy", "To prevent spam and advertisement, we require an invitation code to register your account.")}
+
+                            {Dot("XIzgAAR", "Usually, an available invitation code can be provided from the webmaster or other users. ")}
+                            {Dot("dzIC7qPQ", "If you do wish to join us, please try to reach the webmaster on his email {0} or WeChat account {1} to get an invitation code.", contact_webmaster_email, contact_webmaster_wechat)}
+                        </div>
                     </p>
                 </div>
             }></CardPanel>,
