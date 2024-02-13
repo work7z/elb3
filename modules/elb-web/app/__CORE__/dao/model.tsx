@@ -17,7 +17,8 @@ export class InvitationCode extends Model<InferAttributes<InvitationCode>, Infer
 }
 
 export class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
-    declare userid: string;
+    declare id: number | null;
+    declare userAcctId: string; // unique text id, can not be changed
     declare username?: string; // can be changed at any time, can be duplicate
     declare uid?: number | null;
     declare invitationCode: string;
@@ -46,7 +47,7 @@ export class User extends Model<InferAttributes<User>, InferCreationAttributes<U
 // model for UserToken
 export class UserToken extends Model<InferAttributes<UserToken>, InferCreationAttributes<UserToken>> {
     declare id: number;
-    declare userId: number;
+    declare userId: string;
     declare token: string;
     declare createdAt: CreationOptional<Date> | null;
     declare updatedAt: CreationOptional<Date> | null;
@@ -75,7 +76,7 @@ export class Block extends Model<InferAttributes<Block>, InferCreationAttributes
 export class Topic extends Model<InferAttributes<Topic>, InferCreationAttributes<Topic>> {
     declare id: number;
     declare title: string; // varchar(120)
-    declare userId: number;
+    declare userId: string;
     declare nodeId: string; // varchar(15)
     declare viewCount: number;
     declare favouriteCount: number;
@@ -214,9 +215,15 @@ export default async (daoRef: DaoRef) => {
             type: DataTypes.STRING,
             allowNull: true
         },
-        userid: {
+        userAcctId: {
             type: DataTypes.STRING,
-            primaryKey: true
+            allowNull: false,
+        },
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
+            autoIncrementIdentity: true,
         },
         uid: { // meaning user unique id. if it's null, then it's not an activated account.
             type: DataTypes.INTEGER,

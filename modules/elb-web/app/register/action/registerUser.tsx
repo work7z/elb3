@@ -10,8 +10,23 @@ import _ from "lodash";
 import { InvitationCode, User } from "@/app/__CORE__/dao/model";
 
 
+export let signInWithUserId = (userId: number) => {
+    //
+}
+
+export let getUserInfoByUserAcctId = async (userAcctId: string): Promise<User | null> => {
+    await dao()
+    let user = await User.findOne({
+        where: {
+            userAcctId: userAcctId
+        }
+    })
+    return user;
+}
+
+
 export default async function create(formData: {
-    userid: string,
+    userAcctId: string,
     password: string,
     phoneNumber: string,
     invitationCode: string,
@@ -28,7 +43,7 @@ export default async function create(formData: {
     let rules: CheckRules[] = [
         {
             type: "non-empty",
-            name: "userid",
+            name: "userAcctId",
             label: Dot("oHQNQ4mRw", "User ID"),
         },
         {
@@ -110,7 +125,7 @@ export default async function create(formData: {
 
     let newUser = await daoRef.db.transaction(async () => {
         let newUser = await User.create({
-            userid: formData.userid + '',
+            userAcctId: formData.userAcctId + '',
             password: formData.password + '',
             phoneNumber: formData.phoneNumber + '',
             invitationCode: formData.invitationCode + '',

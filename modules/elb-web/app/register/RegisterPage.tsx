@@ -34,21 +34,34 @@ export default function RegisterPage(props: { pageProps: RegisterPageProps }) {
         let formData = new FormData(e.target as HTMLFormElement);
         try {
             setWorking(true)
-            let v = await create({
-                userid: formData.get("userid")?.toString() || '',
-                password: formData.get("password")?.toString() || '',
-                phoneNumber: formData.get("phoneNumber")?.toString() || '',
-                confirmPassword: formData.get("confirmPassword")?.toString() || '',
-                vcode: formData.get("vcode")?.toString() || '',
-                invitationCode: formData.get("invitationCode")?.toString() || '',
-            })
-            if (v.error) {
-                onVCodeFactor(Date.now())
-                setErrMsg([v.error || ''])
+            let userAcctId = formData.get("userAcctId")?.toString() || ''
+            if (userAcctId.indexOf(" ") >= 0) {
+                setErrMsg([Dot("IhRA4d5c", "User ID cannot contain space.")])
                 window.scrollTo(0, 0)
                 return;
-            };
-            location.href = '/welcome'
+            }
+            if (userAcctId.length < 2) {
+                setErrMsg([Dot("IhRA45c", "User ID must be at least 2 characters.")])
+                window.scrollTo(0, 0)
+                return;
+            }
+            if (window.confirm(Dot("flId5c", "Are you sure to register with this user ID <{0}>? It cannot be changed once you confirm the user ID.", userAcctId))) {
+                let v = await create({
+                    userAcctId: userAcctId,
+                    password: formData.get("password")?.toString() || '',
+                    phoneNumber: formData.get("phoneNumber")?.toString() || '',
+                    confirmPassword: formData.get("confirmPassword")?.toString() || '',
+                    vcode: formData.get("vcode")?.toString() || '',
+                    invitationCode: formData.get("invitationCode")?.toString() || '',
+                })
+                if (v.error) {
+                    onVCodeFactor(Date.now())
+                    setErrMsg([v.error || ''])
+                    window.scrollTo(0, 0)
+                    return;
+                };
+                location.href = '/welcome'
+            }
         } catch (e: any) {
             setErrMsg([e.message || ''])
             window.scrollTo(0, 0)
@@ -66,7 +79,7 @@ export default function RegisterPage(props: { pageProps: RegisterPageProps }) {
                 <div className='space-y-2 mt-4 max-w-md'>
                     <div className='mb-2'>
                     </div>
-                    <UserInput name='userid' />
+                    <UserInput checkDuplicate={true} name='userAcctId' />
                     <GeneralInput fn_svgJSX={
                         (clz: string) =>
                             <svg className={clz} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
