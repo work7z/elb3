@@ -25,7 +25,7 @@ export default async function RootLayout(props: {
   return (
     <Layout>
       {children}
-    <PrelintInit></PrelintInit>
+      <PrelintInit></PrelintInit>
     </Layout>
   );
 }

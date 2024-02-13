@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  // mode: "jit",
   content: [
     "node_modules/preline/dist/*.js",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",

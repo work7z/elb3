@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 let isDev = process.env.NODE_ENV == "development";
 const nextConfig = {
+  // compiler: {
+  //   styledComponents: true,
+  // },
   // i18n: {
   //   locales: ['en-US', 'zh-CN', 'zh-TW'],
   //   defaultLocale: 'zh-CN',
