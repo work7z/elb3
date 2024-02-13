@@ -23,5 +23,31 @@
       "args": ["server"],
       "internalConsoleOptions": "neverOpen"
     },
+      {
+      "name": "Next.js: debug server-side",
+      "type": "node-terminal",
+      "cwd": "${workspaceFolder}/modules/elb-web",
+      "request": "launch",
+      "command": "npm run dev"
+    },
+    {
+      "name": "Next.js: debug client-side",
+      "type": "chrome",
+      "cwd": "${workspaceFolder}/modules/elb-web",
+      "request": "launch",
+      "url": "http://localhost:3000"
+    },
+    {
+      "name": "Next.js: debug full stack",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run dev",
+      "cwd": "${workspaceFolder}/modules/elb-web",
+      "serverReadyAction": {
+        "pattern": "- Local:.+(https?://.+)",
+        "uriFormat": "%s",
+        "action": "debugWithChrome"
+      }
+    }
   ]
 }

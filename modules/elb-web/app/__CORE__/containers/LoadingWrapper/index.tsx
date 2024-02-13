@@ -12,7 +12,7 @@ export default (props: { children?: any, }) => {
                 <span className="sr-only">Loading...</span>
             </div>
         </div>
-        {props.children}
+        {/* {props.children} */}
     </div>
     return <div>{props.children}</div>
 }

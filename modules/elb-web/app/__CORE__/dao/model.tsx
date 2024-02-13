@@ -253,7 +253,7 @@ export default async (daoRef: DaoRef) => {
         },
         avatarPath: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         status: {
             type: DataTypes.STRING,
@@ -273,11 +273,11 @@ export default async (daoRef: DaoRef) => {
         },
         cityId: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         goal: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         createdAt: {
             type: DataTypes.DATE,

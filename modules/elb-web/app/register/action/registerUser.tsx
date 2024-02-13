@@ -18,6 +18,7 @@ export default async function create(formData: {
     confirmPassword: string,
     vcode: string
 }): Promise<AsyncCreateResponse<{ newUser?: User }>> {
+    console.log('formData', formData)
     let daoRef = await dao()
     let invitationCodeItem = await InvitationCode.findOne({
         where: {
@@ -85,12 +86,12 @@ export default async function create(formData: {
                 if (val.length > 0) {
                     let item = invitationCodeItem
                     if (!item) {
-                        return Dot("8s1RXhx", "Invitation code does not exist")
+                        return Dot("8s1dX", "The invitation code does not exist in system, please check if there is a case sensitive issue.")
                     }
                     if (item.expiredAt < new Date()) {
                         return Dot("8saIR-LCjyChx", "Invitation code has expired")
                     }
-                    if (item.useCount <= 0) {
+                    if (item.useCount > item.maxUseCount) {
                         return Dot("8saIt5r5nGxwwChx", "Invitation code has been used up")
                     }
                     // all good
