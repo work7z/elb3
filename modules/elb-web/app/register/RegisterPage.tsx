@@ -27,6 +27,7 @@ export default function RegisterPage(props: { pageProps: RegisterPageProps }) {
     let [errMsg, setErrMsg] = React.useState<string[]>([])
     let [vcodeFactor, onVCodeFactor] = useState(0)
     let [working, setWorking] = useState(false)
+    let [pw, setPw] = useState('')
     return <LoadingWrapper><form className='' method="POST" onSubmit={async e => {
         e.preventDefault();
         setErrMsg([])
@@ -45,21 +46,30 @@ export default function RegisterPage(props: { pageProps: RegisterPageProps }) {
                 window.scrollTo(0, 0)
                 return;
             }
-            if (window.confirm(Dot("flId5c", "Are you sure to register with this user ID <{0}>? It cannot be changed once you confirm the user ID.", userAcctId))) {
-                let v = await create({
-                    userAcctId: userAcctId,
-                    password: formData.get("password")?.toString() || '',
-                    phoneNumber: formData.get("phoneNumber")?.toString() || '',
-                    confirmPassword: formData.get("confirmPassword")?.toString() || '',
-                    vcode: formData.get("vcode")?.toString() || '',
-                    invitationCode: formData.get("invitationCode")?.toString() || '',
-                })
-                if (v.error) {
-                    onVCodeFactor(Date.now())
-                    setErrMsg([v.error || ''])
-                    window.scrollTo(0, 0)
-                    return;
-                };
+            if (true) {
+                for (let preview of [true, false]) {
+                    let v = await create({
+                        preview: preview,
+                        userAcctId: userAcctId,
+                        password: formData.get("password")?.toString() || '',
+                        phoneNumber: formData.get("phoneNumber")?.toString() || '',
+                        confirmPassword: formData.get("confirmPassword")?.toString() || '',
+                        vcode: formData.get("vcode")?.toString() || '',
+                        invitationCode: formData.get("invitationCode")?.toString() || '',
+                    })
+                    if (v.error) {
+                        onVCodeFactor(Date.now())
+                        setErrMsg([v.error || ''])
+                        window.scrollTo(0, 0)
+                        return;
+                    };
+                    if (preview) {
+                        if (!window.confirm(Dot("flId5c", "Are you sure to register with this user ID <{0}>? It cannot be changed once you confirm the user ID.", userAcctId))) {
+                            throw new Error(Dot("IuH4gxwH4", 'User cancelled'))
+                        }
+                        continue;
+                    }
+                }
                 location.href = '/welcome'
             }
         } catch (e: any) {

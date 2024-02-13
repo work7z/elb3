@@ -47,7 +47,7 @@ export class User extends Model<InferAttributes<User>, InferCreationAttributes<U
 // model for UserToken
 export class UserToken extends Model<InferAttributes<UserToken>, InferCreationAttributes<UserToken>> {
     declare id: number;
-    declare userId: string;
+    declare userId: number;
     declare token: string;
     declare createdAt: CreationOptional<Date> | null;
     declare updatedAt: CreationOptional<Date> | null;

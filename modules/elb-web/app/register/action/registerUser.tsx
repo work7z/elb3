@@ -7,11 +7,42 @@ import { AsyncCreateResponse, CheckRules, fn_verifyVCode, validateEachRuleInArr 
 import { setCookie, getCookie } from 'cookies-next';
 import { cookies } from 'next/headers';
 import _ from "lodash";
-import { InvitationCode, User } from "@/app/__CORE__/dao/model";
+import { InvitationCode, User, UserToken } from "@/app/__CORE__/dao/model";
+import { checkIfStrOnlyHasAlphanumeric } from "./utils";
+import { randomUUID } from "crypto";
 
+export type Elb3AuthBody = {
+    userAcctId: string,
+    sessionVal: string
+}
 
-export let signInWithUserId = (userId: number) => {
-    //
+export let signInWithUserId = async (userAcctId: string) => {
+    let userInfo = await getUserInfoByUserAcctId(userAcctId)
+    if (!userInfo) {
+        throw new Error('user not found')
+    }
+    if (!userInfo.id) {
+        throw new Error('user id not found')
+    }
+    let daoRef = await dao()
+    let key_sessionGroup = 'session-group';
+    let token = randomUUID();
+    // init set
+    await daoRef.redis.sAdd(key_sessionGroup, userAcctId) // add user acct into the set
+    let sessionVal = await daoRef.redis.hGet(key_sessionGroup + ':' + userAcctId, 'token')
+    if (_.isEmpty(sessionVal)) {
+        sessionVal = randomUUID().toString()
+        await daoRef.redis.hSet(key_sessionGroup + ':' + userAcctId, 'token', sessionVal) // set user acct session id
+    }
+    // add to cookie
+    let push: Elb3AuthBody = {
+        userAcctId: userInfo.userAcctId,
+        sessionVal: sessionVal + ''
+    }
+    setCookie('elb3-auth', JSON.stringify(push), {
+        maxAge: -1,
+        path: '/'
+    })
 }
 
 export let getUserInfoByUserAcctId = async (userAcctId: string): Promise<User | null> => {
@@ -26,6 +57,7 @@ export let getUserInfoByUserAcctId = async (userAcctId: string): Promise<User | 
 
 
 export default async function create(formData: {
+    preview: boolean,
     userAcctId: string,
     password: string,
     phoneNumber: string,
@@ -77,6 +109,47 @@ export default async function create(formData: {
             label: Dot("TdXddh_wK", "Telephone Number"),
         },
         {
+            type: 'check-fn',
+            name: 'userAcctId',
+            validateFn: async (val) => {
+                let user = await getUserInfoByUserAcctId(val)
+                if (user) {
+                    return Dot("8sVG1RdXhx", "User ID already exists")
+                }
+                let ok = checkIfStrOnlyHasAlphanumeric(val)
+                if (!ok) {
+                    return Dot("8sVGdXhx", "User ID should only contain letters and numbers")
+                }
+                if (val.length < 2) {
+                    return Dot("8sVG1kqXhx", "User ID should be at least 2 characters")
+                }
+                let prohibittedArr = [
+                    "admin",
+                    "administrator",
+                    "root",
+                    "superuser",
+                    "system",
+                    "sys",
+                    "systemadmin",
+                    "sysadmin",
+                    "user",
+                    "username",
+                    "useracctid",
+                    "undefined",
+                    "null",
+                    "fuck",
+                    "suck"
+                ]
+                // check if contains in prohibiteedArr
+                let lVal = _.toLower(val)
+                for (let item of prohibittedArr) {
+                    if (lVal.indexOf(_.toLower(item)) != -1) {
+                        return Dot("K2UEY4ddl", "The user ID contains invalid words, please avoid using {0}", item)
+                    }
+                }
+            }
+        },
+        {
             type: "check-fn",
             name: "password",
             validateFn: async (val) => {
@@ -123,6 +196,12 @@ export default async function create(formData: {
         return validObj
     }
 
+    if (formData.preview) {
+        return {
+            data: undefined
+        };
+    }
+
     let newUser = await daoRef.db.transaction(async () => {
         let newUser = await User.create({
             userAcctId: formData.userAcctId + '',
@@ -139,6 +218,9 @@ export default async function create(formData: {
         await invitationCodeItem?.update({
             useCount: invitationCodeItem.useCount - 1
         })
+
+        signInWithUserId(formData.userAcctId + '')
+
         return newUser
     })
     if (!newUser) {
