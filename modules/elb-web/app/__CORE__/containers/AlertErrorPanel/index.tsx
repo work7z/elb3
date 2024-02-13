@@ -23,9 +23,9 @@ export default (props: { errorMsg: string[] }) => {
                             }
                         </ul>
                     </div>
-                    <p className='text-xs mt-6'>
+                    <div className='text-xs mt-6'>
                         {Dot("ZaS8MP8cr", "Note: The verification code is refreshed, please adjust your form values and re-input the code to continue with.")}
-                    </p>
+                    </div>
                 </div>
             </div>
         </div>

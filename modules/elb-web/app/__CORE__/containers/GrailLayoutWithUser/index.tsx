@@ -32,6 +32,7 @@ export default (props: {
                     }
                 </div>
             </div >
+            <script>0</script>
         </main >
     );
 }

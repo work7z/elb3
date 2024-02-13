@@ -9,15 +9,12 @@ export default (props: {
     let { combindSearchProps } = props;
     return <GrailLayoutWithUser combindSearchProps={combindSearchProps} children={
         <div className='space-y-2 flex-1'>
-            {
-                /** write a welcome page */
-            }
             <CardPanel className='p-8 py-8'>
                 <div className=' '>
                     <div className='text-xl mb-4 font-bold'>
                         {Dot("yOdwRB", "Welcome to ELB3 Community!")}
                     </div>
-                    <p className='space-y-2 text-xs'>
+                    <div className='space-y-2 text-xs'>
                         <div>
                             {Dot("MnVg5i", "Hello, nice to meet you! It is our pleasure to invite you to this community. ")}
                         </div>
@@ -27,15 +24,15 @@ export default (props: {
                         <div>
                             {Dot("5pevqzFXX", "If you also think it is meaningful for you to join us, please continue to update your profile by clicking below button, thanks!")}
                         </div>
-                    </p>
-                    <p className='space-y-2 mt-2 space-x-2 '>
+                    </div>
+                    <div className='space-y-2 mt-2 space-x-2 '>
                         <a href='/settings' type="button" className="py-2 px-2 inline-flex items-center gap-x-2 text-xs font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                             {Dot("W3M4ivK9U", "Update Profile")}
                         </a>
                         <a href='/' type="button" className="py-2 px-2 inline-flex items-center gap-x-2 text-xs font-semibold rounded-lg border border-gray-500 text-gray-500 hover:border-gray-800 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none dark:border-gray-400 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:border-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                             {Dot("uefFV1", "Later")}
                         </a>
-                    </p>
+                    </div>
                 </div>
             </CardPanel>
         </div>
