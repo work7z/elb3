@@ -3,42 +3,10 @@
 import { getImgBase64Result } from "@/app/api/captcha/route";
 import dao from "../../__CORE__/dao";
 import { Dot } from "../../__CORE__/utils/TranslationUtils";
-import { AsyncCreateResponse, CheckRules, validateEachRuleInArr } from "../action-types";
+import { AsyncCreateResponse, CheckRules, fn_verifyVCode, validateEachRuleInArr } from "../action-types";
 import { setCookie, getCookie } from 'cookies-next';
 import { cookies } from 'next/headers';
 import _ from "lodash";
-export let fn_verifyVCode = (): any => {
-    return {
-        type: "check-fn",
-        name: "vcode",
-        validateFn: async (val) => {
-            let daoRef = await dao()
-            let vcodeLabel = getCookie('vcode', {
-                cookies,
-            })
-            if (!vcodeLabel) {
-                return Dot("4sQWoTgfr", "Verification code is expired, please refresh the page and try again")
-            }
-            let fn_cleanVCode = async () => {
-                if (vcodeLabel) {
-                    await daoRef.redis.del(vcodeLabel)
-                }
-            }
-            let vcodeValOrderIdx = await daoRef.redis.get(vcodeLabel)
-            if (_.isNil(vcodeValOrderIdx)) {
-                await fn_cleanVCode()
-                return Dot("4sdQWoTgfr", "Verification code is expired, please refresh the page and try again.")
-            }
-            let vcodeActualVal = getImgBase64Result(parseInt(vcodeValOrderIdx))
-            console.log('vcode', { vcodeActualVal, val })
-            if (_.toLower(vcodeActualVal) !== _.toLower(val)) {
-                await fn_cleanVCode()
-                return Dot("HaU4NMabv", "Verification code is incorrect, please re-input or refresh the image.")
-            }
-            return null;
-        }
-    }
-}
 
 
 export default async function create(formData: {
@@ -69,6 +37,11 @@ export default async function create(formData: {
             type: 'non-empty',
             name: 'phoneNumber',
             label: Dot("TqXdd3h_wK", "Telephone Number"),
+        },
+        {
+            type: "non-empty",
+            name: "invitationCode",
+            label: Dot("Xddh_wK", "Invitation Code"),
         },
         {
             type: "non-empty",

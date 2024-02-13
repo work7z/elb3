@@ -1,9 +1,17 @@
 import { Sequelize, DataTypes, Model, InferCreationAttributes, InferAttributes, CreationOptional } from 'sequelize';
 import { SystemConfig as SystemConfig } from "../../../../../config/types"
 import { DaoRef } from './index'
+import { isDevEnv } from '../hooks/env';
 
 export type UserRole = "webmaster" | "moderator" | "user"
 
+export class InvitationCode extends Model<InferAttributes<InvitationCode>, InferCreationAttributes<InvitationCode>> {
+    declare id: number | null;
+    declare code: string;
+    declare createdAt: CreationOptional<Date> | null;
+    declare updatedAt: CreationOptional<Date> | null;
+    declare deleteAt: CreationOptional<Date> | null;
+}
 
 export class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
     declare id: number;
@@ -147,11 +155,39 @@ export class ChatGroupHistory extends Model<InferAttributes<ChatGroupHistory>, I
 
 
 
-export default (daoRef: DaoRef) => {
+export default async (daoRef: DaoRef) => {
     let sequelize = daoRef.db
     // options
     sequelize.sync({ alter: true })
     // init model
+    InvitationCode.init({
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
+            autoIncrementIdentity: true,
+        },
+        code: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        deleteAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        }
+    }, {
+        sequelize,
+        modelName: "InvitationCode",
+        tableName: "invitation_code"
+    })
     User.init({
         id: {
             type: DataTypes.INTEGER,
@@ -186,6 +222,10 @@ export default (daoRef: DaoRef) => {
         role: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        invitationCode: {
+            type: DataTypes.STRING,
+            allowNull: true
         },
         avatarPath: {
             type: DataTypes.STRING,
@@ -493,4 +533,12 @@ export default (daoRef: DaoRef) => {
         modelName: "Audit",
         tableName: "audit"
     })
+
+    // setup dev env
+    if (isDevEnv()) {
+        let a = await InvitationCode.create({
+            code: "test100",
+        },)
+        console.log('test invitation code', a.toJSON())
+    }
 }
