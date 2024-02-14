@@ -19,8 +19,6 @@ import PrelintInit from './__CORE__/script/preline-init'
 export default async function RootLayout(props: {
   children,
 }) {
-  // let a=  await dbconn()
-
   let { children } = props;
   return (
     <Layout>

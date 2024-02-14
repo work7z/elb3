@@ -1,21 +1,25 @@
 'use server'
 
-import { getImgBase64Result } from "@/app/api/captcha/route";
+import { getImgBase64Result, } from "@/app/api/captcha/route";
 import dao from "../../__CORE__/dao";
 import { Dot } from "../../__CORE__/utils/TranslationUtils";
 import { AsyncCreateResponse, CheckRules, fn_verifyVCode, validateEachRuleInArr } from "../action-types";
 import { setCookie, getCookie, getCookies } from 'cookies-next';
 import { cookies } from 'next/headers';
 import _ from "lodash";
-import { InvitationCode, User, UserToken } from "@/app/__CORE__/dao/model";
+import { InvitationCode, User, UserRole, UserToken } from "@/app/__CORE__/dao/model";
 import { checkIfStrOnlyHasAlphanumeric } from "./utils";
 import { randomUUID } from "crypto";
 import { key_sessionGroup } from "../redis-types";
+import path from "path";
+import { getSignatureFromStr } from "./auth";
+
 
 export type Elb3AuthBody = {
     userAcctId: string,
-    sessionVal: string
+    userRole: UserRole
 }
+
 
 export let signInWithUserId = async (userAcctId: string) => {
     let userInfo = await getUserInfoByUserAcctId(userAcctId)
@@ -28,20 +32,20 @@ export let signInWithUserId = async (userAcctId: string) => {
     let daoRef = await dao()
     // init set
     await daoRef.redis.sAdd(key_sessionGroup, userAcctId) // add user acct into the set
-    let sessionVal = await daoRef.redis.hGet(key_sessionGroup + ':' + userAcctId, 'token')
-    if (_.isEmpty(sessionVal)) {
-        sessionVal = randomUUID().toString()
-        await daoRef.redis.hSet(key_sessionGroup + ':' + userAcctId, 'token', sessionVal) // set user acct session id
-    }
+    // let sessionVal = await daoRef.redis.hGet(key_sessionGroup + ':' + userAcctId, 'token')
+    // if (_.isEmpty(sessionVal)) {
+    //     sessionVal = randomUUID().toString()
+    //     await daoRef.redis.hSet(key_sessionGroup + ':' + userAcctId, 'token', sessionVal) // set user acct session id
+    // }
     // add to cookie
     let push: Elb3AuthBody = {
         userAcctId: userInfo.userAcctId,
-        sessionVal: sessionVal + ''
+        userRole: userInfo.role
     }
-    setCookie('elb3-auth', encodeURIComponent(JSON.stringify(push)), {
-        cookies
-    })
-    setCookie('elb3-hello', 'world', {
+    let elb3AuthBody = btoa(JSON.stringify(push))
+    let expiredDate = new Date().getTime() + 1000 * 60 * 60 * 24 * 30 * 12 * 30 // by default, 30 years expired
+    let signature = getSignatureFromStr(elb3AuthBody)
+    setCookie('elb3-auth', expiredDate + '.' + elb3AuthBody + '.' + (signature), {
         cookies
     })
 }

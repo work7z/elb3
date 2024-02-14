@@ -1,5 +1,4 @@
 import { Sequelize, DataTypes, Model, InferCreationAttributes, InferAttributes, CreationOptional } from 'sequelize';
-import { SystemConfig as SystemConfig } from "../../../../../config/types"
 import { DaoRef } from './index'
 import { isDevEnv } from '../hooks/env';
 

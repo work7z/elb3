@@ -17,7 +17,9 @@ export default () => {
                 })
             }
             <span className="">{Dot("ky6JphiKk", "{0} Online Users", 3012)}</span>
+            {/* <span>{Dot("J58z6ReKh", "{0} Registered Users", 102)}</span> */}
             <span>{Dot("gmK3pKyRI", "{0} Peak Online Count", 1293)}</span>
+            <span>用户数1003</span>
         </div>
         <div className="text-xs text-slate-500 font-serif  dark:text-slate-400">
             ELB3.com is derived from <i>English Learning Base</i> group that was founded on August 1st, 2021.  It is technically built with the FOSS project <a href="https://github.com/work7z/elb3" rel='nofollow' target='_blank' className="text-slate-600">ELB3</a> which is licensed under AGPL v3.0.

@@ -1,4 +1,4 @@
-import { Sequelize, DataTypes, Model } from 'sequelize';
+import { Sequelize, } from 'sequelize';
 import { SystemConfig as SystemConfig } from "../../../../../config/types"
 import fs from 'fs'
 import path from 'path'
@@ -37,10 +37,6 @@ let lock = false
 let refMap: { [key: string]: DaoRef } = {}
 let loadDAO = async (): Promise<DaoRef> => {
     console.log('initializing DAO Ref...')
-    // while (lock) {
-    //     console.log('locking')
-    //     await new Promise((resolve) => setTimeout(resolve, 100))
-    // }
     lock = true;
     try {
         let envFlag: SystemFlag = crtRef.flag
@@ -89,5 +85,4 @@ let loadDAO = async (): Promise<DaoRef> => {
         throw e;
     }
 }
-loadDAO() // initial launch
 export default loadDAO

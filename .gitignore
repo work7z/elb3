@@ -1,4 +1,6 @@
 var/log/
+private.key
+*.key
 prod
 prod/**/*
 prod/*

@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 let isDev = process.env.NODE_ENV == "development";
 const nextConfig = {
+  experimental: {
+    serverComponentsExternalPackages: ["sequelize", "sequelize-typescript"],
+  },
   // compiler: {
   //   styledComponents: true,
   // },
