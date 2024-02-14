@@ -4,7 +4,7 @@
   "description": "This project, elb3, powers the online forum \"English Learning Base III\". It is a small forum for English language master and amateur to conveniently communicate with each other.",
   "main": "index.js",
   "scripts": {
-    "fe-sync": "./pipeline/sync-to-laf.sh",
+    "fe-sync": "sh ./pipeline/sync-to-laf.sh",
     "fe-web": "(cd ./modules/elb-web && npm run dev)",
     "fe-scan": "(cd ./dev/scripts/scan/ && node ./scan-entry.js)",
     "fe-build": "(cd ./modules/elb-web && npm run build)",

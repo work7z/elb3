@@ -44,7 +44,7 @@ export default (p: AuthInfoProps) => {
                     setErrMsg([e.error])
                 } else {
                     setResendMode(false)
-                    // location.href = '/welcome'
+                    location.href = '/welcome'
                 }
             } catch (e: any) {
                 console.log('err', e)
@@ -100,6 +100,7 @@ export default (p: AuthInfoProps) => {
                     })
                     if (e && e.error) {
                         setErrMsg([e.error])
+                        onVCodeFactor(Date.now())
                     } else {
                         setResendMode(false)
                         onFinalPhoneNumber(phoneNumber)
