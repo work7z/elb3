@@ -1,4 +1,6 @@
-import { Sequelize, DataTypes, Model, InferCreationAttributes, InferAttributes, CreationOptional } from 'sequelize';
+import {
+    Sequelize, DataTypes, Model, InferCreationAttributes, InferAttributes, CreationOptional
+} from 'sequelize';
 import { DaoRef } from './index'
 import { isDevEnv } from '../hooks/env';
 
@@ -213,6 +215,7 @@ export default async (daoRef: DaoRef) => {
         }
     }, {
         sequelize,
+        paranoid: true,
         modelName: "InvitationCode",
         tableName: "invitation_code"
     })
@@ -310,6 +313,7 @@ export default async (daoRef: DaoRef) => {
         }
     }, {
         sequelize,
+        paranoid: true,
         modelName: "User",
         tableName: "user"
     })
@@ -341,6 +345,7 @@ export default async (daoRef: DaoRef) => {
         }
     }, {
         sequelize,
+        paranoid: true,
         modelName: "UserToken",
         tableName: "user_token"
     })
@@ -364,6 +369,7 @@ export default async (daoRef: DaoRef) => {
         }
     }, {
         sequelize,
+        paranoid: true,
         modelName: "UserLoginLog",
         tableName: "user_login_log"
     })
@@ -395,6 +401,7 @@ export default async (daoRef: DaoRef) => {
         }
     }, {
         sequelize,
+        paranoid: true,
         modelName: "Block",
         tableName: "block"
     })
@@ -446,6 +453,7 @@ export default async (daoRef: DaoRef) => {
         }
     }, {
         sequelize,
+        paranoid: true,
         modelName: "Topic",
         tableName: "topic"
     })
@@ -489,6 +497,7 @@ export default async (daoRef: DaoRef) => {
         }
     }, {
         sequelize,
+        paranoid: true,
         modelName: "TopicContent",
         tableName: "topic_content"
     })
@@ -536,6 +545,7 @@ export default async (daoRef: DaoRef) => {
         }
     }, {
         sequelize,
+        paranoid: true,
         modelName: "TopicComment",
         tableName: "topic_comment"
     })
@@ -571,6 +581,7 @@ export default async (daoRef: DaoRef) => {
         }
     }, {
         sequelize,
+        paranoid: true,
         modelName: "Audit",
         tableName: "audit"
     })
@@ -611,6 +622,7 @@ export default async (daoRef: DaoRef) => {
         }
     }, {
         sequelize,
+        paranoid: true,
         modelName: "SMSCodeRecord",
         tableName: "sms_code_record"
     })

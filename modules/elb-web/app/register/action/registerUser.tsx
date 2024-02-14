@@ -69,7 +69,7 @@ export type ValOrError<T> = {
 }
 
 export let verifySMSCode = async (formData: {
-    phoneNumber: string, msgCode: string
+    phoneNumber: string, msgCode: string, type: "activate-account" | "reset-password"
 }): Promise<ValOrError<{}>> => {
     let authInfo = await handleAuthInfo()
     if (!authInfo.signedIn) {
@@ -83,25 +83,43 @@ export let verifySMSCode = async (formData: {
     let item = await SMSCodeRecord.findOne({
         where: {
             userAcctId: userAcctId,
-            phoneNumber: formData.phoneNumber,
             code: formData.msgCode
         }
     })
+    let key = 'smstried' + userAcctId
+    let sms_code_tried_times = await daoRef.redis.get(key)
+    if (sms_code_tried_times == null || sms_code_tried_times == '') {
+        sms_code_tried_times = '1'
+    }
+    await daoRef.redis.setEx(key, 60 * 60 * 24, (parseInt(sms_code_tried_times) + 1) + '')
+    let max = 200
     if (!item) {
         return {
-            error: Dot("RYlJHHwg3", "SMS code is not correct")
+            error: Dot("RYlJHHwg3", "SMS code is not correct. ") + `[${sms_code_tried_times}/${max}]`
         }
     }
-    let sms_code_tried_times = await daoRef.redis.get('sms_code_tried_times' + userAcctId)
-    if (sms_code_tried_times == null || sms_code_tried_times == '') {
-        sms_code_tried_times = '0'
-    }
-    if (parseInt(sms_code_tried_times) > 200) {
+    if (parseInt(sms_code_tried_times) > max) {
         return {
             error: Dot("D_9sNBiZj", "You tried too many times, please try again later.")
         }
     }
-    await daoRef.redis.setEx('sms_code_tried_times' + userAcctId, 60 * 60 * 24, (parseInt(sms_code_tried_times) + 1) + '')
+    await daoRef.db.transaction(async () => {
+        if (item) {
+            switch (formData.type) {
+                case 'activate-account':
+                    if (authInfo.user) {
+                        await authInfo.user.update({
+                            status: 'normal'
+                        })
+                    }
+                    break;
+                default:
+                    throw new Error('unknown logic')
+            }
+            await item.destroy()
+        }
+    })
+
     return {}
 }
 

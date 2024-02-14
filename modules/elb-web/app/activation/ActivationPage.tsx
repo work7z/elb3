@@ -17,6 +17,7 @@ export default (p: AuthInfoProps) => {
     let [vcodeFactor, onVCodeFactor] = useState(0)
     let dftPhoneNumber = p.authInfo.user?.phoneNumber || ''
     let [phoneNumber, onPhoneNumber] = useState<string>(dftPhoneNumber)
+    let [final_phoneNumber, onFinalPhoneNumber] = useState<string>(dftPhoneNumber)
     let [working, onWorking] = useState(false)
     let [resendMode, setResendMode] = useState(false)
 
@@ -31,17 +32,19 @@ export default (p: AuthInfoProps) => {
             let formData = new FormData(e.target as HTMLFormElement);
             setErrMsg([])
             try {
-                let phoneNumber = formData.get("phoneNumber")?.toString() || ''
+                let phoneNumber = final_phoneNumber // formData.get("phoneNumber")?.toString() || ''
                 let msgCode = formData.get("msgCode")?.toString() || '';
                 onWorking(true)
                 let e = await verifySMSCode({
                     phoneNumber,
-                    msgCode
+                    msgCode,
+                    type: 'activate-account'
                 })
                 if (e && e.error) {
                     setErrMsg([e.error])
                 } else {
                     setResendMode(false)
+                    // location.href = '/welcome'
                 }
             } catch (e: any) {
                 console.log('err', e)
@@ -49,9 +52,8 @@ export default (p: AuthInfoProps) => {
             } finally {
                 onWorking(false)
             }
-
         }}>
-            <AlertErrorPanel errorMsg={errMsg}></AlertErrorPanel>
+            <AlertErrorPanel noVCode errorMsg={errMsg}></AlertErrorPanel>
             <PhoneInput disabled={true} onChange={e => {
                 onPhoneNumber(e)
             }} name={"phoneNumber"} defaultValue={phoneNumber}></PhoneInput>
@@ -65,7 +67,7 @@ export default (p: AuthInfoProps) => {
                 )
             } name='msgCode' ></GeneralInput>
             <div className='space-y-2 mt-2 space-x-2 '>
-                <button disabled={working} type="button" className="py-2 px-2 inline-flex items-center gap-x-2 text-xs font-semibold rounded-lg border border-transparent bg-solarized-blue text-white hover:bg-solarized-blueLight   disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                <button disabled={working} type="submit" className="py-2 px-2 inline-flex items-center gap-x-2 text-xs font-semibold rounded-lg border border-transparent bg-solarized-blue text-white hover:bg-solarized-blueLight   disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                     {Dot("PbNcddi", "Activate Account")}
                 </button>
                 <button type="button" onClick={() => {
@@ -100,6 +102,7 @@ export default (p: AuthInfoProps) => {
                         setErrMsg([e.error])
                     } else {
                         setResendMode(false)
+                        onFinalPhoneNumber(phoneNumber)
                     }
                 } catch (e: any) {
                     console.log('err', e)

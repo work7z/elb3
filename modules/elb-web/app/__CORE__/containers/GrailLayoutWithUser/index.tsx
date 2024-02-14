@@ -34,7 +34,7 @@ export default async (props: {
             className="space-y-2"
         >
             {
-                props.rightJSX ? props.rightJSX({ authInfo }) : <CardPanel><UserPanel authInfo={authInfo} {...props.combindSearchProps}></UserPanel></CardPanel>
+                props.rightJSX ? props.rightJSX({ authInfo }) : <UserPanel authInfo={authInfo} {...props.combindSearchProps}></UserPanel>
             }
         </div>
     </div >
