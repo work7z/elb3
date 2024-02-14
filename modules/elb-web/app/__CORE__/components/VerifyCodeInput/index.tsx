@@ -8,7 +8,7 @@ import path from 'path';
 import { readFileSync } from 'fs';
 
 
-export default (props: { codeImgBase64: string, vcodeFactor: number }) => {
+export default (props: { codeImgBase64?: string, vcodeFactor: number }) => {
     let [ts, onTS] = React.useState(Date.now())
     return (
         <div className="">

@@ -15,8 +15,11 @@ export default (p: AuthInfoProps) => {
     let [errMsg, setErrMsg] = React.useState<string[]>([])
     let [vcodeFactor, onVCodeFactor] = useState(0)
     let [phoneNumber, onPhoneNumber] = useState<string>(p.authInfo.user?.phoneNumber || '')
-    let inner = (
 
+    let [resendMode, setResendMode] = useState(false)
+
+
+    let inner = (
         <form className="space-y-2">
             <AlertErrorPanel errorMsg={errMsg}></AlertErrorPanel>
             <PhoneInput onChange={e => {
@@ -34,13 +37,34 @@ export default (p: AuthInfoProps) => {
                 <button type="button" className="py-2 px-2 inline-flex items-center gap-x-2 text-xs font-semibold rounded-lg border border-transparent bg-solarized-blueLight text-white hover:bg-solarized-blue   disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                     {Dot("PbNcddi", "Activate Account")}
                 </button>
-                <button type="button" className="py-2 px-2 inline-flex items-center gap-x-2 text-xs font-semibold rounded-lg border border-gray-500 text-gray-500 hover:border-gray-800 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none dark:border-gray-400 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:border-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                <button type="button" onClick={() => {
+                    setResendMode(true)
+                }} className="py-2 px-2 inline-flex items-center gap-x-2 text-xs font-semibold rounded-lg border border-gray-500 text-gray-500 hover:border-gray-800 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none dark:border-gray-400 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:border-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                     {Dot("uedfFV1", "Resend Code")}
                 </button>
             </div>
         </form>
-
     )
+    if (resendMode) {
+        inner = <div>
+            <form className="space-y-2" action={e => {
+                //
+            }}>
+                <VerifyCodeInput vcodeFactor={vcodeFactor}></VerifyCodeInput>
+                <div className='space-y-2 mt-2 space-x-2 '>
+                    <button type="button" className="py-2 px-2 inline-flex items-center gap-x-2 text-xs font-semibold rounded-lg border border-transparent bg-solarized-greenLight text-white hover:bg-solarized-green   disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                        {Dot("JpbHj8RRw", "Resend Code")}
+                    </button>
+                    <button type="button" onClick={() => {
+                        setResendMode(false)
+                    }} className="py-2 px-2 inline-flex items-center gap-x-2 text-xs font-semibold rounded-lg border border-gray-500 text-gray-500 hover:border-gray-800 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none dark:border-gray-400 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:border-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                        {Dot("ffblLVX-F", "Cancel")}
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    }
     return <div className='space-y-2 flex-1'><LoadingWrapper>
         <CardPanel className='p-8 py-8'>
             <div className=' '>
