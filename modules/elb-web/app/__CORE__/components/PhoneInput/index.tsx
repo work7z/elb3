@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { Dot } from '../../utils/TranslationUtils';
-export default (props: { name: string }) => {
+export default (props: { name: string, defaultValue?: string, onChange?: (e: string) => any }) => {
     let [value, setValue] = React.useState('')
     useEffect(() => {
-        setValue(localStorage.getItem(props.name) || '')
+        setValue(props.defaultValue || localStorage.getItem(props.name) || '')
     }, [])
 
     return (
@@ -13,6 +13,7 @@ export default (props: { name: string }) => {
                 <input
                     value={value} onChange={e => {
                         setValue(e.target.value)
+                        props.onChange && props.onChange(e.target.value)
                         localStorage.setItem(props.name, e.target.value)
                     }}
                     name={props.name} type="number" id="hs-leading-icon" className="py-3 px-4 ps-11 block w-full border-gray-200 border-[1px] shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder={Dot("VzKInd", "Enter telephone number")} />
