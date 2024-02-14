@@ -31,10 +31,15 @@ export let fn_get_system_info_from_redis = async (): Promise<SystemInfoBody> => 
     let daoRef = await dao()
     let userCount = await daoRef.redis.hGet(key_systemInfoGroup, 'userCount')
     let peakOnlineCount = await daoRef.redis.hGet(key_systemInfoGroup, 'peakOnlineCount')
-    let userOnlineCount = '1' //await daoRef.redis.hGet(key_systemInfoGroup, 'userOnlineCount')
+    let now = Date.now()
+    let prevTimePoint = now - (60 * 60 * 1000 * 3) // last 3 hours
+    let userOnlineCount = await daoRef.redis.zCount(key_active_user, prevTimePoint,now) 
+    if(parseInt(peakOnlineCount||'1') < userOnlineCount){
+        await daoRef.redis.hSet(key_systemInfoGroup, 'peakOnlineCount', userOnlineCount)
+    }
     return {
         userCount: parseInt(userCount + ''),
-        userOnlineCount: parseInt(userOnlineCount || '1'),
+        userOnlineCount: userOnlineCount,
         peakOnlineCount: parseInt(peakOnlineCount || '1')
     }
 }
