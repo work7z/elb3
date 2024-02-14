@@ -68,9 +68,47 @@ export type ValOrError<T> = {
     value?: T
 }
 
+export let verifySMSCode = async (formData: {
+    phoneNumber: string, msgCode: string
+}): Promise<ValOrError<{}>> => {
+    let authInfo = await handleAuthInfo()
+    if (!authInfo.signedIn) {
+        throw new Error('not signed in')
+    }
+    let userAcctId = authInfo.user?.userAcctId
+    if (!userAcctId) {
+        throw new Error('user acct id not found')
+    }
+    let daoRef = await dao()
+    let item = await SMSCodeRecord.findOne({
+        where: {
+            userAcctId: userAcctId,
+            phoneNumber: formData.phoneNumber,
+            code: formData.msgCode
+        }
+    })
+    if (!item) {
+        return {
+            error: Dot("RYlJHHwg3", "SMS code is not correct")
+        }
+    }
+    let sms_code_tried_times = await daoRef.redis.get('sms_code_tried_times' + userAcctId)
+    if (sms_code_tried_times == null || sms_code_tried_times == '') {
+        sms_code_tried_times = '0'
+    }
+    if (parseInt(sms_code_tried_times) > 200) {
+        return {
+            error: Dot("D_9sNBiZj", "You tried too many times, please try again later.")
+        }
+    }
+    await daoRef.redis.setEx('sms_code_tried_times' + userAcctId, 60 * 60 * 24, (parseInt(sms_code_tried_times) + 1) + '')
+    return {}
+}
+
 export let sendSMSCodeWithVerificationCode = async (formData: {
     phoneNumber: string, vcode: string
 }): Promise<ValOrError<{}>> => {
+    await dao()
     let authInfo = await handleAuthInfo()
     if (!authInfo.signedIn) {
         throw new Error('not signed in')

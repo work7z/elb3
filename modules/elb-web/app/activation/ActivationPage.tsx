@@ -10,7 +10,7 @@ import { AuthInfoProps, CombindSearchProps } from "../page";
 import AlertErrorPanel from "../__CORE__/containers/AlertErrorPanel";
 import VerifyCodeInput from "../__CORE__/components/VerifyCodeInput";
 import GeneralInput from "../__CORE__/components/GeneralInput";
-import { sendSMSCodeWithVerificationCode } from "../register/action/registerUser";
+import { sendSMSCodeWithVerificationCode, verifySMSCode } from "../register/action/registerUser";
 
 export default (p: AuthInfoProps) => {
     let [errMsg, setErrMsg] = React.useState<string[]>([])
@@ -27,15 +27,29 @@ export default (p: AuthInfoProps) => {
 
     let inner = (
         <form className="space-y-2" onSubmit={async e => {
+            e.preventDefault();
+            let formData = new FormData(e.target as HTMLFormElement);
+            setErrMsg([])
             try {
-                setErrMsg([])
+                let phoneNumber = formData.get("phoneNumber")?.toString() || ''
+                let msgCode = formData.get("msgCode")?.toString() || '';
                 onWorking(true)
+                let e = await verifySMSCode({
+                    phoneNumber,
+                    msgCode
+                })
+                if (e && e.error) {
+                    setErrMsg([e.error])
+                } else {
+                    setResendMode(false)
+                }
             } catch (e: any) {
                 console.log('err', e)
                 setErrMsg([e.message])
             } finally {
                 onWorking(false)
             }
+
         }}>
             <AlertErrorPanel errorMsg={errMsg}></AlertErrorPanel>
             <PhoneInput disabled={true} onChange={e => {
@@ -59,6 +73,11 @@ export default (p: AuthInfoProps) => {
                 }} className="py-2 px-2 inline-flex items-center gap-x-2 text-xs font-semibold rounded-lg border border-gray-500 text-gray-500 hover:border-gray-800 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none dark:border-gray-400 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:border-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                     {Dot("uedfFV1", "Resend Code")}
                 </button>
+                <button type="button" onClick={() => {
+                    setResendMode(true)
+                }} className="py-2 px-2 inline-flex items-center gap-x-2 text-xs font-semibold rounded-lg border border-gray-500 text-gray-500 hover:border-gray-800 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none dark:border-gray-400 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:border-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                    {Dot("uedsV1", "Change PhoneNumber")}
+                </button>
             </div>
         </form>
     )
@@ -79,6 +98,8 @@ export default (p: AuthInfoProps) => {
                     })
                     if (e && e.error) {
                         setErrMsg([e.error])
+                    } else {
+                        setResendMode(false)
                     }
                 } catch (e: any) {
                     console.log('err', e)
@@ -116,7 +137,7 @@ export default (p: AuthInfoProps) => {
                         {resendMode ?
                             Dot("3PwVdYKz7", "To resend a SMS code to your phone {0}, please input below verification code firstly. Note that you can also adjust your telephone number here, and please feel free to let us know if any concern, thanks!", phoneNumber)
                             :
-                            Dot("9gWsZxYEN", "We have sent an activation code to your phone, please check it and input below. If you did not receive any message on your phone, you can click the resend button to get a new one.")}
+                            Dot("9gWsZdEN", "We have sent an activation code to your phone {0}, please check it and input it as below. If you did not receive any message on your phone, you can click the resend button to get a new one.", phoneNumber)}
                     </div>
 
                 </div>

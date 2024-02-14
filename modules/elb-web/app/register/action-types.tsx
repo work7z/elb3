@@ -88,6 +88,7 @@ export let fn_verifyVCode = (): any => {
                 await fn_cleanVCode()
                 return Dot("HaU4NMabv", "Verification code is incorrect, please re-input or refresh the image.")
             }
+            await daoRef.redis.del(vcodeLabel)
             return null;
         }
     }
