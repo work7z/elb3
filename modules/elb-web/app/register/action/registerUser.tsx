@@ -7,13 +7,14 @@ import { AsyncCreateResponse, CheckRules, fn_verifyVCode, validateEachRuleInArr 
 import { setCookie, getCookie, getCookies } from 'cookies-next';
 import { cookies } from 'next/headers';
 import _ from "lodash";
-import { InvitationCode, User, UserRole, UserToken } from "@/app/__CORE__/dao/model";
+import { InvitationCode, SMSCodeRecord, User, UserRole, UserToken } from "@/app/__CORE__/dao/model";
 import { checkIfStrOnlyHasAlphanumeric } from "./utils";
 import { randomUUID } from "crypto";
 import { key_sessionGroup } from "../redis-types";
 import path from "path";
 import { getSignatureFromStr } from "./auth";
 import { fn_refresh_system_info_from_redis } from "../user-types";
+import moment from "moment";
 
 
 export type Elb3AuthBody = {
@@ -61,6 +62,37 @@ export let getUserInfoByUserAcctId = async (userAcctId: string): Promise<User | 
     return user;
 }
 
+export type ValOrError<T> = {
+    error?: string,
+    value?: T
+}
+export let sendSMSCodeForUser = async (userAcctId: string, phoneNumber: string): Promise<ValOrError<{}>> => {
+    phoneNumber = _.trim(phoneNumber)
+    let daoRef = await dao()
+    let sms_code = _.random(100000, 999999) + ''
+    let momentDate = moment().format("YYYY-MM-DD");
+    let ctn = await SMSCodeRecord.count({
+        where: {
+            userAcctId: userAcctId,
+            phoneNumber: phoneNumber,
+            dateValue: momentDate
+        }
+    })
+    if (ctn > 8) {
+        return {
+            error: Dot("-dxG-aEe4w", "The maximum number of SMS verification codes sent today has been reached.")
+        }
+    }
+    await SMSCodeRecord.create({
+        id: 0,
+        userAcctId: userAcctId,
+        phoneNumber: phoneNumber,
+        code: sms_code,
+        dateValue: momentDate
+    })
+    // TODO: send sms code
+    return {}
+}
 
 export default async function create(formData: {
     preview: boolean,
@@ -227,6 +259,8 @@ export default async function create(formData: {
         await signInWithUserId(formData.userAcctId + '')
 
         await fn_refresh_system_info_from_redis()
+
+        await sendSMSCodeForUser(formData.userAcctId, formData.phoneNumber)
 
         return newUser
     })

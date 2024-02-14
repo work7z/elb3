@@ -22,7 +22,7 @@ export default (p: AuthInfoProps) => {
             <PhoneInput onChange={e => {
                 onPhoneNumber(e)
             }} name={"phoneNumber"} defaultValue={phoneNumber}></PhoneInput>
-            <GeneralInput label={Dot("9YPgsPid2M", "SMS Code")} ph={Dot("Md1JbKBRx", "Enter six-digits SMS Code")} fn_svgJSX={
+            <GeneralInput type="number" max={6} label={Dot("9YPgsPid2M", "SMS Code")} ph={Dot("Md1JbKBRx", "Enter six-digits SMS Code")} fn_svgJSX={
                 (clz: string) =>
                 (
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className={clz}>

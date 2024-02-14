@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import { Dot } from '../../utils/TranslationUtils';
-export default (props: { name: string, label: string, type?: string, ph?: string, fn_svgJSX: (clz: string) => any }) => {
+export default (props: { name: string, label: string, max?: number, type?: string, ph?: string, fn_svgJSX: (clz: string) => any }) => {
     let [value, setValue] = React.useState('')
     useEffect(() => {
         setValue(localStorage.getItem(props.name) || '')
@@ -12,7 +12,7 @@ export default (props: { name: string, label: string, type?: string, ph?: string
         <div className=''>
             <label htmlFor="hs-leading-icon" className="block text-sm font-medium mb-2 dark:text-white">{props.label}</label>
             <div className="relative">
-                <input value={value} onChange={e => {
+                <input value={value} max={props.max} onChange={e => {
                     setValue(e.target.value)
                     localStorage.setItem(props.name, e.target.value)
                 }} name={props.name} type={props.type || "text"} id="hs-leading-icon" className="py-3 px-4 ps-11 block w-full border-gray-200 border-[1px]  rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder={props.ph || Dot("bM4CpCd5m", "Enter {0}", props.label)} />

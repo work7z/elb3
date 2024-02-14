@@ -4,6 +4,17 @@ import { isDevEnv } from '../hooks/env';
 
 export type UserRole = "webmaster" | "moderator" | "user"
 
+export class SMSCodeRecord extends Model<InferAttributes<SMSCodeRecord>, InferCreationAttributes<SMSCodeRecord>> {
+    declare id: number;
+    declare userAcctId: string;
+    declare phoneNumber: string;
+    declare code: string;
+    declare dateValue: string;
+    declare createdAt: CreationOptional<Date> | null;
+    declare updatedAt: CreationOptional<Date> | null;
+    declare deleteAt: CreationOptional<Date> | null;
+}
+
 export class InvitationCode extends Model<InferAttributes<InvitationCode>, InferCreationAttributes<InvitationCode>> {
     declare id: number | null;
     declare code: string;
@@ -562,6 +573,46 @@ export default async (daoRef: DaoRef) => {
         sequelize,
         modelName: "Audit",
         tableName: "audit"
+    })
+
+    SMSCodeRecord.init({
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        userAcctId: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        phoneNumber: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        code: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        dateValue: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        deleteAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        }
+    }, {
+        sequelize,
+        modelName: "SMSCodeRecord",
+        tableName: "sms_code_record"
     })
 
     // setup dev env
