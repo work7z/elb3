@@ -21,7 +21,7 @@ let keyFile = path.join(dir, 'private.key')
 let privateKey = fs.readFileSync(keyFile, 'utf-8')
 
 export let getSignatureFromStr = (str: string) => {
-    return getMD5(str + privateKey) + '.v1' // signature plus version
+    return getMD5(str + privateKey) + 'v1' // signature plus version
 }
 
 

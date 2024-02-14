@@ -38,6 +38,5 @@ export default (props: {
                     </div>
                 </CardPanel>
             </div>
-    }>
-    </GrailLayoutWithUser>
+    }></GrailLayoutWithUser>
 }

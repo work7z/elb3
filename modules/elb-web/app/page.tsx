@@ -25,7 +25,6 @@ export type CombindSearchProps = PageProps<{}, SearchParamType>
 
 export default async function Home(props: { searchParams: SearchParamType }) {
     let { searchParams } = props
-    let authInfo = await getAuthInfo()
     let combindSearchProps: CombindSearchProps = {
         params: {},
         searchParams,

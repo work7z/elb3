@@ -24,11 +24,11 @@ export default function Page(props: LoginPageProps) {
     return <GrailLayoutWithUser rightJSX={
         (p: AuthInfoProps) =>
             <VisiterGuideInfoPanel></VisiterGuideInfoPanel>
-    } combindSearchProps={combindSearchProps}>
+    } combindSearchProps={combindSearchProps} jsx_main={(p: AuthInfoProps) => (
         <div className='space-y-2 flex-1'>
             <LoginPage loginPageProps={props}></LoginPage>
         </div>
-    </GrailLayoutWithUser>
+    )}></GrailLayoutWithUser>
 }
 
 

@@ -67,11 +67,13 @@ export default function Page(props: RegisterPageProps) {
                 }></CardPanel>,
 
             ]
-    } combindSearchProps={combindSearchProps}>
-        <div className='space-y-2 flex-1'>
-            <RegisterPage pageProps={props}></RegisterPage>
-        </div>
-    </GrailLayoutWithUser>
+    } combindSearchProps={combindSearchProps} jsx_main={(p: AuthInfoProps) => {
+        return (
+            <div className='space-y-2 flex-1'>
+                <RegisterPage pageProps={props}></RegisterPage>
+            </div>
+        )
+    }}></GrailLayoutWithUser>
 }
 
 
