@@ -7,6 +7,7 @@ import { AuthInfoProps, CombindSearchProps } from "../../../page"
 import MoonSunControl from "./MoonSunControl"
 import _ from 'lodash'
 import VisiterGuideInfoPanel from "../VisiterGuideInfoPanel"
+import { fn_get_user_avatar } from "@/app/register/user-types"
 
 
 let EachInfoCell = (props: { href?: string, className?: string, name: string, content: any }) => {
@@ -20,18 +21,18 @@ export default (props: CombindSearchProps & AuthInfoProps) => {
     let notificationCtn = 0;
     let borderStyleClz = "  border-gray-200 dark:border-solarized-base02Light1  "
     let eachInfoCellClz = borderStyleClz + " border-r-[1px]"
-    let joinedDate = props.authInfo.currentUser?.createdAt
+    let joinedDate = props.authInfo.user?.createdAt
     let diffDays = Math.max(joinedDate ? Math.floor((new Date().getTime() - new Date(joinedDate).getTime()) / (1000 * 60 * 60 * 24)) : 0, 1)
     if (!props.authInfo.signedIn) {
         return <VisiterGuideInfoPanel ></VisiterGuideInfoPanel>
     }
     return <div className="p-2">
         <div className="flex ">
-            <img src={"/avatar/" + _.random(1, 100) + ".png"} className="w-12 h-12 rounded bg-zinc-100  text-xl flex justify-center items-center text-gray font-bold ">
+            <img src={fn_get_user_avatar(props)} className="w-12 h-12 rounded bg-zinc-100  text-xl flex justify-center items-center text-gray font-bold ">
             </img>
             <div className="flex-shrink flex-1 ml-2">
                 <div>
-                    <a href="/" className="text-gray-800 dark:text-slate-300 hover:underline font-bold">{props.authInfo.currentUser?.userAcctId}</a>
+                    <a href="/" className="text-gray-800 dark:text-slate-300 hover:underline font-bold">{props.authInfo.user?.userAcctId}</a>
                 </div>
                 <div className="text-sm text-gray-600 dark:text-slate-300 mt-[-1px]">{Dot("hxCMxpW6Sq", "Joined {0} days ago", diffDays)}</div>
             </div>
@@ -39,13 +40,13 @@ export default (props: CombindSearchProps & AuthInfoProps) => {
         <hr className={"mt-2 " + borderStyleClz}></hr>
         <div className="flex flex-row   justify-around">
             <EachInfoCell className={eachInfoCellClz} name={Dot("BqWGnXEzV", "City")} content={
-                props.authInfo?.currentUser?.cityId || '未知'
+                props.authInfo?.user?.cityId || '未知'
             } />
             <EachInfoCell className={eachInfoCellClz} name={Dot("jdbef_PBl", "Goal")} content={
-                props.authInfo?.currentUser?.goal || '未知'
+                props.authInfo?.user?.goal || '未知'
             } />
             <EachInfoCell name={Dot("Y0drdCSiu", "Topics")} content={
-                props.authInfo?.currentUser?.topicCount || 0
+                props.authInfo?.user?.topicCount || 0
             } />
         </div>
         <hr className={" mb-2  " + borderStyleClz}></hr>

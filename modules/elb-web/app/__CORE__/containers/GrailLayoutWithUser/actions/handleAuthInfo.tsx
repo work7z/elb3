@@ -10,6 +10,7 @@ import { header_ELB3_auth } from "@/app/register/web-types";
 import { redirect, usePathname } from "next/navigation";
 import { getSignatureFromStr } from "@/app/register/action/auth";
 import { Elb3AuthBody, getUserInfoByUserAcctId } from "@/app/register/action/registerUser";
+import { SystemInfoBody, fn_get_system_info_from_redis } from "@/app/register/user-types";
 
 let getPathnameInRSC = () => {
     const headersList = headers();
@@ -25,14 +26,16 @@ export let redirectToLoginPage = () => {
 }
 
 export type AuthInfo = {
-    currentUser: User | null,
+    user: User | null,
     signedIn: boolean,
     furtherUserDetail?: {
         userRole: UserRole,
-    }
+    },
+    systemInfo: SystemInfoBody
 }
 
 export default async (): Promise<AuthInfo> => {
+    let systemInfo = await fn_get_system_info_from_redis()
     let elb3AuthStr = getCookie(header_ELB3_auth, { cookies });
     if (!_.isEmpty(elb3AuthStr)) {
         try {
@@ -48,8 +51,9 @@ export default async (): Promise<AuthInfo> => {
             let push: Elb3AuthBody = JSON.parse(atob(body))
             let userInfo = await getUserInfoByUserAcctId(push.userAcctId)
             return {
-                currentUser: userInfo,
-                signedIn: userInfo != null
+                systemInfo,
+                user: userInfo,
+                signedIn: userInfo != null,
             }
         } catch (e) {
             // unable to decode, meaning it is not a valid elb3-auth
@@ -61,7 +65,8 @@ export default async (): Promise<AuthInfo> => {
         // pass through
     }
     return {
-        currentUser: null,
+        systemInfo,
+        user: null,
         signedIn: false
     }
 }

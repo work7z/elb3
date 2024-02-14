@@ -41,7 +41,7 @@ export default async (props: {
     return (<main className="" ><div>
         <TopNav></TopNav>
         <CenterPart children={jsx_center as any} />
-        <Footer></Footer>
+        <Footer authInfo={authInfo}></Footer>
     </div>
     </main>);
 }
