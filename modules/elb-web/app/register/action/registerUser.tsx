@@ -135,7 +135,6 @@ export default async function create(formData: {
                     "root",
                     "superuser",
                     "system",
-                    "sys",
                     "systemadmin",
                     "sysadmin",
                     "user",
@@ -226,7 +225,7 @@ export default async function create(formData: {
         })
 
         await signInWithUserId(formData.userAcctId + '')
-        
+
         await fn_refresh_system_info_from_redis()
 
         return newUser

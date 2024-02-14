@@ -70,7 +70,7 @@ export default function RegisterPage(props: { pageProps: RegisterPageProps }) {
                         continue;
                     }
                 }
-                location.href = '/welcome'
+                location.href = '/activation'
             }
         } catch (e: any) {
             setErrMsg([e.message || ''])
