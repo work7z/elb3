@@ -306,8 +306,8 @@ export default async function create(formData: {
                 }
             }
         },
-        fn_verifyVCode()
-    ]
+        formData.preview ? null : fn_verifyVCode()
+    ].filter(x => x)
 
     let validObj = await validateEachRuleInArr(rules, formData);
     if (validObj) {

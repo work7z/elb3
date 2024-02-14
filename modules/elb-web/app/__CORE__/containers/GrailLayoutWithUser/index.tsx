@@ -39,7 +39,7 @@ export default async (props: {
         </div>
     </div >
     return (<main className="" ><div>
-        <TopNav></TopNav>
+        <TopNav authInfo={authInfo}></TopNav>
         <CenterPart children={jsx_center as any} />
         <Footer authInfo={authInfo}></Footer>
     </div>

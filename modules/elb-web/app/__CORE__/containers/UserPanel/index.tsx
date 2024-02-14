@@ -10,6 +10,7 @@ import VisiterGuideInfoPanel from "../VisiterGuideInfoPanel"
 import { fn_get_user_avatar } from "@/app/register/user-types"
 import CardPanel from "../../components/CardPanel"
 import { fn_getCardPanelForTelephoneFAQ } from "@/app/register/page"
+import LanguagePicker from "../LanguagePicker"
 
 
 let EachInfoCell = (props: { href?: string, className?: string, name: string, content: any }) => {
@@ -79,7 +80,14 @@ export default (props: CombindSearchProps & AuthInfoProps) => {
             </CardPanel>,
             ...fn_getCardPanelForTelephoneFAQ(),
         ]
-    ) : ''
+    ) : [
+        <CardPanel>
+            <a href='/create' className="text-sm p-2 text-center anchor-text flex w-full justify-center py-2">
+                {Dot("Gy45ssBPS", "Create New Topic")}
+            </a>
+        </CardPanel>,
+        <LanguagePicker authInfo={props.authInfo} />
+    ]
     return <div className="space-y-2">
         {innerUserJSX}
         {innerNoticeJSX}
