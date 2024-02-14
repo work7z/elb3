@@ -13,6 +13,7 @@ import { randomUUID } from "crypto";
 import { key_sessionGroup } from "../redis-types";
 import path from "path";
 import { getSignatureFromStr } from "./auth";
+import { fn_refresh_system_info_from_redis } from "../user-types";
 
 
 export type Elb3AuthBody = {
@@ -225,6 +226,8 @@ export default async function create(formData: {
         })
 
         await signInWithUserId(formData.userAcctId + '')
+        
+        await fn_refresh_system_info_from_redis()
 
         return newUser
     })
