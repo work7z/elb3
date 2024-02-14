@@ -16,6 +16,7 @@ export let fn_get_user_avatar = (authInfoProps: AuthInfoProps) => {
 export type SystemInfoBody = {
     userCount: number,
     userOnlineCount: number,
+    peakOnlineCount: number,
 }
 let launchBefore = false;
 export let fn_refresh_system_info_from_redis = async () => {
@@ -29,9 +30,22 @@ export let fn_get_system_info_from_redis = async (): Promise<SystemInfoBody> => 
     }
     let daoRef = await dao()
     let userCount = await daoRef.redis.hGet(key_systemInfoGroup, 'userCount')
-    let userOnlineCount = '300' //await daoRef.redis.hGet(key_systemInfoGroup, 'userOnlineCount')
+    let peakOnlineCount = await daoRef.redis.hGet(key_systemInfoGroup, 'peakOnlineCount')
+    let userOnlineCount = '1' //await daoRef.redis.hGet(key_systemInfoGroup, 'userOnlineCount')
     return {
         userCount: parseInt(userCount + ''),
-        userOnlineCount: parseInt(userOnlineCount || '0'),
+        userOnlineCount: parseInt(userOnlineCount || '1'),
+        peakOnlineCount: parseInt(peakOnlineCount || '1')
     }
+}
+
+export let key_active_user = 'active-users'
+
+export let fn_add_user_into_active = async (userAcctId: string) => {
+    let daoRef = await dao()
+    // add active user into the set, never expire it 
+    await daoRef.redis.zAdd(key_active_user, {
+        score: Date.now(),
+        value: userAcctId
+    })
 }

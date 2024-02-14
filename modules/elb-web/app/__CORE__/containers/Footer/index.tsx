@@ -17,9 +17,8 @@ export default (props: AuthInfoProps) => {
                     return <a target={!link.href.startsWith("/") ? "_blank" : ''} key={i} href={link.href} className=" font-semibold text-slate-500  dark:text-slate-400">{link.name}</a>
                 })
             }
-            <span className="">{Dot("ky6JphiKk", "{0} Online Users", props.auth)}</span>
-            {/* <span>{Dot("J58z6ReKh", "{0} Registered Users", 102)}</span> */}
-            <span>{Dot("gmK3pKyRI", "{0} Peak Online Count", 1293)}</span>
+            <span className="">{Dot("ky6JphiKk", "{0} Online Users", props.authInfo.systemInfo.userOnlineCount)}</span>
+            <span>{Dot("gmK3pKyRI", "{0} Peak Online Count", props.authInfo.systemInfo.peakOnlineCount)}</span>
             <span>{Dot("nIDKbSXTw", "{0} Users", props.authInfo.systemInfo.userCount)}{''}</span>
         </div>
         <div className="text-xs text-slate-500 font-serif  dark:text-slate-400">
