@@ -15,6 +15,7 @@ import path from "path";
 import { getSignatureFromStr } from "./auth";
 import { fn_refresh_system_info_from_redis } from "../user-types";
 import moment from "moment";
+import handleAuthInfo from "@/app/__CORE__/containers/GrailLayoutWithUser/actions/handleAuthInfo";
 
 
 export type Elb3AuthBody = {
@@ -66,6 +67,30 @@ export type ValOrError<T> = {
     error?: string,
     value?: T
 }
+
+export let sendSMSCodeWithVerificationCode = async (formData: {
+    phoneNumber: string, vcode: string
+}): Promise<ValOrError<{}>> => {
+    let authInfo = await handleAuthInfo()
+    if (!authInfo.signedIn) {
+        throw new Error('not signed in')
+    }
+    let userAcctId = authInfo.user?.userAcctId
+    if (!userAcctId) {
+        throw new Error('user acct id not found')
+    }
+    console.log('sms code auth info', authInfo)
+    let { phoneNumber } = formData
+    let r = await validateEachRuleInArr([fn_verifyVCode()], formData)
+    if (r?.error) {
+        return {
+            error: r.error
+        }
+    }
+    let r2 = await sendSMSCodeForUser(userAcctId, phoneNumber)
+    return r2;
+}
+
 export let sendSMSCodeForUser = async (userAcctId: string, phoneNumber: string): Promise<ValOrError<{}>> => {
     phoneNumber = _.trim(phoneNumber)
     let daoRef = await dao()

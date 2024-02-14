@@ -238,7 +238,7 @@ export default async (daoRef: DaoRef) => {
         uid: { // meaning user unique id. if it's null, then it's not an activated account.
             type: DataTypes.INTEGER,
             allowNull: true,
-            unique: true
+            // unique: true
         },
         username: {
             type: DataTypes.STRING,

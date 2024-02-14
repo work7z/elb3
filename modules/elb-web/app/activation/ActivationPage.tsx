@@ -10,22 +10,39 @@ import { AuthInfoProps, CombindSearchProps } from "../page";
 import AlertErrorPanel from "../__CORE__/containers/AlertErrorPanel";
 import VerifyCodeInput from "../__CORE__/components/VerifyCodeInput";
 import GeneralInput from "../__CORE__/components/GeneralInput";
+import { sendSMSCodeWithVerificationCode } from "../register/action/registerUser";
 
 export default (p: AuthInfoProps) => {
     let [errMsg, setErrMsg] = React.useState<string[]>([])
     let [vcodeFactor, onVCodeFactor] = useState(0)
-    let [phoneNumber, onPhoneNumber] = useState<string>(p.authInfo.user?.phoneNumber || '')
-
+    let dftPhoneNumber = p.authInfo.user?.phoneNumber || ''
+    let [phoneNumber, onPhoneNumber] = useState<string>(dftPhoneNumber)
+    let [working, onWorking] = useState(false)
     let [resendMode, setResendMode] = useState(false)
 
+    // activation page
+    let jsx_phoneInput = <PhoneInput onChange={e => {
+        onPhoneNumber(e)
+    }} name={"phoneNumber"} defaultValue={phoneNumber}></PhoneInput>
 
     let inner = (
-        <form className="space-y-2">
+        <form className="space-y-2" onSubmit={async e => {
+            try {
+                setErrMsg([])
+                onWorking(true)
+            } catch (e: any) {
+                console.log('err', e)
+                setErrMsg([e.message])
+            } finally {
+                onWorking(false)
+            }
+        }}>
             <AlertErrorPanel errorMsg={errMsg}></AlertErrorPanel>
-            <PhoneInput onChange={e => {
+            <PhoneInput disabled={true} onChange={e => {
                 onPhoneNumber(e)
             }} name={"phoneNumber"} defaultValue={phoneNumber}></PhoneInput>
-            <GeneralInput type="number" max={6} label={Dot("9YPgsPid2M", "SMS Code")} ph={Dot("Md1JbKBRx", "Enter six-digits SMS Code")} fn_svgJSX={
+
+            <GeneralInput defaultValue={''} type="number" max={6} label={Dot("9YPgsPid2M", "SMS Code")} ph={Dot("Md1JbKBRx", "Enter six-digits SMS Code")} fn_svgJSX={
                 (clz: string) =>
                 (
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className={clz}>
@@ -34,7 +51,7 @@ export default (p: AuthInfoProps) => {
                 )
             } name='msgCode' ></GeneralInput>
             <div className='space-y-2 mt-2 space-x-2 '>
-                <button type="button" className="py-2 px-2 inline-flex items-center gap-x-2 text-xs font-semibold rounded-lg border border-transparent bg-solarized-blueLight text-white hover:bg-solarized-blue   disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                <button disabled={working} type="button" className="py-2 px-2 inline-flex items-center gap-x-2 text-xs font-semibold rounded-lg border border-transparent bg-solarized-blue text-white hover:bg-solarized-blueLight   disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                     {Dot("PbNcddi", "Activate Account")}
                 </button>
                 <button type="button" onClick={() => {
@@ -45,14 +62,36 @@ export default (p: AuthInfoProps) => {
             </div>
         </form>
     )
+    // resend mode
     if (resendMode) {
         inner = <div>
-            <form className="space-y-2" action={e => {
-                //
+            <form className="space-y-2" onSubmit={async e => {
+                e.preventDefault();
+                let formData = new FormData(e.target as HTMLFormElement);
+                setErrMsg([])
+                try {
+                    let phoneNumber = formData.get("phoneNumber")?.toString() || ''
+                    let vcode = formData.get("vcode")?.toString() || '';
+                    onWorking(true)
+                    let e = await sendSMSCodeWithVerificationCode({
+                        phoneNumber,
+                        vcode
+                    })
+                    if (e && e.error) {
+                        setErrMsg([e.error])
+                    }
+                } catch (e: any) {
+                    console.log('err', e)
+                    setErrMsg([e.message])
+                } finally {
+                    onWorking(false)
+                }
             }}>
+                <AlertErrorPanel errorMsg={errMsg}></AlertErrorPanel>
+                {jsx_phoneInput}
                 <VerifyCodeInput vcodeFactor={vcodeFactor}></VerifyCodeInput>
                 <div className='space-y-2 mt-2 space-x-2 '>
-                    <button type="button" className="py-2 px-2 inline-flex items-center gap-x-2 text-xs font-semibold rounded-lg border border-transparent bg-solarized-greenLight text-white hover:bg-solarized-green   disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                    <button disabled={working} type="submit" className="py-2 px-2 inline-flex items-center gap-x-2 text-xs font-semibold rounded-lg border border-transparent bg-solarized-greenLight text-white hover:bg-solarized-green   disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                         {Dot("JpbHj8RRw", "Resend Code")}
                     </button>
                     <button type="button" onClick={() => {
@@ -74,7 +113,10 @@ export default (p: AuthInfoProps) => {
                 <div className='space-y-2 text-xs'>
                     <div>
                         {Dot("5ANr-yPVdi", "Hello, {0}. We need to verify your telephone number to activate your account, it will not take too long.", p.authInfo.user?.userAcctId)}
-                        {Dot("9gWsZxYEN", "We have sent an activation code to your phone, please check it and input below. If you did not receive any message on your phone, you can click the resend button to get a new one.")}
+                        {resendMode ?
+                            Dot("3PwVdYKz7", "To resend a SMS code to your phone {0}, please input below verification code firstly. Note that you can also adjust your telephone number here, and please feel free to let us know if any concern, thanks!", phoneNumber)
+                            :
+                            Dot("9gWsZxYEN", "We have sent an activation code to your phone, please check it and input below. If you did not receive any message on your phone, you can click the resend button to get a new one.")}
                     </div>
 
                 </div>

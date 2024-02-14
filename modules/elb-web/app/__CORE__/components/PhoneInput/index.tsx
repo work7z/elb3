@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Dot } from '../../utils/TranslationUtils';
-export default (props: { name: string, defaultValue?: string, onChange?: (e: string) => any }) => {
+export default (props: { disabled?: boolean, name: string, defaultValue?: string, onChange?: (e: string) => any }) => {
+
     let [value, setValue] = React.useState('')
     useEffect(() => {
         setValue(props.defaultValue || localStorage.getItem(props.name) || '')
@@ -11,6 +12,7 @@ export default (props: { name: string, defaultValue?: string, onChange?: (e: str
             <label htmlFor="hs-leading-icon" className="block text-sm font-medium mb-2 dark:text-white">{Dot("-YjLGS", "Telephone Number")}</label>
             <div className="relative">
                 <input
+                    disabled={props.disabled}
                     value={value} onChange={e => {
                         setValue(e.target.value)
                         props.onChange && props.onChange(e.target.value)
