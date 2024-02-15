@@ -207,7 +207,7 @@ export default async (daoRef: DaoRef) => {
     // options
     sequelize.sync({ alter: true })
     // init model
-    InvitationCode.init({
+    await InvitationCode.init({
         useCount: {
             type: DataTypes.INTEGER,
             allowNull: false
@@ -248,7 +248,7 @@ export default async (daoRef: DaoRef) => {
         modelName: "InvitationCode",
         tableName: "invitation_code"
     })
-    User.init({
+    await User.init({
         replyCount: {
             type: DataTypes.INTEGER,
             allowNull: false
@@ -346,7 +346,7 @@ export default async (daoRef: DaoRef) => {
         modelName: "User",
         tableName: "user"
     })
-    UserToken.init({
+    await UserToken.init({
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -378,7 +378,7 @@ export default async (daoRef: DaoRef) => {
         modelName: "UserToken",
         tableName: "user_token"
     })
-    UserLoginLog.init({
+    await UserLoginLog.init({
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -402,7 +402,7 @@ export default async (daoRef: DaoRef) => {
         modelName: "UserLoginLog",
         tableName: "user_login_log"
     })
-    Block.init({
+    await Block.init({
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -434,7 +434,7 @@ export default async (daoRef: DaoRef) => {
         modelName: "Block",
         tableName: "block"
     })
-    Topic.init({
+    await Topic.init({
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -486,7 +486,7 @@ export default async (daoRef: DaoRef) => {
         modelName: "Topic",
         tableName: "topic"
     })
-    TopicContent.init({
+    await TopicContent.init({
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -530,7 +530,7 @@ export default async (daoRef: DaoRef) => {
         modelName: "TopicContent",
         tableName: "topic_content"
     })
-    TopicComment.init({
+    await TopicComment.init({
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -578,7 +578,7 @@ export default async (daoRef: DaoRef) => {
         modelName: "TopicComment",
         tableName: "topic_comment"
     })
-    Audit.init({
+    await Audit.init({
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -615,7 +615,7 @@ export default async (daoRef: DaoRef) => {
         tableName: "audit"
     })
 
-    SMSCodeRecord.init({
+    await SMSCodeRecord.init({
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -656,7 +656,7 @@ export default async (daoRef: DaoRef) => {
         tableName: "sms_code_record"
     })
 
-    ChatGroup.init({
+    await ChatGroup.init({
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -697,7 +697,7 @@ export default async (daoRef: DaoRef) => {
         tableName: "chat_group"
     })
 
-    ChatGroupHistory.init({
+    await ChatGroupHistory.init({
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -738,7 +738,7 @@ export default async (daoRef: DaoRef) => {
         tableName: "chat_group_history"
     })
 
-    ChatGroupMember.init({
+    await ChatGroupMember.init({
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -771,7 +771,7 @@ export default async (daoRef: DaoRef) => {
         tableName: "chat_group_member"
     })
 
-    ChatGroupHistory.init({
+    await ChatGroupHistory.init({
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,

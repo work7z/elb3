@@ -19,6 +19,7 @@ test('chat2RAWdb2', async () => {
     markEnvAsDevForcibly()
     let dir = "C:\\Users\\jerrylai\\hmproject\\elb3-wechat\\聊天记录";
     let daoRef = await loadDAO();
+    console.log(daoRef.db)
     let groupFolders = fs.readdirSync(dir)
     // await RawGroupHistory.truncate()
     for (let eachGroupFolderName of groupFolders) {
