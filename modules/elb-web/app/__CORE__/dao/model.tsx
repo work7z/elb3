@@ -4,6 +4,68 @@ import {
 import { DaoRef } from './index'
 import { isDevEnv } from '../hooks/env';
 
+
+// chat group, chat group members, chat group history
+
+// model for chat group
+export class ChatGroup extends Model<InferAttributes<ChatGroup>, InferCreationAttributes<ChatGroup>> {
+    declare id: number;
+    declare name: string;
+    declare messageCount: number;
+    declare firstMessageAt: Date;
+    declare lastMessageAt: Date;
+    declare createdAt: CreationOptional<Date> | null;
+    declare updatedAt: CreationOptional<Date> | null;
+    declare deleteAt: CreationOptional<Date> | null;
+}
+
+// model for chat group members 
+export class ChatGroupMember extends Model<InferAttributes<ChatGroupMember>, InferCreationAttributes<ChatGroupMember>> {
+    declare id: number;
+    declare groupId: number;
+    declare userId: number;
+    declare createdAt: CreationOptional<Date> | null;
+    declare updatedAt: CreationOptional<Date> | null;
+    declare deleteAt: CreationOptional<Date> | null;
+}
+
+// model for chat group history
+export class ChatGroupHistory extends Model<InferAttributes<ChatGroupHistory>, InferCreationAttributes<ChatGroupHistory>> {
+    declare id: number;
+    declare groupId: number;
+    declare userId: number;
+    declare type: string; // text, emoji, image, file, etc...
+    declare content: string;
+    declare createdAt: CreationOptional<Date> | null;
+    declare updatedAt: CreationOptional<Date> | null;
+    declare deleteAt: CreationOptional<Date> | null;
+}
+
+export class RawGroupHistory extends Model<InferAttributes<RawGroupHistory>, InferCreationAttributes<RawGroupHistory>> {
+    // localId,TalkerId,Type,SubType,IsSender,CreateTime,Status,StrContent,StrTime,Remark,NickName,Sender
+    declare id: number;
+    declare groupName: string;
+    declare localId: string;
+    declare talkerId: string;
+    declare type: string;
+    declare subType: string;
+    declare isSender: string;
+    declare createTime: Date;
+    declare status: string;
+    declare strContent: string;
+    declare strTime: string;
+    declare remark: string;
+    declare nickName: string;
+    declare sender: string;
+    declare createdAt: CreationOptional<Date> | null;
+    declare updatedAt: CreationOptional<Date> | null;
+    declare deleteAt: CreationOptional<Date> | null;
+}
+
+
+
+// system forum
+
 export type UserRole = "webmaster" | "moderator" | "user"
 
 export class SMSCodeRecord extends Model<InferAttributes<SMSCodeRecord>, InferCreationAttributes<SMSCodeRecord>> {
@@ -137,40 +199,6 @@ export class Audit extends Model<InferAttributes<Audit>, InferCreationAttributes
     declare updatedAt: CreationOptional<Date> | null;
     declare deleteAt: CreationOptional<Date> | null;
 }
-
-// chat group, chat group members, chat group history
-
-// model for chat group
-export class ChatGroup extends Model<InferAttributes<ChatGroup>, InferCreationAttributes<ChatGroup>> {
-    declare id: number;
-    declare name: string;
-    declare createdAt: CreationOptional<Date> | null;
-    declare updatedAt: CreationOptional<Date> | null;
-    declare deleteAt: CreationOptional<Date> | null;
-}
-
-// model for chat group members 
-export class ChatGroupMember extends Model<InferAttributes<ChatGroupMember>, InferCreationAttributes<ChatGroupMember>> {
-    declare id: number;
-    declare groupId: number;
-    declare userId: number;
-    declare createdAt: CreationOptional<Date> | null;
-    declare updatedAt: CreationOptional<Date> | null;
-    declare deleteAt: CreationOptional<Date> | null;
-}
-
-// model for chat group history
-export class ChatGroupHistory extends Model<InferAttributes<ChatGroupHistory>, InferCreationAttributes<ChatGroupHistory>> {
-    declare id: number;
-    declare groupId: number;
-    declare userId: number;
-    declare type: string; // text, emoji, image, file, etc...
-    declare content: string;
-    declare createdAt: CreationOptional<Date> | null;
-    declare updatedAt: CreationOptional<Date> | null;
-    declare deleteAt: CreationOptional<Date> | null;
-}
-
 
 
 export default async (daoRef: DaoRef) => {
@@ -626,6 +654,163 @@ export default async (daoRef: DaoRef) => {
         modelName: "SMSCodeRecord",
         tableName: "sms_code_record"
     })
+
+    ChatGroup.init({
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        messageCount: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        firstMessageAt: {
+            type: DataTypes.DATE,
+            allowNull: false
+        },
+        lastMessageAt: {
+            type: DataTypes.DATE,
+            allowNull: false
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        deleteAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        }
+    }, {
+        sequelize,
+        paranoid: true,
+        modelName: "ChatGroup",
+        tableName: "chat_group"
+    })
+
+    ChatGroupHistory.init({
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        groupId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        userId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        type: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        content: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        deleteAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        }
+    }, {
+        sequelize,
+        paranoid: true,
+        modelName: "ChatGroupHistory",
+        tableName: "chat_group_history"
+    })
+
+    ChatGroupMember.init({
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        groupId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        userId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        deleteAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        }
+    }, {
+        sequelize,
+        paranoid: true,
+        modelName: "ChatGroupMember",
+        tableName: "chat_group_member"
+    })
+
+    ChatGroupHistory.init({
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        groupId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        userId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        type: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        content: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        deleteAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        }
+    }, {
+        sequelize,
+        paranoid: true,
+        modelName: "ChatGroupHistory",
+        tableName: "chat_group_history"
+    })
+
 
     // setup dev env
     if (isDevEnv()) {
