@@ -9,11 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fast-csv/format": "^5.0.0",
+    "@fast-csv/parse": "^5.0.0",
     "@heroicons/react": "^2.1.1",
     "@preline/strong-password": "^2.0.2",
     "@types/react-tooltip": "^4.2.4",
     "axios": "1.6.0",
     "cookies-next": "^4.1.1",
+    "fast-csv": "^5.0.1",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
     "lodash": "4.17.21",

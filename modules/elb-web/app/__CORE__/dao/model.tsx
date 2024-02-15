@@ -44,13 +44,14 @@ export class ChatGroupHistory extends Model<InferAttributes<ChatGroupHistory>, I
 export class RawGroupHistory extends Model<InferAttributes<RawGroupHistory>, InferCreationAttributes<RawGroupHistory>> {
     // localId,TalkerId,Type,SubType,IsSender,CreateTime,Status,StrContent,StrTime,Remark,NickName,Sender
     declare id: number;
+    declare groupKey: string;
     declare groupName: string;
     declare localId: string;
     declare talkerId: string;
     declare type: string;
     declare subType: string;
     declare isSender: string;
-    declare createTime: Date;
+    declare createTime: string;
     declare status: string;
     declare strContent: string;
     declare strTime: string;
@@ -809,6 +810,87 @@ export default async (daoRef: DaoRef) => {
         paranoid: true,
         modelName: "ChatGroupHistory",
         tableName: "chat_group_history"
+    })
+
+    RawGroupHistory.init({
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        groupKey: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        groupName: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        localId: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        talkerId: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        type: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        subType: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        isSender: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        createTime: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        status: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        strContent: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        strTime: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        remark: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        nickName: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        sender: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        deleteAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        }
+    }, {
+        sequelize,
+        paranoid: true,
+        modelName: "RawGroupHistory",
+        tableName: "raw_group_history"
     })
 
 
