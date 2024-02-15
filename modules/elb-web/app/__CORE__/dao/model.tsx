@@ -812,7 +812,7 @@ export default async (daoRef: DaoRef) => {
         tableName: "chat_group_history"
     })
 
-    RawGroupHistory.init({
+    await RawGroupHistory.init({
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -847,7 +847,7 @@ export default async (daoRef: DaoRef) => {
             allowNull: true
         },
         createTime: {
-            type: DataTypes.DATE,
+            type: DataTypes.STRING,
             allowNull: true
         },
         status: {

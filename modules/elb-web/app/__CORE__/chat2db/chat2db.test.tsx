@@ -9,7 +9,7 @@ import { isTestEnv, markEnvAsDevForcibly } from "../hooks/env";
 import * as csv from 'fast-csv';
 import _ from "lodash";
 
-test('chat2RAWdb', async () => {
+test('chat2RAWdb2', async () => {
   try {
     markEnvAsDevForcibly()
     if (isTestEnv()) {
@@ -20,7 +20,7 @@ test('chat2RAWdb', async () => {
     let dir = "C:\\Users\\jerrylai\\hmproject\\elb3-wechat\\聊天记录";
     let daoRef = await loadDAO();
     let groupFolders = fs.readdirSync(dir)
-    await RawGroupHistory.truncate({})
+    // await RawGroupHistory.truncate()
     for (let eachGroupFolderName of groupFolders) {
       let csvFile = path.join(dir, eachGroupFolderName, `${eachGroupFolderName}_utf8.csv`)
       console.log(csvFile)
@@ -54,7 +54,7 @@ test('chat2RAWdb', async () => {
         let m = await RawGroupHistory.create({
           groupKey,
           groupName,
-          ...formatRow as any
+          ...formatRow as any,
         } as any)
         console.log(m)
       }
