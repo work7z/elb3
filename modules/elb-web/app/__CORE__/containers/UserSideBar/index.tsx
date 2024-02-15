@@ -6,7 +6,7 @@ import { Dot } from "@/app/__CORE__/utils/TranslationUtils"
 import { AuthInfoProps, CombindSearchProps } from "../../../page"
 import MoonSunControl from "./MoonSunControl"
 import _ from 'lodash'
-import VisiterGuideInfoPanel from "../VisiterGuideInfoPanel"
+import VisiterSidebar, { SidebarProps } from "../VisiterSidebar"
 import { fn_get_user_avatar } from "@/app/register/user-types"
 import CardPanel from "../../components/CardPanel"
 import { fn_getCardPanelForTelephoneFAQ } from "@/app/register/page"
@@ -20,15 +20,13 @@ let EachInfoCell = (props: { href?: string, className?: string, name: string, co
     </a>
 }
 
-export default (props: CombindSearchProps & AuthInfoProps) => {
+export type SidebarViewModeType = "visiter" | "default"
+export default (props: SidebarProps) => {
     let notificationCtn = 0;
     let borderStyleClz = "  border-gray-200 dark:border-solarized-base02Light1  "
     let eachInfoCellClz = borderStyleClz + " border-r-[1px]"
     let joinedDate = props.authInfo.user?.createdAt
-    let diffDays = Math.max(joinedDate ? Math.floor((new Date().getTime() - new Date(joinedDate).getTime()) / (1000 * 60 * 60 * 24)) : 0, 1)
-    if (!props.authInfo.signedIn) {
-        return <VisiterGuideInfoPanel ></VisiterGuideInfoPanel>
-    }
+    let diffDays = Math.max(joinedDate ? Math.floor((new Date().getTime() - new Date(joinedDate).getTime()) / (1000 * 60 * 60 * 24)) : 0, 0)
     let innerUserJSX = (
         <CardPanel>
             <div className="p-2">
@@ -39,16 +37,16 @@ export default (props: CombindSearchProps & AuthInfoProps) => {
                         <div>
                             <a href="/" className="text-gray-800 dark:text-slate-300 hover:underline font-bold">{props.authInfo.user?.userAcctId}</a>
                         </div>
-                        <div className="text-sm text-gray-600 dark:text-slate-300 mt-[-1px]">{Dot("hxCMxpW6Sq", "Joined {0} days ago", diffDays)}</div>
+                        <div className="text-sm text-gray-600 dark:text-slate-300 mt-[-1px]">{diffDays < 1 ? Dot("6h14B_t4I", "Joined Today") : Dot("hxCMxpW6Sq", "Joined {0} days ago", diffDays)}</div>
                     </div>
                 </div>
                 <hr className={"mt-2 " + borderStyleClz}></hr>
                 <div className="flex flex-row   justify-around">
                     <EachInfoCell className={eachInfoCellClz} name={Dot("BqWGnXEzV", "City")} content={
-                        props.authInfo?.user?.cityId || '未知'
+                        props.authInfo?.user?.cityId || Dot("m2LEjrKDS", '未知')
                     } />
                     <EachInfoCell className={eachInfoCellClz} name={Dot("jdbef_PBl", "Goal")} content={
-                        props.authInfo?.user?.goal || '未知'
+                        props.authInfo?.user?.goal || Dot("tip_JkgcP", '未知')
                     } />
                     <EachInfoCell name={Dot("Y0drdCSiu", "Topics")} content={
                         props.authInfo?.user?.topicCount || 0
@@ -73,24 +71,9 @@ export default (props: CombindSearchProps & AuthInfoProps) => {
             </div >
         </CardPanel>
     )
-    let innerNoticeJSX = props.authInfo.user?.status == 'newly-created' ? (
-        [
-            <CardPanel>
-                <a href='/activation' className="text-sm p-2 text-center anchor-text flex w-full justify-center py-2">{Dot("VndKeCfb-", "Verify Telephone to Activate Account")}</a>
-            </CardPanel>,
-            ...fn_getCardPanelForTelephoneFAQ(),
-        ]
-    ) : [
-        <CardPanel>
-            <a href='/create' className="text-sm p-2 text-center anchor-text flex w-full justify-center py-2">
-                {Dot("Gy45ssBPS", "Create New Topic")}
-            </a>
-        </CardPanel>,
-        <LanguagePicker authInfo={props.authInfo} />
-    ]
     return <div className="space-y-2">
         {innerUserJSX}
-        {innerNoticeJSX}
+        {props.extra}
     </div>
 }
 

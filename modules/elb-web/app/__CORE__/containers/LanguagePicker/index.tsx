@@ -2,8 +2,9 @@
 import { AuthInfoProps } from "@/app/page"
 import CardPanel from "../../components/CardPanel"
 import { Dot } from "../../utils/TranslationUtils"
-import MoonSunControl from "../UserPanel/MoonSunControl"
+import MoonSunControl from "../UserSideBar/MoonSunControl"
 import React from 'react'
+import { AuthInfo } from "../GrailLayoutWithUser/actions/handleAuthInfo"
 
 export let translationLangs: {
     "Label": string[],
@@ -60,7 +61,7 @@ export default (props: AuthInfoProps) => {
                         {
                             translationLangs.map(x => {
                                 return <div className='p-2 flex flex-row justify-between items-center hover:bg-slate-100 cursor-pointer transition-all'>
-                                    <a href={props.authInfo.signedIn ? '/' + x.Value}>    <div>{x.LabelByLang}{x.Value == 'en_US' ? '' : `(${x.LabelInEnglish})`}</div>
+                                    <a href={props.authInfo && props.authInfo.signedIn ? '/' + x.Value : '/login'}>    <div>{x.LabelByLang}{x.Value == 'en_US' ? '' : `(${x.LabelInEnglish})`}</div>
                                     </a>
                                 </div>
                             })

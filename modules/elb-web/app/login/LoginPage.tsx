@@ -6,7 +6,7 @@ import { CombindSearchProps } from '@/app/page'
 import CardPanel from '@/app/__CORE__/components/CardPanel';
 import { PageProps } from '../__CORE__/types/pages';
 import { Dot } from '../__CORE__/utils/TranslationUtils';
-import VisiterGuideInfoPanel from '../__CORE__/containers/VisiterGuideInfoPanel';
+import VisiterGuideInfoPanel from '../__CORE__/containers/VisiterSidebar';
 import PasswordInput from '../__CORE__/components/PasswordInput'
 import UserInput from '../__CORE__/components/UsernameInput'
 import PhoneInput from '../__CORE__/components/PhoneInput'

@@ -5,7 +5,7 @@ import { AuthInfoProps, CombindSearchProps } from '@/app/page'
 import CardPanel from '@/app/__CORE__/components/CardPanel';
 import { PageProps } from '../__CORE__/types/pages';
 import { Dot } from '../__CORE__/utils/TranslationUtils';
-import VisiterGuideInfoPanel from '../__CORE__/containers/VisiterGuideInfoPanel';
+import VisiterGuideInfoPanel from '../__CORE__/containers/VisiterSidebar';
 import PasswordInput from '../__CORE__/components/PasswordInput'
 import UserInput from '../__CORE__/components/UsernameInput'
 import PhoneInput from '../__CORE__/components/PhoneInput'
@@ -21,10 +21,7 @@ import { getWebsiteName } from '../__CORE__/common/config';
 export default function Page(props: LoginPageProps) {
     let { searchParams, params } = props;
     let combindSearchProps = props;
-    return <GrailLayoutWithUser rightJSX={
-        (p: AuthInfoProps) =>
-            <VisiterGuideInfoPanel></VisiterGuideInfoPanel>
-    } combindSearchProps={combindSearchProps} jsx_main={(p: AuthInfoProps) => (
+    return <GrailLayoutWithUser sidebarViewMode='visiter' combindSearchProps={combindSearchProps} main={(p: AuthInfoProps) => (
         <div className='space-y-2 flex-1'>
             <LoginPage loginPageProps={props}></LoginPage>
         </div>
