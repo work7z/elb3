@@ -45,7 +45,15 @@ export default async (props: {
                     <CardPanel>
                         <a href='mailto:work7z@outlook.com' className="text-sm p-2 text-center anchor-text flex w-full justify-center py-2">{Dot("VnddCfb-", "You are currently banned for a while")}</a>
                     </CardPanel>,
-                    <LanguagePicker authInfo={authInfo} />
+                    <CardPanel className="mt-2" children={
+                        <div className='p-2 '>
+                            <h3 className='font-semibold mb-2'>{Dot("lidydVO", "Why I am blocked or limited?")}</h3>
+                            <div className='text-xs space-y-2'>
+                                <div>{Dot("F-D-AewqL", "Do retrospect with what you have done recently. We cannot endure any behaviour that can be considered as harrasment, ADs or personal abuse, etc...")}</div>
+                                <div>{Dot("lEDpJMRfG", "If you are confused, please feel free to let us know by sending an email to us.")}</div>
+                            </div>
+                        </div>
+                    } />
                 ]
             )
         } else if (isNewlyCreatedUser) {
@@ -64,7 +72,6 @@ export default async (props: {
                         {Dot("Gy45ssBPS", "Create New Topic")}
                     </a>
                 </CardPanel>,
-                <LanguagePicker authInfo={authInfo} />
             ]
         }
         jsx_sidebar = <UserSideBar authInfo={authInfo} extra={extraInSidebar || userExtraInSidbear} {...props.combindSearchProps}></UserSideBar>

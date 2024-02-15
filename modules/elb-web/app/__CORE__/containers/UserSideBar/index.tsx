@@ -74,6 +74,7 @@ export default (props: SidebarProps) => {
     return <div className="space-y-2">
         {innerUserJSX}
         {props.extra}
+        {/* <LanguagePicker authInfo={props.authInfo} />, */}
     </div>
 }
 

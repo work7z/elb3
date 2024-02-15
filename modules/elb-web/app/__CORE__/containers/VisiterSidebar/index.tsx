@@ -46,8 +46,10 @@ export default (props: SidebarProps) => {
         </CardPanel>
 
         <WeekDayCardPanel></WeekDayCardPanel>
-        <LanguagePicker authInfo={props.authInfo}></LanguagePicker>
 
         {props.extra}
+
+        {/* <LanguagePicker authInfo={props.authInfo}></LanguagePicker> */}
+
     </div>
 }
