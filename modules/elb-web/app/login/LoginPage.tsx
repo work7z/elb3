@@ -83,7 +83,7 @@ export default function LoginPage(props: { loginPageProps: LoginPageProps }) {
                         <input name="type" value={type} ></input>
                     </div>
                     {
-                        type == 'username' ? <UserInput name='userAcctId'></UserInput> :
+                        type == 'username' ? <UserInput checkIfHas name='userAcctId'></UserInput> :
                             <PhoneInput name='phoneNumber' />
                     }
                     <PasswordInput name='password'></PasswordInput>
