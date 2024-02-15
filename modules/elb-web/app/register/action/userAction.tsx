@@ -7,12 +7,12 @@ import { AsyncCreateResponse, CheckRules, fn_verifyVCode, validateEachRuleInArr 
 import { setCookie, getCookie, getCookies } from 'cookies-next';
 import { cookies } from 'next/headers';
 import _ from "lodash";
-import { InvitationCode, SMSCodeRecord, User, UserRole, UserToken } from "@/app/__CORE__/dao/model";
+import { InvitationCode, SMSCodeRecord, User, UserLoginLog, UserRole, UserToken } from "@/app/__CORE__/dao/model";
 import { checkIfStrOnlyHasAlphanumeric } from "./utils";
 import { randomUUID } from "crypto";
 import { key_sessionGroup } from "../redis-types";
 import path from "path";
-import { getSignatureFromStr } from "./auth";
+import { getMD5, getSignatureFromStr } from "./auth";
 import { fn_refresh_system_info_from_redis } from "../user-types";
 import moment from "moment";
 import handleAuthInfo from "@/app/__CORE__/containers/GrailLayoutWithUser/actions/handleAuthInfo";
@@ -58,6 +58,15 @@ export let getUserInfoByUserAcctId = async (userAcctId: string): Promise<User | 
     let user = await User.findOne({
         where: {
             userAcctId: userAcctId
+        }
+    })
+    return user;
+}
+export let getUserInfoByPhoneNumber = async (phoneNumber: string): Promise<User | null> => {
+    await dao()
+    let user = await User.findOne({
+        where: {
+            phoneNumber: phoneNumber
         }
     })
     return user;
@@ -121,6 +130,10 @@ export let verifySMSCode = async (formData: {
     })
 
     return {}
+}
+
+export let hashPW = (pw: string) => {
+    return getMD5("elb-210801" + pw + "240215")
 }
 
 export let sendSMSCodeWithVerificationCode = async (formData: {
@@ -207,7 +220,35 @@ export async function handleSignInUser(formData: {
             name: "vcode",
             label: Dot("TqXddh_K", "Verification Code"),
         },
-        fn_verifyVCode()
+        fn_verifyVCode(),
+        {
+            type: 'check-fn',
+            name: 'userAcctId',
+            validateFn: async (val) => {
+                let user: User | null = null;
+                if (formData.type == 'username') {
+                    user = await getUserInfoByUserAcctId(formData.userAcctId)
+                } else {
+                    user = await getUserInfoByPhoneNumber(formData.phoneNumber)
+                }
+                if (!user) {
+                    return Dot("8sVG1RdXhx", "User does not exist")
+                }
+                if (user.password != hashPW(formData.password)) {
+                    return Dot("8sVG1RddXhx", "Password is not correct")
+                }
+                // LOGIN SUCCESS
+                await daoRef.db.transaction(async () => {
+                    if (!user) return;
+                    await signInWithUserId(user.userAcctId)
+                    await UserLoginLog.create({
+                        userId: user.id || -1,
+                        loginIp: '',
+                        loginTime: new Date(),
+                    })
+                })
+            }
+        },
     ].filter(x => x)
 
     let validObj = await validateEachRuleInArr(rules, formData);
@@ -370,7 +411,7 @@ export default async function create(formData: {
     let newUser = await daoRef.db.transaction(async () => {
         let newUser = await User.create({
             userAcctId: formData.userAcctId + '',
-            password: formData.password + '',
+            password: hashPW(formData.password + ''),
             phoneNumber: formData.phoneNumber + '',
             invitationCode: formData.invitationCode + '',
             vcode: formData.vcode + '',
