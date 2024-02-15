@@ -37,6 +37,7 @@ let loadDAO = async (): Promise<DaoRef> => {
         let sequelize = new Sequelize(`${link}`, isTestEnv() ? {} : {
             dialect: 'mysql',
             dialectModule: require('mysql2'),
+            logging: console.log,
             timezone: '+08:00'
         });
 
@@ -59,6 +60,8 @@ let loadDAO = async (): Promise<DaoRef> => {
             redis: client as any,
             db: sequelize,
         }
+
+        console.log('established connection, setup model...')
 
         // 3. setup model 
         await model(r)

@@ -204,8 +204,6 @@ export class Audit extends Model<InferAttributes<Audit>, InferCreationAttributes
 
 export default async (daoRef: DaoRef) => {
     let sequelize = daoRef.db
-    // options
-    sequelize.sync({ alter: true })
     // init model
     await InvitationCode.init({
         useCount: {
@@ -855,7 +853,8 @@ export default async (daoRef: DaoRef) => {
             allowNull: true
         },
         strContent: {
-            type: DataTypes.STRING,
+            // long text type
+            type: DataTypes.TEXT('long'),
             allowNull: true
         },
         strTime: {
@@ -888,11 +887,13 @@ export default async (daoRef: DaoRef) => {
         }
     }, {
         sequelize,
-        paranoid: true,
+        paranoid: false,
         modelName: "RawGroupHistory",
         tableName: "raw_group_history"
     })
 
+    // options
+    await sequelize.sync({ alter: true, force: false })
 
     // setup dev env
     if (isDevEnv()) {

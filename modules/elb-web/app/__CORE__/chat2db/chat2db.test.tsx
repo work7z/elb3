@@ -21,7 +21,7 @@ test('chat2RAWdb2', async () => {
     let daoRef = await loadDAO();
     console.log(daoRef.db)
     let groupFolders = fs.readdirSync(dir)
-    // await RawGroupHistory.truncate()
+    await RawGroupHistory.truncate()
     for (let eachGroupFolderName of groupFolders) {
       let csvFile = path.join(dir, eachGroupFolderName, `${eachGroupFolderName}_utf8.csv`)
       console.log(csvFile)
