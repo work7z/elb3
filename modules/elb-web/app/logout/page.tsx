@@ -17,6 +17,7 @@ import { getWebsiteName } from '../__CORE__/common/config';
 import { LoginPageProps } from '../login/LoginPage';
 import LanguagePicker from '../__CORE__/containers/LanguagePicker';
 import LogoutPage from './LogoutPage';
+import { deleteCookie, getCookie, getCookies } from 'cookies-next';
 
 
 export default function Page(props: LoginPageProps) {

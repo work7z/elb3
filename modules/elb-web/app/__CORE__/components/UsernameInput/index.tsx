@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect } from 'react';
 import { Dot } from '../../utils/TranslationUtils';
-import { getUserInfoByUserAcctId } from '@/app/register/action/registerUser';
+import { getUserInfoByUserAcctId } from '@/app/register/action/userAction';
 import _ from 'lodash';
 import { checkIfStrOnlyHasAlphanumeric } from '@/app/register/action/utils';
 export default (props: { checkDuplicate?: boolean, name: string }) => {

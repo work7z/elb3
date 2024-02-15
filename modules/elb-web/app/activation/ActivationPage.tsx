@@ -10,7 +10,7 @@ import { AuthInfoProps, CombindSearchProps } from "../page";
 import AlertErrorPanel from "../__CORE__/containers/AlertErrorPanel";
 import VerifyCodeInput from "../__CORE__/components/VerifyCodeInput";
 import GeneralInput from "../__CORE__/components/GeneralInput";
-import { sendSMSCodeWithVerificationCode, verifySMSCode } from "../register/action/registerUser";
+import { sendSMSCodeWithVerificationCode, verifySMSCode } from "../register/action/userAction";
 
 export default (p: AuthInfoProps) => {
     let [errMsg, setErrMsg] = React.useState<string[]>([])

@@ -19,12 +19,25 @@ import { getWebsiteName } from '../__CORE__/common/config';
 import { LoginPageProps } from '../login/LoginPage';
 import LanguagePicker from '../__CORE__/containers/LanguagePicker';
 import LoadingWrapper from '../__CORE__/containers/LoadingWrapper';
+import { cookies } from 'next/headers';
+import { getCookies } from 'cookies-next';
+import _ from 'lodash';
 
+function deleteAllCookies() {
+    const cookies = document.cookie.split(";");
+
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i];
+        const eqPos = cookie.indexOf("=");
+        const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+}
 export default (p: AuthInfoProps) => {
     useEffect(() => {
-        setTimeout(() => {
-            location.href = '/'
-        }, 3000)
+        deleteAllCookies()
+        localStorage.clear()
+        location.href = '/'
     }, [])
     return (
         <div className='space-y-2 flex-1'>

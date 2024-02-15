@@ -16,7 +16,7 @@ import TwTabs from '../__CORE__/components/TwTabs'
 import '../__CORE__/script/preline-init'
 import { Metadata, ResolvingMetadata } from 'next';
 import { getWebsiteName } from '../__CORE__/common/config';
-import create from './action/registerUser'
+import create from './action/userAction'
 import { useFormState } from 'react-dom'
 import LoadingWrapper from '../__CORE__/containers/LoadingWrapper';
 import AlertErrorPanel from '../__CORE__/containers/AlertErrorPanel';

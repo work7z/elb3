@@ -175,6 +175,53 @@ export let sendSMSCodeForUser = async (userAcctId: string, phoneNumber: string):
     return {}
 }
 
+
+
+
+export async function handleSignInUser(formData: {
+    userAcctId: string,
+    password: string,
+    phoneNumber: string,
+    type: string,
+    vcode: string
+}): Promise<AsyncCreateResponse<{}>> {
+    let daoRef = await dao()
+    let rules: CheckRules[] = [
+        formData.type == 'username' ? {
+            type: "non-empty",
+            name: "userAcctId",
+            label: Dot("oHQNQ4mRw", "User ID"),
+        } :
+            {
+                type: 'non-empty',
+                name: 'phoneNumber',
+                label: Dot("Te3h_wK", "Telephone Number"),
+            },
+        {
+            type: "non-empty",
+            name: "password",
+            label: Dot("TXdh_K", "Password"),
+        },
+        {
+            type: "non-empty",
+            name: "vcode",
+            label: Dot("TqXddh_K", "Verification Code"),
+        },
+        fn_verifyVCode()
+    ].filter(x => x)
+
+    let validObj = await validateEachRuleInArr(rules, formData);
+    if (validObj) {
+        return validObj
+    }
+
+    return {
+        data: {
+        },
+    }
+}
+
+
 export default async function create(formData: {
     preview: boolean,
     userAcctId: string,
