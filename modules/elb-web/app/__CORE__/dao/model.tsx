@@ -7,6 +7,8 @@ import { isDevEnv } from '../hooks/env';
 
 // chat group, chat group members, chat group history
 
+
+
 // model for chat group
 export class ChatGroup extends Model<InferAttributes<ChatGroup>, InferCreationAttributes<ChatGroup>> {
     declare id: number;
@@ -39,6 +41,41 @@ export class ChatGroupHistory extends Model<InferAttributes<ChatGroupHistory>, I
     declare createdAt: CreationOptional<Date> | null;
     declare updatedAt: CreationOptional<Date> | null;
     declare deleteAt: CreationOptional<Date> | null;
+}
+
+export class RawWXContact extends Model<InferAttributes<RawWXContact>, InferCreationAttributes<RawWXContact>> {
+    declare id: number;
+    declare groupKey: string;
+
+    declare UserName: string;
+    declare Alias: string;
+    declare EncryptUserName: string;
+    declare DelFlag: number;
+    declare Type: number;
+    declare VerifyFlag: number;
+    declare Reserved1: number;
+    declare Reserved2: number;
+    declare Reserved3: string;
+    declare Reserved4: string;
+    declare Remark: string;
+    declare NickName: string;
+    declare LabelIDList: string;
+    declare DomainList: string;
+    declare ChatRoomType: number;
+    declare PYInitial: string;
+    declare QuanPin: string;
+    declare RemarkPYInitial: string;
+    declare RemarkQuanPin: string;
+    declare BigHeadImgUrl: string;
+
+}
+
+export class RawFTSChatroom extends Model<InferAttributes<RawFTSChatroom>, InferCreationAttributes<RawFTSChatroom>> {
+    declare docid: number;
+    declare groupKey: string;
+    declare c0groupRemark: string;
+    declare c1nickname: string;
+    declare c2alias: string;
 }
 
 export class RawGroupHistory extends Model<InferAttributes<RawGroupHistory>, InferCreationAttributes<RawGroupHistory>> {
@@ -809,7 +846,130 @@ export default async (daoRef: DaoRef) => {
         modelName: "ChatGroupHistory",
         tableName: "chat_group_history"
     })
-
+    await RawWXContact.init({
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        groupKey: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        UserName: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        Alias: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        EncryptUserName: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        DelFlag: {
+            type: DataTypes.INTEGER,
+            allowNull: true
+        },
+        Type: {
+            type: DataTypes.INTEGER,
+            allowNull: true
+        },
+        VerifyFlag: {
+            type: DataTypes.INTEGER,
+            allowNull: true
+        },
+        Reserved1: {
+            type: DataTypes.INTEGER,
+            allowNull: true
+        },
+        Reserved2: {
+            type: DataTypes.INTEGER,
+            allowNull: true
+        },
+        Reserved3: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        Reserved4: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        Remark: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        NickName: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        LabelIDList: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        DomainList: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        ChatRoomType: {
+            type: DataTypes.INTEGER,
+            allowNull: true
+        },
+        PYInitial: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        QuanPin: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        RemarkPYInitial: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        RemarkQuanPin: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        BigHeadImgUrl: {
+            type: DataTypes.STRING,
+            allowNull: true
+        }
+    }, {
+        sequelize,
+        paranoid: true,
+        modelName: "RawWXContact",
+        tableName: "raw_wx_contact"
+    })
+    await RawFTSChatroom.init({
+        docid: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        groupKey: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        c0groupRemark: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        c1nickname: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        c2alias: {
+            type: DataTypes.STRING,
+            allowNull: false
+        }
+    }, {
+        sequelize,
+        paranoid: true,
+        modelName: "RawFTSChatroom",
+        tableName: "raw_fts_chatroom"
+    })
     await RawGroupHistory.init({
         id: {
             type: DataTypes.INTEGER,

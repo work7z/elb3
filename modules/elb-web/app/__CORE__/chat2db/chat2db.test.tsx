@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import loadDAO, { } from "../dao";
-import { RawGroupHistory, User } from "../dao/model";
+import { RawFTSChatroom, RawGroupHistory, RawWXContact, User } from "../dao/model";
 import { expect, test } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { DataTypes, Model } from 'sequelize'
@@ -18,10 +18,34 @@ test('chat2RAWdb2', async () => {
     }
     markEnvAsDevForcibly()
     let dir = "C:\\Users\\jerrylai\\hmproject\\elb3-wechat\\聊天记录";
+    let ftsChatroomtJSON = path.join(dir, '..', 'FTSChatroom.json')
+    let wxContactJSON = path.join(dir, '..', 'WXContact.json')
+    let ftsRecords: RawFTSChatroom[] = JSON.parse(fs.readFileSync(ftsChatroomtJSON, 'utf8').toString())
+    let wxContacts: RawWXContact[] = JSON.parse(fs.readFileSync(wxContactJSON, 'utf8').toString())
     let daoRef = await loadDAO();
     console.log(daoRef.db)
+    let groupKey = '20240215'
     let groupFolders = fs.readdirSync(dir)
-    await RawGroupHistory.truncate()
+    await RawGroupHistory.truncate({ force: true })
+    await RawFTSChatroom.truncate({ force: true })
+    await RawWXContact.truncate({ force: true })
+    // fts records
+    for (let eachRecord of ftsRecords) {
+      let m = await RawFTSChatroom.create({
+        ...eachRecord,
+        groupKey: groupKey
+      })
+      console.log(m)
+    }
+    // raw wx contacts
+    for (let eachContact of wxContacts) {
+      let m = await RawWXContact.create({
+        ...eachContact,
+        groupKey: groupKey
+      })
+      console.log(m)
+    }
+    // group folders
     for (let eachGroupFolderName of groupFolders) {
       let csvFile = path.join(dir, eachGroupFolderName, `${eachGroupFolderName}_utf8.csv`)
       console.log(csvFile)
@@ -29,7 +53,6 @@ test('chat2RAWdb2', async () => {
       let fileStat = fs.statSync(csvFile)
       console.log(fileStat.size)
       let groupName = eachGroupFolderName
-      let groupKey = '20240215'
       // csv reader
       let allRows: any[] = []
       await new Promise((r, e) => {
