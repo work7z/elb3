@@ -41,7 +41,12 @@ test('chat2GetReport', async () => {
       let { sender } = row;
       let o1 = await RawFTSChatroom.findOne({
         where: {
-          c2alias: sender
+          c2alias: {
+            [Op.eq]: sender
+          },
+          c0groupRemark: {
+            [Op.ne]: ''
+          }
         }
       })
       if (o1 != null) {
@@ -51,25 +56,28 @@ test('chat2GetReport', async () => {
         // select min(username) from raw_wx_contact iwc where iwc.alias = a.c2alias or iwc.username = a.c2alias
         let o2 = await RawWXContact.findOne({
           where: {
-            [Op.or]: [
-              {
-                Alias: {
-                  [Op.eq]: row.sender
-                }
-              },
-              {
-                UserName: {
-                  [Op.eq]: row.sender
-                }
-              },
-            ]
+            UserName: row.sender
           }
         })
         if (o2 == null) {
           actualGroupAlias = 'Unknown User'
         } else {
-          actualGroupAlias = o2.UserName
-          ackAnyGroupAlias = true;
+          let o3 = await RawFTSChatroom.findOne({
+            where: {
+              c2alias: {
+                [Op.eq]: o2.Alias
+              },
+              c0groupRemark: {
+                [Op.ne]: ''
+              }
+            }
+          })
+          if (o3 != null) {
+            ackAnyGroupAlias = true;
+            actualGroupAlias = o3.c0groupRemark
+          } else {
+            actualGroupAlias = o2.NickName
+          }
         }
       }
 
