@@ -104,9 +104,16 @@ test('chat-raw2crt', async () => {
           throw new Error('no group id for ' + groupName)
         }
         if (findGroupUserObj) {
+          let getMinDate = (a?: Date, b: Date) => {
+            if (a == null) {
+              return b;
+            }
+            return a < b ? a : b;
+          }
           // update msg count
           await findGroupUserObj?.update({
             msgCount: (findGroupUserObj?.msgCount || 0) + 1,
+            firstMessageAt: getMinDate(findGroupUserObj.firstMessageAt, actualStrTime),
             lastMessageAt: actualStrTime,
           })
           // check user alias
