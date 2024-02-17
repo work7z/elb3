@@ -63,6 +63,7 @@ test('chat-raw2crt', async () => {
           })
         }
         // check user
+        let expUserId = -1
         let isNotEmptySender = !_.isEmpty(sender) && sender.indexOf('@chatroom') == -1
         let findGroupUserObj: ChatGroupUser | null = null;
         if (isNotEmptySender) {
@@ -95,7 +96,8 @@ test('chat-raw2crt', async () => {
               })
             }
           } else {
-            throw new Error('no raw user for ' + sender)
+            // throw new Error('no raw user for ' + sender)
+            expUserId = -2
           }
         }
         if (!groupObj.id) {
@@ -116,6 +118,9 @@ test('chat-raw2crt', async () => {
               }
             })
             for (let eachItem of rawChatRoomItems) {
+              if (_.isEmpty(eachItem.c0groupRemark)) {
+                continue;
+              }
               await ChatGroupAliasMap.create({
                 groupUserId: findGroupUserObj.id || -1,
                 groupAlias: eachItem.c0groupRemark,
@@ -131,7 +136,7 @@ test('chat-raw2crt', async () => {
         }
         await ChatGroupHistory.create({
           groupId: groupObj.id,
-          groupUserId: findGroupUserObj ? findGroupUserObj.id || -1 : -1,
+          groupUserId: findGroupUserObj ? findGroupUserObj.id || expUserId : expUserId,
           sentTime: actualStrTime,
           content: strContent,
           type: eachRecord.type,
