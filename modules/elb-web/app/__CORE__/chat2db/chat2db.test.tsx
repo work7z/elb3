@@ -7,7 +7,7 @@ import { render, screen } from '@testing-library/react'
 import { DataTypes, Model, Op } from 'sequelize'
 import { isTestEnv, markEnvAsDevForcibly } from "../hooks/env";
 import * as csv from 'fast-csv';
-import _ from "lodash";
+import _, { find } from "lodash";
 import moment from "moment";
 
 export type RawGroupMemberLogCount = {
@@ -104,17 +104,29 @@ test('chat-raw2crt', async () => {
           throw new Error('no group id for ' + groupName)
         }
         if (findGroupUserObj) {
-          let getMinDate = (a?: Date, b: Date) => {
+          let getMinDate = (a?: Date, b?: Date) => {
             if (a == null) {
               return b;
             }
+            if (b == null) {
+              return a;
+            }
             return a < b ? a : b;
+          }
+          let getMaxDate = (a?: Date, b?: Date) => {
+            if (a == null) {
+              return b;
+            }
+            if (b == null) {
+              return a;
+            }
+            return a > b ? a : b;
           }
           // update msg count
           await findGroupUserObj?.update({
             msgCount: (findGroupUserObj?.msgCount || 0) + 1,
             firstMessageAt: getMinDate(findGroupUserObj.firstMessageAt, actualStrTime),
-            lastMessageAt: actualStrTime,
+            lastMessageAt: getMaxDate(findGroupUserObj.lastMessageAt, actualStrTime),
           })
           // check user alias
           if (checkUserIdObj[findGroupUserObj.wxUserAlias] == null) {
