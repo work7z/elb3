@@ -232,10 +232,10 @@ export async function handleSignInUser(formData: {
                     user = await getUserInfoByPhoneNumber(formData.phoneNumber)
                 }
                 if (!user) {
-                    return Dot("8sVG1RdXhx", "User does not exist")
+                    return Dot("dsdfqw", "User does not exist")
                 }
                 if (user.password != hashPW(formData.password)) {
-                    return Dot("8sVG1RddXhx", "Password is not correct")
+                    return Dot("eqwee", "Password is not correct")
                 }
                 // LOGIN SUCCESS
                 await daoRef.db.transaction(async () => {
