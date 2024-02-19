@@ -18,14 +18,14 @@ import { getCookie } from "cookies-next";
 import getAuthInfo, { AuthInfo } from "./actions/handleAuthInfo";
 import Footer from "../Footer";
 import VisiterSidebar from "../VisiterSidebar";
-import { fn_getCardPanelForTelephoneFAQ } from "@/app/register/page";
+import { fn_getCardPanelForTelephoneFAQ } from "@/app/[lang]/register/page";
 import { Dot } from "../../utils/TranslationUtils";
 import LanguagePicker from "../LanguagePicker";
 
 export type Jsx_fn_type = (props: AuthInfoProps) => any;
 
 export default async (props: {
-    combindSearchProps: CombindSearchProps & { rounded?: boolean }
+    combindSearchProps: CombindSearchProps
 } & { sidebarViewMode?: SidebarViewModeType, main: Jsx_fn_type, sidebar?: Jsx_fn_type, extraInSidebar?: Jsx_fn_type }) => {
 
     let authInfo = await getAuthInfo()

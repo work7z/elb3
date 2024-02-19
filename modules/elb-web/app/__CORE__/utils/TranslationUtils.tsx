@@ -61,7 +61,7 @@ function formatResultWithReplacer(val = "", ...args) {
 }
 
 
-let getXLocaleStrInRSC = (): LocaleType => {
+export let getXLocaleStrInRSC = (): LocaleType => {
   const headersList = headers();
   const val = headersList.get('x-locale') || "";
   let item = all_locales.find(x => x.langInHttp == val)

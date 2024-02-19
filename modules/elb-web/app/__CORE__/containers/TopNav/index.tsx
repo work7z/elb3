@@ -15,10 +15,10 @@ export let TopNav = (props: AuthInfoProps) => {
     let isLoginIn = props.authInfo.signedIn
 
     let homeItem = { name: Dot("UjkOS50wO", "Home"), href: "/" }
-    let chatGroupItem = { name: Dot("groupnote", "Group"), href: "/group" }
+    let chatGroupItem = { name: Dot("groupnote", "Memo"), href: "/group" }
     let links: { name: string, href: string }[] = isLoginIn ? [
         homeItem,
-        { name: props.authInfo.user?.userAcctId || 'Unknown', href: "/min" },
+        // { name: props.authInfo.user?.userAcctId || 'Unknown', href: "/min" },
         chatGroupItem,
         { name: Dot("TV09-obNr", "Milestone"), href: "/milestone" },
         { name: Dot("geHXwByxy", "Settings"), href: "/settings" },

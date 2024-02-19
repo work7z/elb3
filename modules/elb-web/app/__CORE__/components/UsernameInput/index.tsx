@@ -2,9 +2,9 @@
 
 import React, { useCallback, useEffect, useState } from 'react';
 import { Dot } from '../../utils/ClientTranslationUtils';
-import { getUserInfoByUserAcctId } from '@/app/register/action/userAction';
+import { getUserInfoByUserAcctId } from '@/app/[lang]/register/action/userAction';
 import _ from 'lodash';
-import { checkIfStrOnlyHasAlphanumeric } from '@/app/register/action/utils';
+import { checkIfStrOnlyHasAlphanumeric } from '@/app/[lang]/register/action/utils';
 export default (props: { checkIfHas?: boolean, checkDuplicate?: boolean, name: string }) => {
     let [value, setValue] = React.useState('')
     useEffect(() => {
