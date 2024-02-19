@@ -18,8 +18,8 @@ export let TopNav = (props: AuthInfoProps) => {
     let chatGroupItem = { name: Dot("groupnote", "Group"), href: "/group" }
     let links: { name: string, href: string }[] = isLoginIn ? [
         homeItem,
-        chatGroupItem,
         { name: props.authInfo.user?.userAcctId || 'Unknown', href: "/min" },
+        chatGroupItem,
         { name: Dot("TV09-obNr", "Milestone"), href: "/milestone" },
         { name: Dot("geHXwByxy", "Settings"), href: "/settings" },
         { name: Dot("xhxY6iLDH", "Logout"), href: "/logout" },
