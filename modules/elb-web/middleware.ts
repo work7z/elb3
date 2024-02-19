@@ -45,7 +45,7 @@ function getLocale(request: NextRequest) {
 
 export function middleware(request: NextRequest) {
   // Check if there is any supported locale in the pathname
-  let finalLocaleObject: LocaleType = all_locales[0];
+  let finalLocaleObject: LocaleType = zhCNLocale; // by default, we use zh_CN
   const requestHeaders = new Headers(request.headers);
   const { pathname } = request.nextUrl;
   let handleLocaleSet = () => {
@@ -69,9 +69,11 @@ export function middleware(request: NextRequest) {
       request.nextUrl.pathname = `/${localeObj?.langInURL}${pathname}`;
       // e.g. incoming request is /products
       // The new URL is now /en-US/products
+      handleLocaleSet();
       return Response.redirect(request.nextUrl);
     }
   }
+  handleLocaleSet();
 
   requestHeaders.set("x-url", request.nextUrl.pathname);
 

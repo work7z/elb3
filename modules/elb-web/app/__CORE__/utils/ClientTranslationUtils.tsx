@@ -24,10 +24,20 @@ import { headers } from 'next/headers';
 import _ from "lodash";
 import { LANG_EN_US, LangDefinition } from "../types/constants";
 import { usePathname } from 'next/navigation'
+import { all_locales, zhCNLocale } from '@/middleware';
 
 let VER_FORGE_FORM = '0.0.1'
 export const KEY_LANG_PACK_ZH_CN = "KEY_LANG_PACK_ZH_CN" + VER_FORGE_FORM;
 export const KEY_LANG_PACK_ZH_HK = "KEY_LANG_PACK_ZH_HK" + VER_FORGE_FORM;
+
+
+let document = null;
+let sysLocale = zhCNLocale
+if (typeof window !== "undefined") {
+  let sysLang = window['document'].body.parentElement?.getAttribute("lang")
+  sysLocale = all_locales.find(x => x.langInHttp == sysLang) || sysLocale
+}
+
 
 interface LangMap {
   zh_CN: LangDefinition;
@@ -41,7 +51,6 @@ let newLangMap2 = (): LangMap => {
 };
 export const newLangMap = newLangMap2;
 let crtNewLangMap = newLangMap();
-// TODO: for multiple values, use ref id to reduce the transimit size
 
 export const LANG_INIT_BEFORE_MAP: { [key: string]: boolean } = {};
 
@@ -63,13 +72,12 @@ function formatResultWithReplacer(val = "", ...args) {
 }
 
 export let getCurrentLang = () => {
-  // return 'zh_CN'
-  return 'zh_HK'
+  return sysLocale.langIni18n
 }
 
 const TranslationUtils = {
   ForcbilyLanguage: "",
-  CurrentLanguage: LANG_EN_US,
+  CurrentLanguage: sysLocale.langIni18n,
   IsChinese() {
     return (
       TranslationUtils.CurrentLanguage == "zh_CN"
