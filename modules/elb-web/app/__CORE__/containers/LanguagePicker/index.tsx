@@ -73,7 +73,7 @@ export default (props: AuthInfoProps) => {
                     </div>
                     <p className="space-y-2 text-sm mt-8">
                         <div>
-                            Note that you can only choose the language after you sign in according to current system design.
+                            Note that you can choose the language though you have not signed in the system.
                         </div>
                     </p>
                 </div>

@@ -10,7 +10,10 @@ export let getLocalePrefix_Client = (): LocaleType => {
     return sysLocale
 }
 
-export let formatURL_Client = (str: string): string => {
+export let fmtURL_Client = (str: string): string => {
+    if (str == '/') {
+        str = ''
+    }
     let localePrefix = getLocalePrefix_Client().langInURL
     return localePrefix + str
 }
