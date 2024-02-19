@@ -6,36 +6,50 @@ import { match } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 
 export type LocaleType = {
-  langInHttp: string;
+  langInHttp: string[];
   langInURL: string;
   langIni18n: string;
 };
 export let zhCNLocale: LocaleType = {
-  langInHttp: "zh-cn",
+  langInHttp: ["zh-cn", "zh-sg", "zh-hans"],
   langInURL: "zh-hans",
   langIni18n: "zh_CN",
 };
 export let all_locales: LocaleType[] = [
   {
-    langInHttp: "en-US",
+    langInHttp: ["en-US", "en-GB", "en-AU", "en-CA", "en-NZ", "en-ZA"],
     langInURL: "en",
     langIni18n: "en_US",
   },
   zhCNLocale,
   {
-    langInHttp: "zh-hk",
+    langInHttp: ["zh-hk", "zh-tw", "zh-mo", "zh-my"],
     langInURL: "zh-hant",
     langIni18n: "zh_HK",
   },
 ];
 let defaultLocale = zhCNLocale; // default locale is zh_CN
 const locales_http = all_locales.map((x) => x.langInHttp);
+const rever_locales_http = locales_http.reverse().map((x) => {
+  return x.map((y) => _.toLower(y));
+});
 
 // Get the preferred locale, similar to the above or using a library
 function getLocale(request: NextRequest) {
-  let headers = { "accept-language": request.headers.get("accept-language") };
-  let languages = new Negotiator({ headers }).languages();
-  return match(languages, locales_http, defaultLocale.langInHttp);
+  let acceptLanguage = _.toLower(request.headers.get("accept-language") + "");
+  let val = defaultLocale.langInHttp[0];
+  let ack = false;
+  rever_locales_http.every((locale) => {
+    _.every(locale, (x) => {
+      if (acceptLanguage?.includes(x)) {
+        val = x;
+        ack = true;
+      }
+      return !ack;
+    });
+    return !ack;
+  });
+  return val;
 }
 
 export function middleware(request: NextRequest) {
@@ -44,7 +58,7 @@ export function middleware(request: NextRequest) {
   const requestHeaders = new Headers(request.headers);
   const { pathname } = request.nextUrl;
   let handleLocaleSet = () => {
-    requestHeaders.set("x-locale", finalLocaleObject.langInHttp);
+    requestHeaders.set("x-locale", finalLocaleObject.langInHttp[0]);
   };
   if (pathname != "/" && pathname != "" && pathname.indexOf("/api") == -1) {
     const pathnameHasLocale = all_locales.some((locale) => {

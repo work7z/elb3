@@ -57,7 +57,7 @@ export default (props: AuthInfoProps) => {
                         Choose Language{props.authInfo.signedIn ? '' : ''}
                     </button> */}
                     <h1 className="text-lg  font-semibold mb-4">
-                        {Dot("949vRg3b-", "This community is powered by a fully international FOSS project.")}
+                        {Dot("jRFk519Bj-", "This community is driven by a fully international free open source code project.")}
                     </h1>
                     <h1 className='text-md font-semibold mb-4'>
                         Currently, we are supporting the following languages:
