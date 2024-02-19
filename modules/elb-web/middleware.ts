@@ -46,7 +46,7 @@ export function middleware(request: NextRequest) {
   let handleLocaleSet = () => {
     requestHeaders.set("x-locale", finalLocaleObject.langInHttp);
   };
-  if (pathname != "/" && pathname != "") {
+  if (pathname != "/" && pathname != "" && pathname.indexOf("/api") == -1) {
     const pathnameHasLocale = all_locales.some((locale) => {
       let mat =
         pathname.startsWith(`/${locale.langInURL}/`) ||

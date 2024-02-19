@@ -32,7 +32,7 @@ export const KEY_LANG_PACK_ZH_HK = "KEY_LANG_PACK_ZH_HK" + VER_FORGE_FORM;
 
 
 let document = null;
-let sysLocale = zhCNLocale
+export let sysLocale = zhCNLocale
 if (typeof window !== "undefined") {
   let sysLang = window['document'].body.parentElement?.getAttribute("lang")
   sysLocale = all_locales.find(x => x.langInHttp == sysLang) || sysLocale
