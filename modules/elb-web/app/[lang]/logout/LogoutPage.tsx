@@ -23,11 +23,14 @@ import { cookies } from 'next/headers';
 import { getCookies } from 'cookies-next';
 import _ from 'lodash';
 import { fmtURL_Client } from '@/app/__CORE__/utils/ClientRouterHelpers';
+import { loadDOT, useTTT2 } from '../register/i18n-types';
 
 function deleteAllCookies() {
     document.cookie = ''
 }
 export default (p: AuthInfoProps) => {
+    useTTT2(loadDOT("AsgwGFZldg"))
+
     useEffect(() => {
         deleteAllCookies()
         localStorage.clear()

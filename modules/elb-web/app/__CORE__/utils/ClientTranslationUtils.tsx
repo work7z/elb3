@@ -75,6 +75,8 @@ export let getCurrentLang = () => {
   return sysLocale.langIni18n
 }
 
+
+
 const TranslationUtils = {
   ForcbilyLanguage: "",
   CurrentLanguage: sysLocale.langIni18n,
@@ -89,10 +91,13 @@ const TranslationUtils = {
     let language = '';
     language = getCurrentLang()
 
-    if (language != 'en_US') {
-      let pmap = require("../../../public/static/lang/" + language + ".json")
-      TranslationUtils.LangMap[language] = pmap
+    if (!TranslationUtils.LangMap[language]) {
+      TranslationUtils.LangMap[language] = {}
     }
+    // if (language != 'en_US') {
+    //   let pmap = {} // require("../../../public/static/lang/" + language + ".json")
+    //   TranslationUtils.LangMap[language] = pmap
+    // }
     if (language == LANG_EN_US) {
       // do nothing
     } else {

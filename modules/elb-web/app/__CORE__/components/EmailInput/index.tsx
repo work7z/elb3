@@ -2,7 +2,10 @@
 
 import React, { useEffect } from 'react';
 import { Dot } from '../../utils/ClientTranslationUtils';
+import { loadDOT, useTTT2 } from '@/app/[lang]/register/i18n-types';
 export default (props: { name: string }) => {
+    useTTT2(loadDOT("-bXvwz70W"))
+
     let [value, setValue] = React.useState('')
     useEffect(() => {
         setValue(localStorage.getItem(props.name) || '')
