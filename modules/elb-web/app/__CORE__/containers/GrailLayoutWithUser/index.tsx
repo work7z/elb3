@@ -13,7 +13,7 @@ import UserSideBar, { SidebarViewModeType } from "../UserSideBar";
 import { redirect, useParams, useSearchParams } from "next/navigation";
 import { usePathname } from 'next/navigation';
 import React, { } from "react";
-import { AuthInfoProps, CombindSearchProps } from "@/app/page";
+import { AuthInfoProps, CombindSearchProps } from "@/app/[lang]/page";
 import { getCookie } from "cookies-next";
 import getAuthInfo, { AuthInfo } from "./actions/handleAuthInfo";
 import Footer from "../Footer";

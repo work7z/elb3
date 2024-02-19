@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { AuthInfoProps } from "../page";
+import { AuthInfoProps } from "../[lang]/page";
 import dao from "../__CORE__/dao";
 import { key_systemInfoGroup } from "./redis-types";
 import { User } from "../__CORE__/dao/model";
@@ -33,8 +33,8 @@ export let fn_get_system_info_from_redis = async (): Promise<SystemInfoBody> => 
     let peakOnlineCount = await daoRef.redis.hGet(key_systemInfoGroup, 'peakOnlineCount')
     let now = Date.now()
     let prevTimePoint = now - (60 * 60 * 1000 * 3) // last 3 hours
-    let userOnlineCount = await daoRef.redis.zCount(key_active_user, prevTimePoint,now) 
-    if(parseInt(peakOnlineCount||'1') < userOnlineCount){
+    let userOnlineCount = await daoRef.redis.zCount(key_active_user, prevTimePoint, now)
+    if (parseInt(peakOnlineCount || '1') < userOnlineCount) {
         await daoRef.redis.hSet(key_systemInfoGroup, 'peakOnlineCount', userOnlineCount)
     }
     return {

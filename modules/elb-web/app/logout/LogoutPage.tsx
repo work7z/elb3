@@ -2,10 +2,10 @@
 
 import React, { useEffect } from 'react'
 import GrailLayoutWithUser from '@/app/__CORE__/containers/GrailLayoutWithUser'
-import { AuthInfoProps, CombindSearchProps } from '@/app/page'
+import { AuthInfoProps, CombindSearchProps } from '@/app/[lang]/page'
 import CardPanel from '@/app/__CORE__/components/CardPanel';
 import { PageProps } from '../__CORE__/types/pages';
-import { Dot } from '../__CORE__/utils/TranslationUtils';
+import { Dot } from '../__CORE__/utils/ClientTranslationUtils';
 import VisiterGuideInfoPanel from '../__CORE__/containers/VisiterSidebar';
 import PasswordInput from '../__CORE__/components/PasswordInput'
 import UserInput from '../__CORE__/components/UsernameInput'

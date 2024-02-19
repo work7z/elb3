@@ -19,9 +19,10 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // SKIP_DOT
-import { headers } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import _ from "lodash";
 import { LANG_EN_US, LangDefinition } from "../types/constants";
+import { LocaleType, all_locales as all_locales, zhCNLocale } from '@/middleware';
 
 let VER_FORGE_FORM = '0.0.1'
 export const KEY_LANG_PACK_ZH_CN = "KEY_LANG_PACK_ZH_CN" + VER_FORGE_FORM;
@@ -39,7 +40,6 @@ let newLangMap2 = (): LangMap => {
 };
 export const newLangMap = newLangMap2;
 let crtNewLangMap = newLangMap();
-// TODO: for multiple values, use ref id to reduce the transimit size
 
 export const LANG_INIT_BEFORE_MAP: { [key: string]: boolean } = {};
 
@@ -60,19 +60,27 @@ function formatResultWithReplacer(val = "", ...args) {
   return val;
 }
 
+
+let getXLocaleStrInRSC = (): LocaleType => {
+  const headersList = headers();
+  const val = headersList.get('x-locale') || "";
+  return all_locales.find(x => x.langInHttp == val) || zhCNLocale
+}
+
 export let getWebsiteLocale = () => {
-  return 'zh-CN'
+  let xlocale = getXLocaleStrInRSC()
+  return xlocale.langInHttp
 }
 export let getCurrentLang = () => {
-  return 'zh_CN'
+  let xlocale = getXLocaleStrInRSC()
+  return xlocale.langIni18n
 }
 
 const TranslationUtils = {
   ForcbilyLanguage: "",
-  CurrentLanguage: LANG_EN_US,
   IsChinese() {
     return (
-      TranslationUtils.CurrentLanguage == "zh_CN"
+      getCurrentLang() == "zh_CN"
     );
   },
   LangMap: crtNewLangMap,

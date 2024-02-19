@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic'
 import HomeLink from "../../components/HomeLink";
 import SearchBar from "./SearchBar";
 import { useIsLoggedIn } from "../../hooks/user";
-import { AuthInfoProps } from "@/app/page";
+import { AuthInfoProps } from "@/app/[lang]/page";
 
 
 export let TopNav = (props: AuthInfoProps) => {

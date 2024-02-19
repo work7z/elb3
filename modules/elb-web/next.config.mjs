@@ -6,10 +6,6 @@ const nextConfig = {
   // compiler: {
   //   styledComponents: true,
   // },
-  // i18n: {
-  //   locales: ['en-US', 'zh-CN', 'zh-TW'],
-  //   defaultLocale: 'zh-CN',
-  // },
   // domains: [
   //   {
   //     domain: !isDev? 'en.elb3.com': 'en.localhost',

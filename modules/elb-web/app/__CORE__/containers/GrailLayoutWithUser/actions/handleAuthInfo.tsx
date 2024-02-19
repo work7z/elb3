@@ -14,7 +14,6 @@ import { SystemInfoBody, fn_add_user_into_active, fn_get_system_info_from_redis 
 
 let getPathnameInRSC = () => {
     const headersList = headers();
-    // read the custom x-url header
     const header_url = headersList.get('x-url') || "";
     return header_url
 }

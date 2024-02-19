@@ -24,7 +24,7 @@ import { headers } from 'next/headers';
 import _ from "lodash";
 import { LANG_EN_US, LangDefinition } from "../types/constants";
 import { usePathname } from 'next/navigation'
- 
+
 let VER_FORGE_FORM = '0.0.1'
 export const KEY_LANG_PACK_ZH_CN = "KEY_LANG_PACK_ZH_CN" + VER_FORGE_FORM;
 export const KEY_LANG_PACK_ZH_HK = "KEY_LANG_PACK_ZH_HK" + VER_FORGE_FORM;
@@ -79,7 +79,7 @@ const TranslationUtils = {
   RealtimeObj: {},
   Dot(id: string, enText: string, ...args: any[]): string {
     let language = '';
-      language = getCurrentLang()
+    language = getCurrentLang()
 
     if (language != 'en_US') {
       let pmap = require("../../../public/static/lang/" + language + ".json")

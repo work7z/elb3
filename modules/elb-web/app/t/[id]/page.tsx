@@ -1,7 +1,7 @@
 import React from 'react'
 import { PageProps } from '../../__CORE__/types/pages'
 import GrailLayoutWithUser from '@/app/__CORE__/containers/GrailLayoutWithUser'
-import { AuthInfoProps, CombindSearchProps } from '@/app/page'
+import { AuthInfoProps, CombindSearchProps } from '@/app/[lang]/page'
 import CardPanel from '@/app/__CORE__/components/CardPanel';
 import _ from 'lodash'
 

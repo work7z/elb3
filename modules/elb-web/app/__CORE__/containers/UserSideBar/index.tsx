@@ -3,7 +3,7 @@ import RegularLink from "@/app/__CORE__/components/RegularLink"
 import { MoonIcon, Cog8ToothIcon, SunIcon } from '@heroicons/react/24/solid'
 
 import { Dot } from "@/app/__CORE__/utils/TranslationUtils"
-import { AuthInfoProps, CombindSearchProps } from "../../../page"
+import { AuthInfoProps, CombindSearchProps } from "../../../[lang]/page"
 import MoonSunControl from "./MoonSunControl"
 import _ from 'lodash'
 import VisiterSidebar, { SidebarProps } from "../VisiterSidebar"
