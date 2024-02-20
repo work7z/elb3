@@ -47,6 +47,7 @@ dist
 
 # misc
 .DS_Store
+production.json
 .env.local
 .env.development.local
 .env.test.local
