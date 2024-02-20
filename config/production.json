@@ -1,5 +1,0 @@
-{
-    "database": {
-        "link": "mysql://root:lai10086work@127.0.0.1:3306/elb3"
-    }
-}
