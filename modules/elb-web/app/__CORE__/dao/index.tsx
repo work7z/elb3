@@ -1,5 +1,5 @@
 import { Sequelize, } from 'sequelize';
-import { SystemConfig as SystemConfig } from "../../../../../config/types"
+import { SystemConfig as SystemConfig } from "../../../../../etc/types"
 import fs from 'fs'
 import path from 'path'
 import { log } from 'console';
@@ -16,7 +16,7 @@ export type DaoRef = {
 
 
 export let getConfigByFlag = (envFlag: SystemEnvFlag): SystemConfig => {
-    let config = fs.readFileSync(path.join(getELB3Root(), 'config', envFlag + '.json'), { encoding: 'utf-8' })
+    let config = fs.readFileSync(path.join(getELB3Root(), 'etc', envFlag + '.json'), { encoding: 'utf-8' })
     return JSON.parse(config) as SystemConfig
 }
 
