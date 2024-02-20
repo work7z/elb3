@@ -4,7 +4,7 @@ import { Dot } from '../../utils/ClientTranslationUtils';
 import { loadDOT, useTTT2 } from '@/app/[lang]/register/i18n-types';
 let a = loadDOT("BndmTuDXy")
 export default (props: { disabled?: boolean, name: string, defaultValue?: string, onChange?: (e: string) => any }) => {
-    useTTT2(a)
+    a()
 
     let [value, setValue] = React.useState('')
     useEffect(() => {
