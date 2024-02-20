@@ -23,8 +23,10 @@ import AlertErrorPanel from '@/app/__CORE__/containers/AlertErrorPanel';
 import GeneralInput from '@/app/__CORE__/components/GeneralInput';
 import { loadDOT, useTTT2 } from './i18n-types';
 
+let a = loadDOT("TLIwAn4K1")
+
 export default function RegisterPage(props: { pageProps: RegisterPageProps }) {
-    useTTT2(loadDOT("TLIwAn4K1"))
+    a()
     let { pageProps } = props;
     let [errMsg, setErrMsg] = React.useState<string[]>([])
     let [vcodeFactor, onVCodeFactor] = useState(0)

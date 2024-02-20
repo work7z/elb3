@@ -28,8 +28,9 @@ import { loadDOT, useTTT2 } from '../register/i18n-types';
 function deleteAllCookies() {
     document.cookie = ''
 }
+let a = loadDOT("AsgwGFZldg")
 export default (p: AuthInfoProps) => {
-    useTTT2(loadDOT("AsgwGFZldg"))
+    a()
 
     useEffect(() => {
         deleteAllCookies()

@@ -13,8 +13,10 @@ import GeneralInput from "@/app/__CORE__/components/GeneralInput";
 import { sendSMSCodeWithVerificationCode, verifySMSCode } from "../register/action/userAction";
 import { loadDOT, useTTT, useTTT2 } from "../register/i18n-types";
 
+let a = loadDOT("AsgwGFZlg")
+
 export default (p: AuthInfoProps) => {
-    useTTT2(loadDOT("AsgwGFZlg"))
+    a()
     let [errMsg, setErrMsg] = React.useState<string[]>([])
     let [vcodeFactor, onVCodeFactor] = useState(0)
     let dftPhoneNumber = p.authInfo.user?.phoneNumber || ''

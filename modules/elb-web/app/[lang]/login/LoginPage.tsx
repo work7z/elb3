@@ -18,6 +18,7 @@ import LoadingWrapper from '@/app/__CORE__/containers/LoadingWrapper';
 import { handleSignInUser } from '../register/action/userAction';
 import AlertErrorPanel from '@/app/__CORE__/containers/AlertErrorPanel';
 import { loadDOT, useTTT, useTTT2 } from '../register/i18n-types';
+import { Dot } from '@/app/__CORE__/utils/ClientTranslationUtils';
 export type LoginPageProps = PageProps<{}, { type: string }>
 
 let lt = loadDOT("c216jAeDW")
@@ -29,7 +30,7 @@ export default function LoginPage(props: { loginPageProps: LoginPageProps }) {
     let [errMsg, setErrMsg] = React.useState<string[]>([])
     let [working, setWorking] = useState(false)
     let [pw, setPw] = useState('')
-    let Dot = useTTT2(lt)
+    lt()
     let type = loginPageProps.searchParams.type || 'username'
     return <LoadingWrapper><form className='' onSubmit={async (e) => {
         e.preventDefault();

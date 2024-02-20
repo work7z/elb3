@@ -9,8 +9,8 @@ export type ShareClienti18nKeys = {
     other: string,
 }
 
-export let loadDOT = (str: string): string => {
-    return str;
+export let loadDOT = (str: string): () => ReturnType<typeof useTTT2> => {
+    return () => useTTT2(str);
 }
 
 export let useTTT2 = function (ltID: string): (id: string, enText: string, ...args: any[]) => string {
