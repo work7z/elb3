@@ -5,7 +5,7 @@ import path from 'path'
 import { log } from 'console';
 import { RedisClientType, createClient } from 'redis';
 import { SystemEnvFlag, getELB3Root, getSysEnv, isDevEnv, isTestEnv } from '../hooks/env';
-import model from './model';
+import model, { DB_VERSION, InvitationCode } from './model';
 import refMap from './ref';
 
 
@@ -16,7 +16,7 @@ export type DaoRef = {
 
 
 export let getConfigByFlag = (envFlag: SystemEnvFlag): SystemConfig => {
-    let config = fs.readFileSync(path.join(getELB3Root(), 'etc', envFlag + '.json'), { encoding: 'utf-8' })
+    let config = fs.readFileSync(path.join(getELB3Root(), 'etc', envFlag + '-config.json'), { encoding: 'utf-8' })
     return JSON.parse(config) as SystemConfig
 }
 
@@ -65,6 +65,28 @@ let loadDAO = async (): Promise<DaoRef> => {
 
         // 3. setup model 
         await model(r)
+        
+
+        // options
+        let setKey = "db-version"
+        // check db version
+        let currentVersion = await r.redis.get(setKey)
+        if (currentVersion !== DB_VERSION) {
+            console.log('db version not match, reset the db')
+            await sequelize.sync({ force: true })
+            await r.redis.set(setKey, DB_VERSION)
+        }
+
+        if(isDevEnv()){
+            let a = await InvitationCode.create({
+                code: "test100",
+                useCount: 0,
+                maxUseCount: 500,
+                expiredAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30) // expired after 30 days
+            },)
+            console.log('test invitation code', a.toJSON())
+        }
+
 
         console.log('ok, setup the model')
         refMap[envFlag] = r;

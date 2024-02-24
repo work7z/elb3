@@ -4,6 +4,7 @@ import {
 import { DaoRef } from './index'
 import { isDevEnv } from '../hooks/env';
 
+export const DB_VERSION="v1"
 
 // chat group, chat group members, chat group history
 
@@ -1079,17 +1080,4 @@ export default async (daoRef: DaoRef) => {
         tableName: "raw_group_history"
     })
 
-    // options
-    // await sequelize.sync({ alter: true, force: false })
-
-    // setup dev env
-    if (isDevEnv()) {
-        let a = await InvitationCode.create({
-            code: "test100",
-            useCount: 0,
-            maxUseCount: 500,
-            expiredAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30) // expired after 30 days
-        },)
-        console.log('test invitation code', a.toJSON())
-    }
 }
